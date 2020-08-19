@@ -1,7 +1,7 @@
 (function(){
-    /*
+    // Import components 
     Vue.component('app-header', function(resolve,reject){
-        fetch('./components/header.html')
+        fetch('./src/components/header.html')
         .then((res)=> {return res.text()})
         .then((res)=>{
             resolve({
@@ -13,48 +13,76 @@
                 template: res  
             })
         }).catch(()=>{return reject()})     
+    });
+
+    // Import pages async
+    var pagesRequests;
+    var homePage, registerPage, loginPage, dashboardPage;
+    
+    pagesRequests = [
+        fetch('./src/pages/home.html')
+            .then((response) => { return response.text() })
+            .then(page => homePage=page),
+            
+        fetch('./src/pages/register.html')
+            .then((response) => { return response.text() })
+            .then(page => registerPage=page),
+        
+        fetch('./src/pages/login.html')
+            .then((response) => { return response.text() })
+            .then(page => loginPage=page),
+        
+        fetch('./src/pages/dashboard.html')
+            .then((response) => { return response.text() })
+            .then(page => dashboardPage=page),
+    ];
+
+    // Start app after download all pages
+    Promise.all(pagesRequests).then( (complete) => {
+        init();
+    }).catch( (error) => {
+        console.log("Pages Download error", error);
+        alert("Erro de conexão... Tente mais tarde!");
     })
-    */
-    const Foo = { template: '<div>foo</div>' }
-    const Bar = { template: '<div>bar</div>' }
-    const Register = { template: '<div>cadastro</div>' }
-    const Dashboard = { template: '<div>Dash</div>' }
-     
-    const routes = [
-        { path: '/', component: Foo },
-        { path: '/login', component: Bar },
-        { path: '/cadastro', component: Register },
-        { path: '/dashboard', component: Dashboard , meta: { requiresAuth: true } }
-    ]
-
-    const router = new VueRouter({
-        routes
-    })
-
-    var auth = {
-        loggedIn: () => {
-            return false;
-        }
-    }
-
-    router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-
-        if (!auth.loggedIn()) {
-        next({
-            path: '/login',
-            query: { redirect: to.fullPath }
+        
+    function init() {
+        var Home = { template: homePage };
+        var Register = { template: registerPage };
+        var Login = { template: loginPage };
+        var Dashboard = { template: Dashboard };
+         
+        var routes = [
+            { path: '/', component: Home },
+            { path: '/cadastro', component: Register },
+            { path: '/login', component:Login  },
+            { path: '/dashboard', component: Dashboard , meta: { requiresAuth: true } }
+        ]
+    
+        var router = new VueRouter({
+            routes
         })
+        
+        /*
+        // Set page access controller
+        router.beforeEach((to, from, next) => {
+        if (to.matched.some(record => record.meta.requiresAuth)) {
+    
+            // TODO: Check for loggedIn user
+            if (auth.isLoggedIn()) {
+            next({
+                path: '/login',
+                query: { redirect: to.fullPath }
+            })
+            } else {
+            next();
+            }
         } else {
-        next();
+            next();
         }
-    } else {
-        next();
-    }
-    })
-
-    const app = new Vue({
-        router
-    }).$mount('#app')
-     
+        })
+        */
+        var app = new Vue({
+            router
+        }).$mount('#app')
+    } 
 })();
