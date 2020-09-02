@@ -1,16 +1,16 @@
 (function(){
     // Import components 
     Vue.component('app-header', function(resolve,reject){
-        fetch('./src/components/header.html')
+        fetch('./src/components/header/header.html')
         .then((res)=> {return res.text()})
         .then((res)=>{
             resolve({
                 data: function() {
                     return {
-                        message: "Welcome to my first VueJs App"
+                        currentRoute: window.location.href.split('#')[1]
                     }
                 },
-                template: res  
+                template: res
             })
         }).catch(()=>{return reject()})     
     });

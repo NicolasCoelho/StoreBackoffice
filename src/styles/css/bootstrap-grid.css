@@ -48,9 +48,9 @@ html {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1240px) {
   .container {
-    max-width: 1140px;
+    max-width: 1200px;
   }
   .hide-in-mobile{
     display: block;
