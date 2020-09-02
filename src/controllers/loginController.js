@@ -1,0 +1,53 @@
+window.controllers.LoginController = (function(){
+    var formInputs = {
+        username: {
+            data:'',
+            hasErrors: false,
+            errorMessage: '* Digite seu nome completo',
+            validate: function () {
+                var data = this.data;
+                this.hasErrors = (
+                    data.length < 4
+                );
+            }
+        },
+        password: {
+            data:'',
+            hasErrors: false,
+            errorMessage: '* Digite sua senha',
+            validate: function () {
+                var data = this.data;
+                this.hasErrors = (
+                    data.length === 0
+                );
+            }
+        }
+    };
+
+    var validateForm = function() {
+        var isValid = true;
+        var keys = Object.keys(formInputs);
+        for(var i = 0; i < keys.length; i++) {
+            if (formInputs[keys[i]].validate()) {
+                isValid = false; 
+            }
+        }
+        return isValid;
+    };
+    
+    var submit = function(func) {
+        if (validateForm()) {
+            auth.login(formInputs.username.data, formInputs.password.data)
+            .then(function(response) {
+                document.querySelector("#dashLink").click();
+            }).catch(function(err){
+                console.log(err);
+            })
+        }
+    };
+
+    return {
+        formInputs,
+        submit
+    };
+})();

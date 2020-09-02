@@ -3,15 +3,18 @@
  * Date: 18/08/2020
  * Version: 1.0 
 -->
-
-<!-- Import Vue Framework -->
+<!-- Set your storeToken provide by plataform -->
+<!--  Customize the static Url to match with your host -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <script>
     window.configs = {
         storeToken: 1,
-        staticUrl: "",
-        apiUrl: "",
+        staticUrl: ""
     }
+    window.controllers = {};
+    document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no');
 </script>
+<!-- Import Vue Framework -->
 <script src="./dependencies/vue/v2.6.11/index.js"></script>
 <script src="./dependencies/vue-router/v3.4.3/index.js"></script>
 
@@ -22,6 +25,9 @@
 <!-- Import styleSheets -->
 <link rel="stylesheet" href="./src/styles/css/bootstrap-grid.css">
 <link rel="stylesheet" href="./src/styles/css/app.css">
+
+<!-- Import controllers -->
+<script src="./src/controllers/LoginController.js"></script>
 
 <!-- Import objects -->
 <script src="./src/ws.js"></script>

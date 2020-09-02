@@ -14,6 +14,23 @@
             })
         }).catch(()=>{return reject()})     
     });
+    Vue.component('app-loginBox', function(resolve,reject){
+        fetch('./src/components/loginBox/loginBox.html')
+        .then((res)=> {return res.text()})
+        .then((res)=>{
+            resolve({
+                data: function() {
+                    return {
+                        formInputs: window.controllers.LoginController.formInputs,
+                    }
+                },
+                methods: {
+                    submit: window.controllers.LoginController.submit,
+                },
+                template: res
+            })
+        }).catch(()=>{return reject()})     
+    });
 
     // Import pages async
     var pagesRequests;
@@ -62,13 +79,11 @@
             { path: '/login', component:Login  },
             { path: '/dashboard', component: Dashboard , meta: { requiresAuth: true } },
             { path: '**', component: NotFound }
-        ]
+        ];
     
         var router = new VueRouter({
             routes
-        })
-        
-        
+        });
         // Set page access controller
         router.beforeEach((to, from, next) => {
             if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -85,10 +100,10 @@
             } else {
                 next();
             }
-        })
-        
+        });
+
         var app = new Vue({
             router
-        }).$mount('#app')
+        }).$mount('#app');
     } 
 })();

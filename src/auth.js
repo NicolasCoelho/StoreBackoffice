@@ -1,43 +1,50 @@
 var auth = (function() {
     
-    var token = localStorage.getItem('token');
+    var token = localStorage.getItem('X-Token');
 
     var isLoggedIn = function () {
-        console.log(token);
         if (token === "" || token === null) return false; 
         
-        var { expTime } = decodeToken();
-        expTime = new Date(expTime);
-
-        return ( expTime.getTime() > Date.now() ); 
-    }
+        var { expDate } = decodeToken().expTime;
+        expDate = new Date(expDate);
+        return ( expDate.getTime() > Date.now() ); 
+    };
 
     var login = function (user, password) {
-        // TODO: fetch login with user and password as params and save token on storage 
-    }
+        return new Promise(function(resolve,reject){
+            ws.authenticate(user,password)
+            .then(function (response){
+                if (response != null) {
+                    token = response;
+                    localStorage.setItem('X-Token', token);
+                    resolve(decodeToken());
+                }
+            }).catch(function(err){reject(err)});
+        }); 
+    };
 
     var logOut = function () {
-        localStorage.removeItem('token');
-    }
+        localStorage.removeItem('X-Token');
+    };
 
     var getTokenInfo = function () {
         if (token === "") return null;
         return decodeToken();
-    }
+    };
 
     var decodeToken = function () {
         var splited = token.split('.');
         var decoded = {
-            data: btoa(splited[0]),
-            expTime: btoa(splited[1]) 
+            data: JSON.parse(atob(splited[0])),
+            expTime: JSON.parse(atob(splited[1]))
         }
         return decoded;
-    }
+    };
     
     return {
         isLoggedIn,
         login,
         logOut,
         getTokenInfo
-    }
+    };
 })();

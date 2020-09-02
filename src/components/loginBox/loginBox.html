@@ -1,0 +1,27 @@
+<div class="login-box">
+    <img src="./src/styles/images/logo-generico.png" width="150" alt="">
+    <form id="authForm">
+        <div class="input-wrapper">
+            <label for="username">E-mail ou CPF: </label>
+            <input 
+                v-on:focusout="formInputs.username.validate()" 
+                @input="formInputs.username.data = $event.target.value"
+                id="username" 
+                type="text">
+            <span class="error" v-if="formInputs.username.hasErrors == true">{{ formInputs.username.errorMessage }}</span>    
+        </div>
+        <div class="input-wrapper">
+            <label for="password">Senha: </label>
+            <input
+                v-on:focusout="formInputs.password.validate(formInputs.password.data)" 
+                @input="formInputs.password.data = $event.target.value" 
+                id="passwword"
+                type="password">
+            <span class="error" v-if="formInputs.password.hasErrors == true">{{ formInputs.password.errorMessage }}</span>    
+        </div>
+        <button v-on:click="submit" class="button primary-button upcase-button">Entrar</button>
+        <router-link to="dashboard" id="dashLink"></router-link>
+    </form>
+    <router-link to="/cadastro">Esqueceu a senha?</router-link> <br>
+    <span>Ainda não é cadastrado?<router-link to="/cadastro">Cadastre-se agora</router-link></span>
+</div>
