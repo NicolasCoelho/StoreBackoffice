@@ -1,0 +1,28 @@
+:root {
+    --primary: #ff8e5c;
+    --secondary: #fff;
+    --bg1: #efefef;
+    --bg2: #fff;
+    --text1: #838383;
+    --text2: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+.button {
+    padding: 15px;
+    font-size: 20px;
+    border: none;
+    box-shadow: none;
+    border-radius: 10px;
+}
+    .button.primary-button{
+        background-color: var(--primary);
+        color: var(--text2);
+    }       
+    .button.secondary-button {
+        background-color: var(--secondary);
+        color: var(--text2);
+    }

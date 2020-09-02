@@ -1,17 +1,17 @@
-<script>
-    var configs = {
-        storeId: 1,
-        staticUrl: "",
-        apiUrl: "",
-    }
-</script>
-
 <!--
  * Author: Nicolas Coelho Mansan
  * Date: 18/08/2020
  * Version: 1.0 
 -->
+
 <!-- Import Vue Framework -->
+<script>
+    window.configs = {
+        storeToken: 1,
+        staticUrl: "",
+        apiUrl: "",
+    }
+</script>
 <script src="./dependencies/vue/v2.6.11/index.js"></script>
 <script src="./dependencies/vue-router/v3.4.3/index.js"></script>
 
@@ -19,7 +19,11 @@
     <router-view></router-view>
 </div>
 
+<!-- Import styleSheets -->
+<link rel="stylesheet" href="./src/styles/css/bootstrap-grid.css">
+<link rel="stylesheet" href="./src/styles/css/app.css">
+
 <!-- Import objects -->
-<script></script>
+<script src="./src/ws.js"></script>
 <script src="./src/auth.js"></script>
 <script src="./src/app.js"></script>
