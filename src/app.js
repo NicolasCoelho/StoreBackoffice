@@ -17,7 +17,7 @@
 
     // Import pages async
     var pagesRequests;
-    var homePage, registerPage, loginPage, dashboardPage;
+    var homePage, registerPage, loginPage, dashboardPage, notFoundPage;
     
     pagesRequests = [
         fetch('./src/pages/home.html')
@@ -35,6 +35,10 @@
         fetch('./src/pages/dashboard.html')
             .then((response) => { return response.text() })
             .then(page => dashboardPage=page),
+
+        fetch('./src/pages/404.html')
+            .then((response) => { return response.text() })
+            .then(page => notFoundPage=page),
     ];
 
     // Start app after download all pages
@@ -49,38 +53,40 @@
         var Home = { template: homePage };
         var Register = { template: registerPage };
         var Login = { template: loginPage };
-        var Dashboard = { template: Dashboard };
+        var Dashboard = { template: dashboardPage };
+        var NotFound = { template: notFoundPage };
          
         var routes = [
             { path: '/', component: Home },
             { path: '/cadastro', component: Register },
             { path: '/login', component:Login  },
-            { path: '/dashboard', component: Dashboard , meta: { requiresAuth: true } }
+            { path: '/dashboard', component: Dashboard , meta: { requiresAuth: true } },
+            { path: '**', component: NotFound }
         ]
     
         var router = new VueRouter({
             routes
         })
         
-        /*
+        
         // Set page access controller
         router.beforeEach((to, from, next) => {
-        if (to.matched.some(record => record.meta.requiresAuth)) {
-    
-            // TODO: Check for loggedIn user
-            if (auth.isLoggedIn()) {
-            next({
-                path: '/login',
-                query: { redirect: to.fullPath }
-            })
+            if (to.matched.some(record => record.meta.requiresAuth)) {
+        
+                // TODO: Check for loggedIn user
+                if (!auth.isLoggedIn()) {
+                next({
+                    path: '/login',
+                    query: { redirect: to.fullPath }
+                })
+                } else {
+                next();
+                }
             } else {
-            next();
+                next();
             }
-        } else {
-            next();
-        }
         })
-        */
+        
         var app = new Vue({
             router
         }).$mount('#app')
