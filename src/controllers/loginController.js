@@ -35,11 +35,11 @@ window.controllers.LoginController = (function(){
         return isValid;
     };
     
-    var submit = function(func) {
+    var submit = function(router) {
         if (validateForm()) {
             auth.login(formInputs.username.data, formInputs.password.data)
             .then(function(response) {
-                document.querySelector("#dashLink").click();
+                router.push('dashboard');
             }).catch(function(err){
                 console.log(err);
             })

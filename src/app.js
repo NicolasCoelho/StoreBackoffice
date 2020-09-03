@@ -1,4 +1,8 @@
 (function(){
+    //Import controllers
+    var loginController = window.controllers.LoginController;
+    var registerController = window.controllers.RegisterController;
+
     // Import components 
     Vue.component('app-header', function(resolve,reject){
         fetch('./src/components/header/header.html')
@@ -21,11 +25,29 @@
             resolve({
                 data: function() {
                     return {
-                        formInputs: window.controllers.LoginController.formInputs,
+                        formInputs: loginController.formInputs,
                     }
                 },
                 methods: {
-                    submit: window.controllers.LoginController.submit,
+                    submit: loginController.submit,
+                },
+                template: res
+            })
+        }).catch(()=>{return reject()})     
+    });
+    Vue.component('app-registerForm', function(resolve,reject){
+        fetch('./src/components/registerForm/registerForm.html')
+        .then((res)=> {return res.text()})
+        .then((res)=>{
+            resolve({
+                data: function() {
+                    return {
+                        formInputs: registerController.formInputs,
+                        optionsLists: registerController.optionsLists
+                    }
+                },
+                methods: {
+                    submit: registerController.submit,
                 },
                 template: res
             })
@@ -70,7 +92,7 @@
         var Home = { template: homePage };
         var Register = { template: registerPage };
         var Login = { template: loginPage };
-        var Dashboard = { template: dashboardPage };
+        var Dashboard = { template: dashboardPage, methods: { logOut: auth.logOut } };
         var NotFound = { template: notFoundPage };
          
         var routes = [
@@ -84,6 +106,7 @@
         var router = new VueRouter({
             routes
         });
+
         // Set page access controller
         router.beforeEach((to, from, next) => {
             if (to.matched.some(record => record.meta.requiresAuth)) {

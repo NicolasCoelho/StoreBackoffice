@@ -23,14 +23,21 @@ var auth = (function() {
         }); 
     };
 
-    var logOut = function () {
+    var logOut = function (router) {
         localStorage.removeItem('X-Token');
+        token = null;
+        router.push('/');
     };
 
     var getTokenInfo = function () {
         if (token === "") return null;
         return decodeToken();
     };
+
+    var setToken = function (to) {
+        token = to;
+        localStorage.setItem("X-Token", token);
+    }
 
     var decodeToken = function () {
         var splited = token.split('.');
@@ -45,6 +52,7 @@ var auth = (function() {
         isLoggedIn,
         login,
         logOut,
+        setToken,
         getTokenInfo
     };
 })();
