@@ -4,52 +4,20 @@
     var registerController = window.controllers.RegisterController;
 
     // Import components 
-    Vue.component('app-header', function(resolve,reject){
+
+    var componentsRequests = [];
+    var headerComponent, loginBoxComponent, registerFormComponent;
+
+    componentsRequests = [
         axios('./components/header/header.html')
-        .then((res)=>{
-            resolve({
-                data: function() {
-                    return {
-                        currentRoute: window.location.href.split('#')[1]
-                    }
-                },
-                template: res.data
-            })
-        }).catch(()=>{return reject()})     
-    });
-    Vue.component('app-loginBox', function(resolve,reject){
+        .then(function(res){headerComponent=res.data}),
+        
         axios('./components/loginBox/loginBox.html')
-        .then((res)=>{
-            resolve({
-                data: function() {
-                    return {
-                        formInputs: loginController.formInputs,
-                    }
-                },
-                methods: {
-                    submit: loginController.submit,
-                },
-                template: res.data
-            })
-        }).catch(()=>{return reject()})     
-    });
-    Vue.component('app-registerForm', function(resolve,reject){
+        .then(function(res){loginBoxComponent=res.data}),
+        
         axios('./components/registerForm/registerForm.html')
-        .then((res)=>{
-            resolve({
-                data: function() {
-                    return {
-                        formInputs: registerController.formInputs,
-                        optionsLists: registerController.optionsLists
-                    }
-                },
-                methods: {
-                    submit: registerController.submit,
-                },
-                template: res.data
-            })
-        }).catch(()=>{return reject()})     
-    });
+        .then(function(res){registerFormComponent=res.data}),
+    ];
 
     // Import pages async
     var pagesRequests;
@@ -57,23 +25,24 @@
     
     pagesRequests = [
         axios('./pages/home.html')
-            .then(page => homePage=page.data),
+            .then(function(page){homePage=page.data}),
             
         axios('./pages/register.html')
-            .then(page => registerPage=page.data),
+            .then(function(page){registerPage=page.data}),
         
         axios('./pages/login.html')
-            .then(page => loginPage=page.data),
+            .then(function(page){loginPage=page.data}),
         
         axios('./pages/dashboard.html')
-            .then(page => dashboardPage=page.data),
+            .then(function(page){dashboardPage=page.data}),
 
         axios('./pages/404.html')
-            .then(page => notFoundPage=page.data),
+            .then(function(page){notFoundPage=page.data}),
     ];
 
     // Start app after download all pages
-    Promise.all(pagesRequests).then( (complete) => {
+    var importsRequests = componentsRequests.concat(pagesRequests);
+    Promise.all(importsRequests).then( (complete) => {
         init();
     }).catch( (error) => {
         console.log("Pages Download error", error);
@@ -81,6 +50,40 @@
     })
         
     function init() {
+        // Set components
+        Vue.component('app-header', {
+            data: function() {
+                return {
+                    currentRoute: window.location.href.split('#')[1]
+                }
+            },
+            template: headerComponent
+        });
+        Vue.component('app-loginBox',{
+            data: function() {
+                return {
+                    formInputs: loginController.formInputs,
+                }
+            },
+            methods: {
+                submit: loginController.submit,
+            },
+            template: loginBoxComponent
+        });
+        Vue.component('app-registerForm', {
+            data: function() {
+                return {
+                    formInputs: registerController.formInputs,
+                    optionsLists: registerController.optionsLists
+                }
+            },
+            methods: {
+                submit: registerController.submit
+            },
+            template: registerFormComponent   
+        });
+
+        // Set pages
         var Home = { template: homePage };
         var Register = { template: registerPage };
         var Login = { template: loginPage };
