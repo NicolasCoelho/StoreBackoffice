@@ -5,7 +5,7 @@
 
     // Import components 
     Vue.component('app-header', function(resolve,reject){
-        fetch('./src/components/header/header.html')
+        fetch('./components/header/header.html')
         .then((res)=> {return res.text()})
         .then((res)=>{
             resolve({
@@ -19,7 +19,7 @@
         }).catch(()=>{return reject()})     
     });
     Vue.component('app-loginBox', function(resolve,reject){
-        fetch('./src/components/loginBox/loginBox.html')
+        fetch('./components/loginBox/loginBox.html')
         .then((res)=> {return res.text()})
         .then((res)=>{
             resolve({
@@ -36,7 +36,7 @@
         }).catch(()=>{return reject()})     
     });
     Vue.component('app-registerForm', function(resolve,reject){
-        fetch('./src/components/registerForm/registerForm.html')
+        fetch('./components/registerForm/registerForm.html')
         .then((res)=> {return res.text()})
         .then((res)=>{
             resolve({
@@ -59,23 +59,23 @@
     var homePage, registerPage, loginPage, dashboardPage, notFoundPage;
     
     pagesRequests = [
-        fetch('./src/pages/home.html')
+        fetch('./pages/home.html')
             .then((response) => { return response.text() })
             .then(page => homePage=page),
             
-        fetch('./src/pages/register.html')
+        fetch('./pages/register.html')
             .then((response) => { return response.text() })
             .then(page => registerPage=page),
         
-        fetch('./src/pages/login.html')
+        fetch('./pages/login.html')
             .then((response) => { return response.text() })
             .then(page => loginPage=page),
         
-        fetch('./src/pages/dashboard.html')
+        fetch('./pages/dashboard.html')
             .then((response) => { return response.text() })
             .then(page => dashboardPage=page),
 
-        fetch('./src/pages/404.html')
+        fetch('./pages/404.html')
             .then((response) => { return response.text() })
             .then(page => notFoundPage=page),
     ];
