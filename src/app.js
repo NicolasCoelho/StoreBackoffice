@@ -5,8 +5,7 @@
 
     // Import components 
     Vue.component('app-header', function(resolve,reject){
-        fetch('./components/header/header.html')
-        .then((res)=> {return res.text()})
+        axios('./components/header/header.html')
         .then((res)=>{
             resolve({
                 data: function() {
@@ -14,13 +13,12 @@
                         currentRoute: window.location.href.split('#')[1]
                     }
                 },
-                template: res
+                template: res.data
             })
         }).catch(()=>{return reject()})     
     });
     Vue.component('app-loginBox', function(resolve,reject){
-        fetch('./components/loginBox/loginBox.html')
-        .then((res)=> {return res.text()})
+        axios('./components/loginBox/loginBox.html')
         .then((res)=>{
             resolve({
                 data: function() {
@@ -31,13 +29,12 @@
                 methods: {
                     submit: loginController.submit,
                 },
-                template: res
+                template: res.data
             })
         }).catch(()=>{return reject()})     
     });
     Vue.component('app-registerForm', function(resolve,reject){
-        fetch('./components/registerForm/registerForm.html')
-        .then((res)=> {return res.text()})
+        axios('./components/registerForm/registerForm.html')
         .then((res)=>{
             resolve({
                 data: function() {
@@ -49,7 +46,7 @@
                 methods: {
                     submit: registerController.submit,
                 },
-                template: res
+                template: res.data
             })
         }).catch(()=>{return reject()})     
     });
@@ -59,25 +56,20 @@
     var homePage, registerPage, loginPage, dashboardPage, notFoundPage;
     
     pagesRequests = [
-        fetch('./pages/home.html')
-            .then((response) => { return response.text() })
-            .then(page => homePage=page),
+        axios('./pages/home.html')
+            .then(page => homePage=page.data),
             
-        fetch('./pages/register.html')
-            .then((response) => { return response.text() })
-            .then(page => registerPage=page),
+        axios('./pages/register.html')
+            .then(page => registerPage=page.data),
         
-        fetch('./pages/login.html')
-            .then((response) => { return response.text() })
-            .then(page => loginPage=page),
+        axios('./pages/login.html')
+            .then(page => loginPage=page.data),
         
-        fetch('./pages/dashboard.html')
-            .then((response) => { return response.text() })
-            .then(page => dashboardPage=page),
+        axios('./pages/dashboard.html')
+            .then(page => dashboardPage=page.data),
 
-        fetch('./pages/404.html')
-            .then((response) => { return response.text() })
-            .then(page => notFoundPage=page),
+        axios('./pages/404.html')
+            .then(page => notFoundPage=page.data),
     ];
 
     // Start app after download all pages
