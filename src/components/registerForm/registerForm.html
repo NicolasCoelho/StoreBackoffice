@@ -245,7 +245,7 @@
             <span v-if="formInputs.account_owner_cpf.hasErrors == true" class="error">{{ formInputs.account_owner_cpf.errorMessage }}</span>
         </div>
         <div class="align-center">
-            <button v-on:click="submit($router)" class="button primary-button upcase-button align-center">Cadastrar</button>
+            <button v-on:click="submit($router, $event)" class="button primary-button upcase-button align-center">Cadastrar</button>
         </div>
     </form>
 </div>

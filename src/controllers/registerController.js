@@ -635,7 +635,8 @@ window.controllers.RegisterController = (function(){
         return {isValid: isValid, payload: payload};
     };
     
-    var submit = function(router) {
+    var submit = function(router,event) {
+        event.preventDefault();
         var validation = validateForm(); 
         if (validation.isValid) {    
             ws.register(validation.payload).then(

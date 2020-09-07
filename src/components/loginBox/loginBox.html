@@ -19,7 +19,7 @@
                 type="password">
             <span class="error" v-if="formInputs.password.hasErrors == true">{{ formInputs.password.errorMessage }}</span>    
         </div>
-        <button v-on:click="submit($router)" class="button primary-button upcase-button">Entrar</button>
+        <button v-on:click="submit($router, $event)" class="button primary-button upcase-button">Entrar</button>
     </form>
     <router-link to="/cadastro">Esqueceu a senha?</router-link> <br>
     <span>Ainda não é cadastrado?<router-link to="/cadastro">Cadastre-se agora</router-link></span>

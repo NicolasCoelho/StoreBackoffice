@@ -35,11 +35,13 @@ window.controllers.LoginController = (function(){
         return isValid;
     };
     
-    var submit = function(router) {
+    var submit = function(router, event) {
+        event.preventDefault();
         if (validateForm()) {
             auth.login(formInputs.username.data, formInputs.password.data)
             .then(function(response) {
-                router.push('/dashboard');
+                console.log(response)
+                router.push('dashboard', (a)=>console.log(a), (b)=>console.log(b),);
             }).catch(function(err){
                 console.log(err);
             })

@@ -94,7 +94,18 @@
             { path: '/', component: Home },
             { path: '/cadastro', component: Register },
             { path: '/login', component:Login  },
-            { path: '/dashboard', component: Dashboard , meta: { requiresAuth: true } },
+            { path: '/dashboard', component: Dashboard ,
+                beforeEnter: function(to,from,next){
+                    if (!auth.isLoggedIn()) {
+                        next({
+                            path: '/login',
+                            query: { redirect: to.fullPath }
+                        })
+                    } else {
+                        next();
+                    }
+                } 
+            },
             { path: '**', component: NotFound }
         ];
     
@@ -102,23 +113,23 @@
             routes
         });
 
-        // Set page access controller
-        router.beforeEach((to, from, next) => {
-            if (to.matched.some(record => record.meta.requiresAuth)) {
+        // // Set page access controller
+        // router.beforeEach((to, from, next) => {
+        //     if (to.matched.some(record => record.meta.requiresAuth)) {
         
-                // TODO: Check for loggedIn user
-                if (!auth.isLoggedIn()) {
-                next({
-                    path: '/login',
-                    query: { redirect: to.fullPath }
-                })
-                } else {
-                next();
-                }
-            } else {
-                next();
-            }
-        });
+        //         // TODO: Check for loggedIn user
+        //         if (!auth.isLoggedIn()) {
+        //         next({
+        //             path: '/login',
+        //             query: { redirect: to.fullPath }
+        //         })
+        //         } else {
+        //         next();
+        //         }
+        //     } else {
+        //         next();
+        //     }
+        // });
 
         var app = new Vue({
             router
