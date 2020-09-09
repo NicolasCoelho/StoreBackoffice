@@ -22,7 +22,7 @@ var ws = (function (){
                     isValid = true;
                 }
                 if (isValid && !rejectAll) {
-                    var token = createMockToken({name: user, profile: 'USER'}, 10);
+                    var token = createMockToken({name: user, profile: 'USER'}, 60);
                     resolve((isValid ? token : null));
                 } else {
                     reject("Usuário ou senha inválidos");

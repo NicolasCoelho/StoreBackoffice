@@ -1,8 +1,12 @@
 (function(){
     //Import controllers
-    var loginController = window.controllers.LoginController;
-    var registerController = window.controllers.RegisterController;
-
+    var loginController = new Object();
+    var registerController = new Object();
+    var loadingModalController = new Object();
+    Object.assign(loginController, window.controllers.LoginController);
+    Object.assign(registerController, window.controllers.RegisterController);
+    Object.assign(loadingModalController ,window.controllers.LoadingModalController)
+    
     // Import components 
 
     var componentsRequests = [];
