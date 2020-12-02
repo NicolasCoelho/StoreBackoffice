@@ -10,7 +10,7 @@
     // Import components 
 
     var componentsRequests = [];
-    var headerComponent, loginBoxComponent, registerFormComponent;
+    var headerComponent, loginBoxComponent, registerFormComponent, menuComponent;
 
     componentsRequests = [
         axios('./components/header/header.html')
@@ -21,27 +21,30 @@
         
         axios('./components/registerForm/registerForm.html')
         .then(function(res){registerFormComponent=res.data}),
+
+        axios('./components/menu/menu.html')
+        .then(function(res){menuComponent=res.data}),
     ];
 
     // Import pages async
     var pagesRequests;
-    var homePage, registerPage, loginPage, dashboardPage, notFoundPage;
+    var homePage, registerPage, loginPage, dashboardPage, notFoundPage,
+        dashboardHomePage, dashboardReportsPage;
     
     pagesRequests = [
-        axios('./pages/home.html')
-            .then(function(page){homePage=page.data}),
+        axios('./pages/home.html').then(function(page){homePage=page.data}),
             
-        axios('./pages/register.html')
-            .then(function(page){registerPage=page.data}),
+        axios('./pages/register.html').then(function(page){registerPage=page.data}),
         
-        axios('./pages/login.html')
-            .then(function(page){loginPage=page.data}),
+        axios('./pages/login.html').then(function(page){loginPage=page.data}),
         
-        axios('./pages/dashboard.html')
-            .then(function(page){dashboardPage=page.data}),
+        axios('./pages/dashboard.html').then(function(page){dashboardPage=page.data}),
+                
+        axios('./pages/dashboard/dash.html').then(function(page){dashboardHomePage=page.data}),
 
-        axios('./pages/404.html')
-            .then(function(page){notFoundPage=page.data}),
+        axios('./pages/dashboard/reports.html').then(function(page){dashboardReportsPage=page.data}),
+
+        axios('./pages/404.html').then(function(page){notFoundPage=page.data}),
     ];
 
     // Start app after download all pages
@@ -58,7 +61,8 @@
         Vue.component('app-header', {
             data: function() {
                 return {
-                    currentRoute: window.location.href.split('#')[1]
+                    currentRoute: window.location.href.split('#')[1],
+                    logOut: auth.logOut
                 }
             },
             template: headerComponent
@@ -86,12 +90,22 @@
             },
             template: registerFormComponent   
         });
-
+        Vue.component('app-menu', {
+            data: function() {
+                return {
+                    currentRoute: window.location.href.split('#')[1]
+                }
+            },
+            template: menuComponent
+        });
         // Set pages
         var Home = { template: homePage };
         var Register = { template: registerPage };
         var Login = { template: loginPage };
         var Dashboard = { template: dashboardPage, methods: { logOut: auth.logOut } };
+            var DashboardHome = { template: dashboardHomePage };
+            var DashboardReports = { template: dashboardReportsPage };
+            
         var NotFound = { template: notFoundPage };
          
         var routes = [
@@ -99,6 +113,9 @@
             { path: '/cadastro', component: Register },
             { path: '/login', component:Login  },
             { path: '/dashboard', component: Dashboard ,
+                children: [
+                    { path: '', component: DashboardHome},
+                ],
                 beforeEnter: function(to,from,next){
                     if (!auth.isLoggedIn()) {
                         next({

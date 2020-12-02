@@ -40,7 +40,6 @@ window.controllers.LoginController = (function(){
         if (validateForm()) {
             auth.login(formInputs.username.data, formInputs.password.data)
             .then(function(response) {
-                console.log(response)
                 router.push('dashboard', (a)=>console.log(a), (b)=>console.log(b),);
             }).catch(function(err){
                 console.log(err);

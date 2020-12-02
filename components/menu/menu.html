@@ -1,0 +1,27 @@
+<div id="MenuComponent">
+    <div class="dash-title">
+        <h3><button class="menu-button button"><i class="fa fa-bars"></i></button>&nbsp;MENU</h3>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="" class="active">Dashboard</a></li>
+            <li><a href="">Relatórios</a></li>
+            <li><a href="" class="active">Gerador de links</a></li>
+            <li><a href="" class="active">Material de treinamento</a></li>
+            <li class="sub-menu">
+                <a href="#">Minha conta <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+                <ul>
+                    <li><a href="">Dados cadastrais</a></li>
+                    <li><a href="">Alterar Senha</a></li>
+                    <li><a href="">Contrato do divulgador</a></li>
+                </ul>
+            </li>
+            <li><a href="" class="active">Ajuda</a></li>
+        </ul>
+    </nav>
+    <script>
+        document.querySelector('.menu-button').addEventListener('click', function(){
+            $('nav').toggle();
+        });
+    </script>
+</div>

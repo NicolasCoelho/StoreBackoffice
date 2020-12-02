@@ -1,0 +1,55 @@
+<div id="DashboardHome">
+    <div class="dash-title">
+        <h3>Dashboard</h3>
+    </div>
+    <div class="row justify-content-lg-between justify-content-center">
+        <div class="col col-12 card small">
+            <img class="icon left" src="/custom/content/themes/Divulgadores/Images/confirmed-icon.png" width="26">
+            <div class="small-content">
+                <strong>Vendas Faturadas</strong>
+                <strong><span id="preifx">R$</span>&nbsp;<span id="confirmedValue">0,00</span></strong>
+                <span><strong>Todo o período</strong></span>
+            </div>
+        </div>
+        <div class="col col-12 card small" >
+            <img class="icon left" src="/custom/content/themes/Divulgadores/Images/canceled-icon.png" width="26">
+            <div class="small-content">
+                <strong>Vendas Canceladas</strong>
+                <strong><span id="preifx">R$</span>&nbsp;<span id="canceledValue">0,00</span></strong>
+                <span><strong>Todo o período</strong></span>
+            </div>
+        </div>
+        <div class="col col-12 card small">
+            <img class="icon left" src="/custom/content/themes/Divulgadores/Images/received-icon.png" width="26">
+            <div class="small-content">
+                <strong>Comissão</strong>
+                <strong><span id="preifx">R$</span>&nbsp;<span id="comissionValue">0,00</span></strong>
+                <span><strong>Todo o período</strong></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% include /Templates/painel/gerador-de-links.template %}
+    </div>
+    <div class="row">
+        <div class="card black">
+            <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+            <div class="small-content">
+                <strong>Como funciona o gerador de links</strong>
+                <p>
+                    <br>
+                    Acesse o site www.mercadofacil.com.br; <br><br>
+                    Encontre uma oferta de produto;<br><br>
+                    Copie a URL do site do produto escolhido;<br><br>
+                    Cole a URL no campo “cole abaixo a URL que deseja divulgar”;<br><br>
+                    Clique em “gerar URL”;<br><br>
+                    No campo abaixo será disponibilizado o seu link exclusivo para divulgação.
+                </p>
+                <p>
+                    Caso queira transformar a URL em um link mais curto clique em “converter para URL curta”; <br><br>
+                    Você será direcionado automaticamente para o site www.bitly.com onde você poderá se cadastrar e gerar uma URL curta.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

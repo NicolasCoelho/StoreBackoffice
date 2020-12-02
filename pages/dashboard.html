@@ -1,9 +1,14 @@
 <div id="DashBoardPage">
-    <h1>Dashboard Page</h1>
-
-    <router-link to="/cadastro">Go to Register</router-link>
-    <router-link to="/login">Go to Login</router-link>
-    <router-link to="/">Go to Home</router-link>
-    <button v-on:click="logOut($router)">LogOut</button>
+    <app-header></app-header>
+    <div class="container control-painel">
+        <div class="row">
+            <div class="col col-md-4 col-lg-3 col-12">
+                <app-menu></app-menu>      
+            </div>
+            <div class="col col-md-8 col-lg-9 col-12">
+                <router-view></router-view>
+            </div>
+        </div>
+    </div>
 </div>
 
