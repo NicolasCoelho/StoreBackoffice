@@ -259,15 +259,15 @@ nav {
     border-radius: var(--border-radius);
     color: var(--text-primary);
 }
-    .card .cardIcon {
+    .card .card-icon {
         position: absolute;
         top: 15px;
         font-size: 20px;
     }
-        .card .cardIcon.left {
+        .card .card-icon.left {
             left: 15px;
         }
-        .card .cardIcon.right {
+        .card .card-icon.right {
             right: 15px;
         }
     .card.resume {
@@ -282,18 +282,18 @@ nav {
                 max-width: 280px;
             }
         }
-    .cardTitle {
+    .card-title {
         font-size: 18px;
         font-weight: 600;
     }
-    .cardValue {
+    .card-value {
         color: var(--primary);
         font-weight: 500;
         font-size: 32px;
     }
-    .cardFooter {
+    .card-footer {
         font-size: 13px;
     }
-        .cardFooter .date {
+        .card-footer .date {
             color: var(--primary);
         }
