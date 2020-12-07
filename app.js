@@ -10,7 +10,8 @@
     // Import components 
 
     var componentsRequests = [];
-    var headerComponent, loginBoxComponent, registerFormComponent, menuComponent, cardComponent;
+    var headerComponent, loginBoxComponent, registerFormComponent,
+    menuComponent, cardComponent, linksGeneratorComponent;
 
     componentsRequests = [
         axios('./components/header/header.html')
@@ -26,7 +27,10 @@
         .then(function(res){menuComponent=res.data}),
         
         axios('./components/card/card.html')
-        .then(function(res){cardComponent=res.data})
+        .then(function(res){cardComponent=res.data}),
+
+        axios('./components/linksGenerator/linksGenerator.html')
+        .then(function(res){linksGeneratorComponent=res.data}),        
     ];
 
     // Import pages async
@@ -35,19 +39,26 @@
         dashboardHomePage, dashboardReportsPage;
     
     pagesRequests = [
-        axios('./pages/home.html').then(function(page){homePage=page.data}),
+        axios('./pages/home.html')
+        .then(function(page){homePage=page.data}),
             
-        axios('./pages/register.html').then(function(page){registerPage=page.data}),
+        axios('./pages/register.html')
+        .then(function(page){registerPage=page.data}),
         
-        axios('./pages/login.html').then(function(page){loginPage=page.data}),
+        axios('./pages/login.html')
+        .then(function(page){loginPage=page.data}),
         
-        axios('./pages/dashboard.html').then(function(page){dashboardPage=page.data}),
+        axios('./pages/dashboard.html')
+        .then(function(page){dashboardPage=page.data}),
                 
-        axios('./pages/dashboard/dash.html').then(function(page){dashboardHomePage=page.data}),
+        axios('./pages/dashboard/dash.html')
+        .then(function(page){dashboardHomePage=page.data}),
 
-        axios('./pages/dashboard/reports.html').then(function(page){dashboardReportsPage=page.data}),
+        axios('./pages/dashboard/reports.html')
+        .then(function(page){dashboardReportsPage=page.data}),
 
-        axios('./pages/404.html').then(function(page){notFoundPage=page.data}),
+        axios('./pages/404.html')
+        .then(function(page){notFoundPage=page.data}),
     ];
 
     // Start app after download all pages
@@ -109,6 +120,15 @@
                 }
             },
             template: cardComponent
+        });
+        Vue.component('app-linksGenerator', {
+            props: ['baseUrl'],
+            data: function() {
+                return {
+                    currentRoute: window.location.href.split('#')[1]
+                }
+            },
+            template: linksGeneratorComponent
         });
 
         // Set pages
