@@ -3,29 +3,14 @@
         <h3>Dashboard</h3>
     </div>
     <div class="row justify-content-lg-between justify-content-center">
-        <div class="col col-12 card small">
-            <img class="icon left" src="/custom/content/themes/Divulgadores/Images/confirmed-icon.png" width="26">
-            <div class="small-content">
-                <strong>Vendas Faturadas</strong>
-                <strong><span id="preifx">R$</span>&nbsp;<span id="confirmedValue">0,00</span></strong>
-                <span><strong>Todo o período</strong></span>
-            </div>
+        <div class="col col-12 col-lg-4 small-card">
+            <app-card icon="fas fa-funnel-dollar" title="Vendas Faturadas" value="300" foot="Todo o período"></app-card>
         </div>
-        <div class="col col-12 card small" >
-            <img class="icon left" src="/custom/content/themes/Divulgadores/Images/canceled-icon.png" width="26">
-            <div class="small-content">
-                <strong>Vendas Canceladas</strong>
-                <strong><span id="preifx">R$</span>&nbsp;<span id="canceledValue">0,00</span></strong>
-                <span><strong>Todo o período</strong></span>
-            </div>
+        <div class="col col-12 col-lg-4 small-card">
+            <app-card icon="fas fa-ban" title="Vendas Canceladas" value="300" foot="Todo o período"></app-card>
         </div>
-        <div class="col col-12 card small">
-            <img class="icon left" src="/custom/content/themes/Divulgadores/Images/received-icon.png" width="26">
-            <div class="small-content">
-                <strong>Comissão</strong>
-                <strong><span id="preifx">R$</span>&nbsp;<span id="comissionValue">0,00</span></strong>
-                <span><strong>Todo o período</strong></span>
-            </div>
+        <div class="col col-12 col-lg-4 small-card">
+            <app-card icon="fas fa-hand-holding-usd" title="Comissão a receber" value="300" foot="Todo o período"></app-card>
         </div>
     </div>
     <div class="row">

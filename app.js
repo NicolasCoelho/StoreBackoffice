@@ -10,7 +10,7 @@
     // Import components 
 
     var componentsRequests = [];
-    var headerComponent, loginBoxComponent, registerFormComponent, menuComponent;
+    var headerComponent, loginBoxComponent, registerFormComponent, menuComponent, cardComponent;
 
     componentsRequests = [
         axios('./components/header/header.html')
@@ -24,6 +24,9 @@
 
         axios('./components/menu/menu.html')
         .then(function(res){menuComponent=res.data}),
+        
+        axios('./components/card/card.html')
+        .then(function(res){cardComponent=res.data})
     ];
 
     // Import pages async
@@ -98,6 +101,16 @@
             },
             template: menuComponent
         });
+        Vue.component('app-card', {
+            props: ['icon', 'title', 'value', 'foot','time'],
+            data: function() {
+                return {
+                    currentRoute: window.location.href.split('#')[1]
+                }
+            },
+            template: cardComponent
+        });
+
         // Set pages
         var Home = { template: homePage };
         var Register = { template: registerPage };
@@ -133,24 +146,6 @@
         var router = new VueRouter({
             routes
         });
-
-        // // Set page access controller
-        // router.beforeEach((to, from, next) => {
-        //     if (to.matched.some(record => record.meta.requiresAuth)) {
-        
-        //         // TODO: Check for loggedIn user
-        //         if (!auth.isLoggedIn()) {
-        //         next({
-        //             path: '/login',
-        //             query: { redirect: to.fullPath }
-        //         })
-        //         } else {
-        //         next();
-        //         }
-        //     } else {
-        //         next();
-        //     }
-        // });
 
         var app = new Vue({
             router
