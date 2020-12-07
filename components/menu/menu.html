@@ -1,12 +1,12 @@
 <div id="MenuComponent">
     <div class="dash-title">
-        <h3><button class="menu-button button"><i class="fa fa-bars"></i></button>&nbsp;MENU</h3>
+        <h3><button class="menu-button button"><i class="fa fa-bars"></i></button>&nbsp;Menu</h3>
     </div>
     <nav>
         <ul>
-            <li><a href="" class="active">Dashboard</a></li>
+            <li><router-link to="/dashboard">Dashboard</router-link></li>
             <li><a href="">Relatórios</a></li>
-            <li><a href="">Gerador de links</a></li>
+            <li><router-link to="/dashboard/links-generator">Gerador de links</router-link></li>
             <li><a href="">Material de treinamento</a></li>
             <li class="sub-menu">
                 <a href="#">Minha conta <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
@@ -19,9 +19,4 @@
             <li><a href="">Ajuda</a></li>
         </ul>
     </nav>
-    <script>
-        document.querySelector('.menu-button').addEventListener('click', function(){
-            $('nav').toggle();
-        });
-    </script>
 </div>

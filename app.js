@@ -11,7 +11,7 @@
 
     var componentsRequests = [];
     var headerComponent, loginBoxComponent, registerFormComponent,
-    menuComponent, cardComponent, linksGeneratorComponent;
+    menuComponent, cardComponent, linksGeneratorComponent, generatorInfoComponent;
 
     componentsRequests = [
         axios('./components/header/header.html')
@@ -30,13 +30,16 @@
         .then(function(res){cardComponent=res.data}),
 
         axios('./components/linksGenerator/linksGenerator.html')
-        .then(function(res){linksGeneratorComponent=res.data}),        
+        .then(function(res){linksGeneratorComponent=res.data}), 
+        
+        axios('./components/generatorInfo/generatorInfo.html')
+        .then(function(res){generatorInfoComponent=res.data}), 
     ];
 
     // Import pages async
     var pagesRequests;
     var homePage, registerPage, loginPage, dashboardPage, notFoundPage,
-        dashboardHomePage, dashboardReportsPage;
+        dashboardHomePage, dashboardReportsPage, linksGeneratorPage;
     
     pagesRequests = [
         axios('./pages/home.html')
@@ -56,6 +59,9 @@
 
         axios('./pages/dashboard/reports.html')
         .then(function(page){dashboardReportsPage=page.data}),
+
+        axios('./pages/dashboard/linksGenerator.html')
+        .then(function(page){linksGeneratorPage=page.data}),
 
         axios('./pages/404.html')
         .then(function(page){notFoundPage=page.data}),
@@ -130,15 +136,24 @@
             },
             template: linksGeneratorComponent
         });
+        Vue.component('app-generatorInfo', {
+            props: ['url'],
+            data: function() {
+                return {
+                    currentRoute: window.location.href.split('#')[1]
+                }
+            },
+            template: generatorInfoComponent
+        });
 
         // Set pages
         var Home = { template: homePage };
         var Register = { template: registerPage };
         var Login = { template: loginPage };
         var Dashboard = { template: dashboardPage, methods: { logOut: auth.logOut } };
-            var DashboardHome = { template: dashboardHomePage };
-            var DashboardReports = { template: dashboardReportsPage };
-            
+        var DashboardHome = { template: dashboardHomePage };
+        var DashboardReports = { template: dashboardReportsPage };
+        var DashboardLinksGenerator = { template: linksGeneratorPage };
         var NotFound = { template: notFoundPage };
          
         var routes = [
@@ -148,6 +163,7 @@
             { path: '/dashboard', component: Dashboard ,
                 children: [
                     { path: '', component: DashboardHome},
+                    { path: 'links-generator', component: DashboardLinksGenerator }
                 ],
                 beforeEnter: function(to,from,next){
                     if (!auth.isLoggedIn()) {

@@ -4,37 +4,19 @@
     </div>
     <div class="row justify-content-lg-between justify-content-center">
         <div class="col col-12 col-lg-4 small-card">
-            <app-card icon="fas fa-funnel-dollar" title="Vendas Faturadas" value="300" foot="Todo o período"></app-card>
+            <app-card icon="fas fa-funnel-dollar" title="Vendas Faturadas" value="R$ 300,00" foot="Todo o período"></app-card>
         </div>
         <div class="col col-12 col-lg-4 small-card">
-            <app-card icon="fas fa-ban" title="Vendas Canceladas" value="300" foot="Todo o período"></app-card>
+            <app-card icon="fas fa-ban" title="Vendas Canceladas" value="R$ 300,00" foot="Todo o período"></app-card>
         </div>
         <div class="col col-12 col-lg-4 small-card">
-            <app-card icon="fas fa-hand-holding-usd" title="Comissão a receber" value="300" foot="Todo o período"></app-card>
+            <app-card icon="fas fa-hand-holding-usd" title="Comissão a receber" value="R$ 300,00" foot="Todo o período"></app-card>
         </div>
     </div>
     <div class="row">
         <app-linksGenerator></app-linksGenerator>
     </div>
     <div class="row">
-        <div class="card black">
-            <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-            <div class="small-content">
-                <strong>Como funciona o gerador de links</strong>
-                <p>
-                    <br>
-                    Acesse o site www.mercadofacil.com.br; <br><br>
-                    Encontre uma oferta de produto;<br><br>
-                    Copie a URL do site do produto escolhido;<br><br>
-                    Cole a URL no campo “cole abaixo a URL que deseja divulgar”;<br><br>
-                    Clique em “gerar URL”;<br><br>
-                    No campo abaixo será disponibilizado o seu link exclusivo para divulgação.
-                </p>
-                <p>
-                    Caso queira transformar a URL em um link mais curto clique em “converter para URL curta”; <br><br>
-                    Você será direcionado automaticamente para o site www.bitly.com onde você poderá se cadastrar e gerar uma URL curta.
-                </p>
-            </div>
-        </div>
+        <app-generatorInfo></app-generatorInfo>
     </div>
 </div>

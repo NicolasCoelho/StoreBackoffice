@@ -1,7 +1,8 @@
 body {
     margin: 0px;
     padding: 0px;
-    color: var(--text1);
+    overflow-y: scroll;
+    color: var(--text-primary);
 }
 
 a {
@@ -11,6 +12,7 @@ a {
 h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     margin: 10px 0px;
+    color: var(--text-primary);
 }
     h1 {
         font-size: 50px;
@@ -58,13 +60,18 @@ table {
 		text-align: center;
 	}
 
+label {
+    margin-bottom: 10px;
+    display: block;
+}
 select,input {
     width: 100%;
-    padding: 13px;
-    font-size: 16px;
-    background-color: var(--bg1);
-    border: none;
-    border-radius: 5px;
+    color: var(--input-color);
+    padding: var(--input-padding);
+    font-size: var(--input-font-size);
+    background-color: var(--input-bg);
+    border: var(--input-border);
+    border-radius: var(--input-border-radius);
     box-shadow: none;
 }
     .input-wrapper {
@@ -74,12 +81,16 @@ select,input {
     }
 
 .error {
-    color: var(--primary);
+    color: var(--input-error-color);
     position: absolute;
     width: 100%;
     left: 0;
     bottom: -16px;
     font-size: 13px;
+}
+
+.fa, .fas, .far {
+    color: var(--icons-color);
 }
 
 .align-center {
@@ -97,23 +108,24 @@ select,input {
 }
 
 .button {
-    padding: 15px;
-    font-size: 18px;
+    padding: var(--button-padding);
+    font-size: var(--button-font-size);
+    font-weight: var(--button-font-weight);
+    color: var(--text-primary);
     border: none;
     box-shadow: none;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
 }
+    .button:hover {
+        cursor: pointer;
+    }
     .button.primary-button{
-        background-color: var(--primary);
-        color: var(--text2);
+        background-color: var(--button-bg-primary);
+        color: var(--button-color-primary);
     }       
     .button.secondary-button {
-        background-color: var(--secondary);
-        color: var(--text2);
-    }
-    .button.upcase-button {
-        text-transform: uppercase;
-        font-weight: 600;
+        background-color: var(--button-bg-secondary);
+        color: var(--button-color-secondary);
     }
 
 .full-banner {
@@ -166,6 +178,7 @@ select,input {
         }
         #RegisterPage #RegisterFormComponent .input-wrapper label {
             width: 400px;
+            margin: 0px;
             display: inline-block;
             text-align: right;
         }
@@ -192,7 +205,7 @@ select,input {
  */
 nav {
 	width: 100%;
-	background: var(--bg-menu);
+	background: var(--menu-bg);
 	color: var(--text-primary);
 	border-radius: var(--border-radius);
 	padding: 20px 0px;
@@ -201,13 +214,9 @@ nav {
 	.menu-button {
 		display: none;
 	}
-	@media(max-width: 992px) {
-		nav {
-			max-width: 100%;
-		}
-	}
 	@media(max-width: 768px) {
 		nav {
+            width: 100%;
 			display: none;
 		}
 		.menu-button {
@@ -215,7 +224,7 @@ nav {
 		}
 	}
 	nav a {
-		color: var(--text-menu);
+		color: var(--menu-text);
 	}
 	nav ul {
 		list-style: none;
@@ -226,13 +235,13 @@ nav {
 		display: block;
 		padding: 15px 0px 15px 25px;
 		border-left: 4px solid transparent;
-		color: var(--text-menu);
+		color: var(--menu-text);
 	}
 	nav>ul>li>a.active,
 	nav>ul>li>a:hover {
-		border-left: 4px solid var(--border-menu-hover);
-        background: var(--bg-button-menu-hover);
-        color: var(--text-menu-hover);
+		border-left: 4px solid var(--menu-border-hover);
+        background: var(--menu-button-bg-hover);
+        color: var(--menu-text-hover);
 	}
 	nav > ul > li.sub-menu ul {
 		padding: 10px 55px;
@@ -254,30 +263,36 @@ nav {
     height: 100%;
     padding: 20px 25px;
     margin-bottom: 25px;
+    position: relative;
     overflow: hidden;
-    background: var(--bg-card);
+    background: var(--card-bg);
     border-radius: var(--border-radius);
     color: var(--text-primary);
 }
     .card .card-icon {
         position: absolute;
-        top: 15px;
+        top: 10px;
         font-size: 20px;
     }
         .card .card-icon.left {
-            left: 15px;
+            left: 10px;
         }
         .card .card-icon.right {
-            right: 15px;
+            right: 10px;
         }
     .card.resume {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        height: 140px;
+        height: 150px;
     }
         @media(min-width: 992px) {
+            .col.small-card {
+                max-width: 230px;
+            }
+        }
+        @media(min-width: 1240px) {
             .col.small-card {
                 max-width: 280px;
             }
@@ -296,4 +311,32 @@ nav {
     }
         .card-footer .date {
             color: var(--primary);
+        }
+    .card.info {
+        background: var(--primary);
+        color: var(--text-secondary);
+        align-items: center;
+    }
+        .card.info .icon {
+            color: var(--secondary);
+            font-size: 80px;
+        }
+        @media (min-width: 992px) {
+            .card.info {
+                display: flex;
+            }
+            .card.info .content{
+                margin-left: 20px;
+            }
+        }
+        @media(max-width: 992px) {
+            .card.info {
+                text-align: center;
+            }
+            .card.info  .content {
+                text-align: left;
+            }
+            .card.info .icon {
+                margin-bottom: 20px;
+            }
         }
