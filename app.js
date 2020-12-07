@@ -113,7 +113,7 @@
         Vue.component('app-menu', {
             data: function() {
                 return {
-                    currentRoute: window.location.href.split('#')[1]
+                    currentRoute: () => window.location.href.split('#')[1]
                 }
             },
             template: menuComponent
@@ -162,7 +162,8 @@
             { path: '/login', component:Login  },
             { path: '/dashboard', component: Dashboard ,
                 children: [
-                    { path: '', component: DashboardHome},
+                    { path: '', component: DashboardHome },
+                    { path: 'reports', component: DashboardReports },
                     { path: 'links-generator', component: DashboardLinksGenerator }
                 ],
                 beforeEnter: function(to,from,next){

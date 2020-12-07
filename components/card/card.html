@@ -3,7 +3,7 @@
     <div class="card-title">{{ title }}</div>
     <div class="card-value">{{ value }}</div>
     <div class="card-foter">
-        <span class="period">{{ foot }} &nbsp;</span>
-        <span class="date">{{ time }}</span>
+        <span class="period">{{ foot }}</span>
+        <span class="date" v-if="time">&nbsp;{{ time }}</span>
     </div>
 </div>
