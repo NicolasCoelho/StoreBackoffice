@@ -39,33 +39,59 @@
 
     // Import pages async
     var pagesRequests;
-    var homePage, registerPage, loginPage, dashboardPage, notFoundPage,
-        dashboardHomePage, dashboardReportsPage, linksGeneratorPage;
+    var homePage = {}; 
+    var registerPage = {};
+    var loginPage = {};
+    var dashboardPage = {};
+    var notFoundPage = {};
+    var dashboardHomePage = {};
+    var dashboardReportsPage = {};
+    var dashboardLinksGeneratorPage = {};
+    var dashboardTrainingPage = {};
+    var dasboardHelpPage = {};
+    var dashboardChangePasswordPage = {};
+    var dashboardCustumerDataPage = {};
+    var dashboardContractPage = {};
     
     pagesRequests = [
         axios('./pages/home.html')
-        .then(function(page){homePage=page.data}),
+        .then(function(page){homePage.template=page.data}),
             
         axios('./pages/register.html')
-        .then(function(page){registerPage=page.data}),
+        .then(function(page){registerPage.template=page.data}),
         
         axios('./pages/login.html')
-        .then(function(page){loginPage=page.data}),
+        .then(function(page){loginPage.template=page.data}),
         
         axios('./pages/dashboard.html')
-        .then(function(page){dashboardPage=page.data}),
+        .then(function(page){dashboardPage.template=page.data}),
                 
         axios('./pages/dashboard/dash.html')
-        .then(function(page){dashboardHomePage=page.data}),
+        .then(function(page){dashboardHomePage.template=page.data}),
 
         axios('./pages/dashboard/reports.html')
-        .then(function(page){dashboardReportsPage=page.data}),
+        .then(function(page){dashboardReportsPage.template=page.data}),
 
         axios('./pages/dashboard/linksGenerator.html')
-        .then(function(page){linksGeneratorPage=page.data}),
-
+        .then(function(page){dashboardLinksGeneratorPage.template=page.data}),
+        
+        axios('./pages/dashboard/changePassword.html')
+        .then(function(page){dashboardChangePasswordPage.template=page.data}),
+        
+        axios('./pages/dashboard/contract.html')
+        .then(function(page){dashboardContractPage.template=page.data}),
+        
+        axios('./pages/dashboard/customerData.html')
+        .then(function(page){dashboardCustumerDataPage.template=page.data}),
+        
+        axios('./pages/dashboard/help.html')
+        .then(function(page){dasboardHelpPage.template=page.data}),
+        
+        axios('./pages/dashboard/training.html')
+        .then(function(page){dashboardTrainingPage.template=page.data}),
+        
         axios('./pages/404.html')
-        .then(function(page){notFoundPage=page.data}),
+        .then(function(page){notFoundPage.template=page.data}),
     ];
 
     // Start app after download all pages
@@ -146,26 +172,21 @@
             },
             template: generatorInfoComponent
         });
-
-        // Set pages
-        var Home = { template: homePage };
-        var Register = { template: registerPage };
-        var Login = { template: loginPage };
-        var Dashboard = { template: dashboardPage, methods: { logOut: auth.logOut } };
-        var DashboardHome = { template: dashboardHomePage };
-        var DashboardReports = { template: dashboardReportsPage };
-        var DashboardLinksGenerator = { template: linksGeneratorPage };
-        var NotFound = { template: notFoundPage };
          
         var routes = [
-            { path: '/', component: Home },
-            { path: '/cadastro', component: Register },
-            { path: '/login', component:Login  },
-            { path: '/dashboard', component: Dashboard ,
+            { path: '/', component: homePage },
+            { path: '/cadastro', component: registerPage },
+            { path: '/entrar', component: loginPage },
+            { path: '/dashboard', component: dashboardPage ,
                 children: [
-                    { path: '', component: DashboardHome },
-                    { path: 'reports', component: DashboardReports },
-                    { path: 'links-generator', component: DashboardLinksGenerator }
+                    { path: '', component: dashboardHomePage },
+                    { path: 'relatorios', component: dashboardReportsPage },
+                    { path: 'gerador-de-links', component: dashboardLinksGeneratorPage },
+                    { path: 'material-de-treinamento', component: dashboardTrainingPage },
+                    { path: 'dados-cadastrais', component: dashboardCustumerDataPage },
+                    { path: 'alterar-senha', component: dashboardChangePasswordPage },
+                    { path: 'contrato', component: dashboardContractPage },
+                    { path: 'ajuda', component: dasboardHelpPage },
                 ],
                 beforeEnter: function(to,from,next){
                     if (!auth.isLoggedIn()) {
@@ -178,7 +199,7 @@
                     }
                 } 
             },
-            { path: '**', component: NotFound }
+            { path: '**', component: notFoundPage }
         ];
     
         var router = new VueRouter({
