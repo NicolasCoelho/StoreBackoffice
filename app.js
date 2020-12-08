@@ -1,40 +1,47 @@
 (function(){
+    // Configs
+    var configs = window.app.configs
+
     //Import controllers
     var loginController = new Object();
     var registerController = new Object();
-    var loadingModalController = new Object();
+    var loadingController = new Object();
     var menuController = new Object();
-    Object.assign(loginController, window.controllers.LoginController);
-    Object.assign(registerController, window.controllers.RegisterController);
-    Object.assign(loadingModalController ,window.controllers.LoadingModalController);
-    Object.assign(menuController, window.controllers.MenuController);
+    Object.assign(loginController, window.app.controllers.LoginController);
+    Object.assign(registerController, window.app.controllers.RegisterController);
+    Object.assign(loadingController ,window.app.controllers.LoadingController);
+    Object.assign(menuController, window.app.controllers.MenuController);
     
     // Import components 
     var componentsRequests = [];
     var headerComponent, loginBoxComponent, registerFormComponent,
-    menuComponent, cardComponent, linksGeneratorComponent, generatorInfoComponent;
+    menuComponent, cardComponent, linksGeneratorComponent, generatorInfoComponent,
+    loadingComponent;
 
     componentsRequests = [
-        axios('./components/header/header.html')
+        axios(ws.staticUrl+'/components/header/header.html')
         .then(function(res){headerComponent=res.data}),
         
-        axios('./components/loginBox/loginBox.html')
+        axios(ws.staticUrl+'/components/loginBox/loginBox.html')
         .then(function(res){loginBoxComponent=res.data}),
         
-        axios('./components/registerForm/registerForm.html')
+        axios(ws.staticUrl+'/components/registerForm/registerForm.html')
         .then(function(res){registerFormComponent=res.data}),
 
-        axios('./components/menu/menu.html')
+        axios(ws.staticUrl+'/components/menu/menu.html')
         .then(function(res){menuComponent=res.data}),
         
-        axios('./components/card/card.html')
+        axios(ws.staticUrl+'/components/card/card.html')
         .then(function(res){cardComponent=res.data}),
 
-        axios('./components/linksGenerator/linksGenerator.html')
+        axios(ws.staticUrl+'/components/linksGenerator/linksGenerator.html')
         .then(function(res){linksGeneratorComponent=res.data}), 
         
-        axios('./components/generatorInfo/generatorInfo.html')
+        axios(ws.staticUrl+'/components/generatorInfo/generatorInfo.html')
         .then(function(res){generatorInfoComponent=res.data}), 
+        
+        axios(ws.staticUrl+'/components/loading/loading.html')
+        .then(function(res){loadingComponent=res.data}), 
     ];
 
     // Import pages async
@@ -54,43 +61,43 @@
     var dashboardContractPage = {};
     
     pagesRequests = [
-        axios('./pages/home.html')
+        axios(configs.home || staticUrl+'./pages/home.html')
         .then(function(page){homePage.template=page.data}),
             
-        axios('./pages/register.html')
+        axios(ws.staticUrl+'/pages/register.html')
         .then(function(page){registerPage.template=page.data}),
         
-        axios('./pages/login.html')
+        axios(ws.staticUrl+'/pages/login.html')
         .then(function(page){loginPage.template=page.data}),
         
-        axios('./pages/dashboard.html')
+        axios(ws.staticUrl+'/pages/dashboard.html')
         .then(function(page){dashboardPage.template=page.data}),
                 
-        axios('./pages/dashboard/dash.html')
+        axios(ws.staticUrl+'/pages/dashboard/dash.html')
         .then(function(page){dashboardHomePage.template=page.data}),
 
-        axios('./pages/dashboard/reports.html')
+        axios(ws.staticUrl+'/pages/dashboard/reports.html')
         .then(function(page){dashboardReportsPage.template=page.data}),
 
-        axios('./pages/dashboard/linksGenerator.html')
+        axios(ws.staticUrl+'/pages/dashboard/linksGenerator.html')
         .then(function(page){dashboardLinksGeneratorPage.template=page.data}),
         
-        axios('./pages/dashboard/changePassword.html')
+        axios(ws.staticUrl+'/pages/dashboard/changePassword.html')
         .then(function(page){dashboardChangePasswordPage.template=page.data}),
         
-        axios('./pages/dashboard/contract.html')
+        axios(ws.staticUrl+'/pages/dashboard/contract.html')
         .then(function(page){dashboardContractPage.template=page.data}),
         
-        axios('./pages/dashboard/customerData.html')
+        axios(ws.staticUrl+'/pages/dashboard/customerData.html')
         .then(function(page){dashboardCustumerDataPage.template=page.data}),
         
-        axios('./pages/dashboard/help.html')
+        axios(ws.staticUrl+'/pages/dashboard/help.html')
         .then(function(page){dasboardHelpPage.template=page.data}),
         
-        axios('./pages/dashboard/training.html')
+        axios(ws.staticUrl+'/pages/dashboard/training.html')
         .then(function(page){dashboardTrainingPage.template=page.data}),
         
-        axios('./pages/404.html')
+        axios(ws.staticUrl+'/pages/404.html')
         .then(function(page){notFoundPage.template=page.data}),
     ];
 
@@ -109,7 +116,8 @@
             data: function() {
                 return {
                     currentRoute: window.location.href.split('#')[1],
-                    logOut: auth.logOut
+                    logOut: auth.logOut,
+                    configs: configs
                 }
             },
             template: headerComponent
@@ -118,6 +126,7 @@
             data: function() {
                 return {
                     formInputs: loginController.formInputs,
+                    configs: configs
                 }
             },
             methods: {
@@ -172,6 +181,14 @@
             },
             template: generatorInfoComponent
         });
+        Vue.component('app-loading', {
+            data: function() {
+                return {
+                    loading: loadingController
+                }
+            },
+            template: loadingComponent
+        });
          
         var routes = [
             { path: '/', component: homePage },
@@ -191,7 +208,7 @@
                 beforeEnter: function(to,from,next){
                     if (!auth.isLoggedIn()) {
                         next({
-                            path: '/login',
+                            path: '/entrar',
                             query: { redirect: to.fullPath }
                         })
                     } else {

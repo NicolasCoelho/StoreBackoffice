@@ -1,4 +1,4 @@
-window.controllers.LoadingModalController = (function(){
+window.app.controllers.LoadingController = (function(){
     
     var loading = false;
 

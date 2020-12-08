@@ -9,12 +9,18 @@
 <title>Divulgadores</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <script>
-    window.configs = {
-        storeToken: 1,
-        staticUrl: ""
+    window.app = {
+        configs: {
+            appTitle: 'Divulgadores',
+            name: 'Ecomlab',
+            url: 'https://www.ecomlab.com.br',
+            storeToken: 1,
+            logo: 'http://127.0.0.1:5500/styles/images/logo-generico.png',
+            home: 'http://127.0.0.1:5500/pages/home.html'
+        },
+        controllers: {}
     }
-    window.controllers = {};
-    document.title = 'Divulgadores';
+    document.title = window.app.configs.appTitle;
 </script>
 <style>
 :root {
@@ -26,6 +32,7 @@
     --content-bg: #fff;
     --card-bg: #f5f5f5;
     --login-page-bg: var(--primary);
+    --login-box-bg: var(--card-bg);
     --text-primary: #838383;
     --text-secondary: #fff;
     --border-radius: 0px;
@@ -75,7 +82,7 @@
 <link rel="stylesheet" href="./styles/css/app.css">
 
 <!-- Import controllers -->
-<script src="./controllers/loadingModalController.js"></script>
+<script src="./controllers/loadingController.js"></script>
 <script src="./controllers/loginController.js"></script>
 <script src="./controllers/registerController.js"></script>
 <script src="./controllers/menuController.js"></script>

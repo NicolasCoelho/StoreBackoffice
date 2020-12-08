@@ -1,4 +1,4 @@
-window.controllers.RegisterController = (function(){
+window.app.controllers.RegisterController = (function(){
     
     var optionsLists = {
         maritalStatus: [
