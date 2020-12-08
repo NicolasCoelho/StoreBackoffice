@@ -126,6 +126,7 @@
             data: function() {
                 return {
                     formInputs: loginController.formInputs,
+                    loading: loadingController,
                     configs: configs
                 }
             },

@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-
 body {
     margin: 0px;
     padding: 0px;
@@ -110,6 +108,10 @@ select,input {
 }
 
 .button {
+    position: relative;
+    min-height: 50px;
+    min-width: 75px;
+    transition: 1s;
     padding: var(--button-padding);
     font-size: var(--button-font-size);
     font-weight: var(--button-font-weight);
@@ -203,22 +205,22 @@ select,input {
 }
 
 #Loading {
-    position: relative;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: auto;
     transition: all 0.1s linear;
-    transform: scale(0.7);
+    transform: scale(1);
     z-index: 9999;
 }
 
 #Loading > div > div {
     animation-play-state: paused;
-    border: 5px solid #c8c8c8;
+    border: 3px solid var(--loading-spinner);
     border-radius: 50%;
     animation: rotate 1s infinite linear;
-    border-left-color: rgba(200, 200, 200, 0.4);
+    border-left-color: var(--loading-spinner-border);
     width: 100%;
     height: 100%;
 }
@@ -229,10 +231,10 @@ select,input {
     left: 0;
     right: 0;
     bottom: 0;
-    margin: auto;
+    margin: 0 auto;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     padding: 5px;
 }
 
@@ -267,7 +269,7 @@ select,input {
     right: 0;
     bottom: 0;
     margin: auto;
-    color: #000;
+    color: var(--loading-icon);
     width: 24px;
     height: 24px;
     line-height: 1;

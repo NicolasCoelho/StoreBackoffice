@@ -3,22 +3,23 @@ window.app.controllers.LoadingController = (function(){
     var loading = false;
 
     var startLoad = function() {
-        loading = true;
+        this.loading = true;
     };
 
     var stopLoad = function() {
-        loading = false;
+        this.loading = false;
     };
 
     var toogleLoad = function () {
-        loading = !loading;
+        this.loading = !this.loading;
     };
 
     var isLoading = function(){
-        return loading;
+        return this.loading;
     };
     
     return {
+        loading,
         isLoading,
         startLoad,
         stopLoad,
