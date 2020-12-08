@@ -3,12 +3,13 @@
     var loginController = new Object();
     var registerController = new Object();
     var loadingModalController = new Object();
+    var menuController = new Object();
     Object.assign(loginController, window.controllers.LoginController);
     Object.assign(registerController, window.controllers.RegisterController);
-    Object.assign(loadingModalController ,window.controllers.LoadingModalController)
+    Object.assign(loadingModalController ,window.controllers.LoadingModalController);
+    Object.assign(menuController, window.controllers.MenuController);
     
     // Import components 
-
     var componentsRequests = [];
     var headerComponent, loginBoxComponent, registerFormComponent,
     menuComponent, cardComponent, linksGeneratorComponent, generatorInfoComponent;
@@ -113,7 +114,7 @@
         Vue.component('app-menu', {
             data: function() {
                 return {
-                    currentRoute: () => window.location.href.split('#')[1]
+                    menu: menuController
                 }
             },
             template: menuComponent
