@@ -131,7 +131,12 @@ select,input {
         background-color: var(--button-bg-secondary);
         color: var(--button-color-secondary);
     }
-
+    .button.primary-button:focus {
+        outline: 1px solid var(--button-border-focus-color-primary);
+    }
+    .button.secondary-button:focus {
+        outline: 1px solid var(--button-border-focus-color-secondary);
+    }
 .full-banner {
     width: 100%;
     height: auto;
