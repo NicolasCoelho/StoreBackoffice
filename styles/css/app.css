@@ -129,6 +129,9 @@ select,input {
     .button:hover {
         cursor: pointer;
     }
+    .button:focus {
+        outline: none;
+    }
     .button.primary-button{
         background-color: var(--button-bg-primary);
         color: var(--button-color-primary);
@@ -137,11 +140,13 @@ select,input {
         background-color: var(--button-bg-secondary);
         color: var(--button-color-secondary);
     }
-    .button.primary-button:focus {
-        outline: 1px solid var(--button-border-focus-color-primary);
+    .button.primary-button:active {
+        background-color: var(--button-bg-active-primary);
+        color: var(--button-color-active-primary);
     }
-    .button.secondary-button:focus {
-        outline: 1px solid var(--button-border-focus-color-secondary);
+    .button.secondary-button:active {
+        background-color: var(--button-bg-active-secondary);
+        color: var(--button-color-active-secondary);
     }
 .full-banner {
     width: 100%;
