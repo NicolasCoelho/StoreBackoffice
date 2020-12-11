@@ -2,6 +2,7 @@ body {
     margin: 0px;
     padding: 0px;
     overflow-y: scroll;
+    overflow-x: hidden;
     color: var(--text-primary);
 }
 
@@ -66,6 +67,7 @@ label {
 }
 select,input {
     width: 100%;
+    transition: 100ms;
     color: var(--input-color);
     padding: var(--input-padding);
     font-size: var(--input-font-size);
@@ -74,6 +76,10 @@ select,input {
     border-radius: var(--input-border-radius);
     box-shadow: none;
 }
+    select:focus,input:focus {
+        outline: none;
+        transform: scale(1.02);
+    }
     .input-wrapper {
         position: relative;
         margin: 20px 0px;
@@ -183,7 +189,7 @@ select,input {
     @media(min-width: 1200px) {
         #RegisterPage #RegisterFormComponent h2,
         #RegisterPage #RegisterFormComponent .error {
-            margin-left: 400px;
+            margin-left: 410px;
         }
         #RegisterPage #RegisterFormComponent .input-wrapper label {
             width: 400px;
@@ -194,6 +200,7 @@ select,input {
         #RegisterPage #RegisterFormComponent .input-wrapper input,
         #RegisterPage #RegisterFormComponent .input-wrapper select {
             width: 400px;
+            margin-left: 5px;
             display: inline-block;
             text-align: left;
         }
