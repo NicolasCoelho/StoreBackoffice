@@ -5,7 +5,7 @@ body {
     overflow-x: hidden;
     color: var(--text-primary);
 }
-#app {
+#app,#DashBoardPage,#NotFoundPage,#HomePage,#LoginPage,#RegisterPage {
     min-height: 100vh;
 }
 a {
