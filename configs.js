@@ -4,7 +4,7 @@ window.app = (function(){
         configs:  {
             appTitle: 'Divulgadores',
             name: 'Ecomlab',
-            staticUrl: 'http://localhost:5500/',
+            staticUrl: 'https://static.divulgadores.app.br',
             url: 'https://www.ecomlab.com.br',
             storeToken: 1,
             home: 'http://127.0.0.1:5500/pages/home.html',
