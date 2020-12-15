@@ -11,7 +11,6 @@
     Object.assign(registerController, window.app.controllers.RegisterController);
     Object.assign(loadingController ,window.app.controllers.LoadingController);
     Object.assign(menuController, window.app.controllers.MenuController);
-    
     // Import components 
     var componentsRequests = [];
     var headerComponent, loginBoxComponent, registerFormComponent,
@@ -19,28 +18,28 @@
     loadingComponent;
 
     componentsRequests = [
-        axios(ws.staticUrl+'/components/header/header.html')
+        axios(ws.staticUrl+'components/header/header.html')
         .then(function(res){headerComponent=res.data}),
         
-        axios(ws.staticUrl+'/components/loginBox/loginBox.html')
+        axios(ws.staticUrl+'components/loginBox/loginBox.html')
         .then(function(res){loginBoxComponent=res.data}),
         
-        axios(ws.staticUrl+'/components/registerForm/registerForm.html')
+        axios(ws.staticUrl+'components/registerForm/registerForm.html')
         .then(function(res){registerFormComponent=res.data}),
 
-        axios(ws.staticUrl+'/components/menu/menu.html')
+        axios(ws.staticUrl+'components/menu/menu.html')
         .then(function(res){menuComponent=res.data}),
         
-        axios(ws.staticUrl+'/components/card/card.html')
+        axios(ws.staticUrl+'components/card/card.html')
         .then(function(res){cardComponent=res.data}),
 
-        axios(ws.staticUrl+'/components/linksGenerator/linksGenerator.html')
+        axios(ws.staticUrl+'components/linksGenerator/linksGenerator.html')
         .then(function(res){linksGeneratorComponent=res.data}), 
         
-        axios(ws.staticUrl+'/components/generatorInfo/generatorInfo.html')
+        axios(ws.staticUrl+'components/generatorInfo/generatorInfo.html')
         .then(function(res){generatorInfoComponent=res.data}), 
         
-        axios(ws.staticUrl+'/components/loading/loading.html')
+        axios(ws.staticUrl+'components/loading/loading.html')
         .then(function(res){loadingComponent=res.data}), 
     ];
 
@@ -64,40 +63,40 @@
         axios(configs.home || ws.staticUrl+'./pages/home.html')
         .then(function(page){homePage.template=page.data}),
             
-        axios(ws.staticUrl+'/pages/register.html')
+        axios(ws.staticUrl+'pages/register.html')
         .then(function(page){registerPage.template=page.data}),
         
-        axios(ws.staticUrl+'/pages/login.html')
+        axios(ws.staticUrl+'pages/login.html')
         .then(function(page){loginPage.template=page.data}),
         
-        axios(ws.staticUrl+'/pages/dashboard.html')
+        axios(ws.staticUrl+'pages/dashboard.html')
         .then(function(page){dashboardPage.template=page.data}),
                 
-        axios(ws.staticUrl+'/pages/dashboard/dash.html')
+        axios(ws.staticUrl+'pages/dashboard/dash.html')
         .then(function(page){dashboardHomePage.template=page.data}),
 
-        axios(ws.staticUrl+'/pages/dashboard/reports.html')
+        axios(ws.staticUrl+'pages/dashboard/reports.html')
         .then(function(page){dashboardReportsPage.template=page.data}),
 
-        axios(ws.staticUrl+'/pages/dashboard/linksGenerator.html')
+        axios(ws.staticUrl+'pages/dashboard/linksGenerator.html')
         .then(function(page){dashboardLinksGeneratorPage.template=page.data}),
         
-        axios(ws.staticUrl+'/pages/dashboard/changePassword.html')
+        axios(ws.staticUrl+'pages/dashboard/changePassword.html')
         .then(function(page){dashboardChangePasswordPage.template=page.data}),
         
-        axios(ws.staticUrl+'/pages/dashboard/contract.html')
+        axios(ws.staticUrl+'pages/dashboard/contract.html')
         .then(function(page){dashboardContractPage.template=page.data}),
         
-        axios(ws.staticUrl+'/pages/dashboard/customerData.html')
+        axios(ws.staticUrl+'pages/dashboard/customerData.html')
         .then(function(page){dashboardCustumerDataPage.template=page.data}),
         
-        axios(ws.staticUrl+'/pages/dashboard/help.html')
+        axios(ws.staticUrl+'pages/dashboard/help.html')
         .then(function(page){dasboardHelpPage.template=page.data}),
         
-        axios(ws.staticUrl+'/pages/dashboard/training.html')
+        axios(ws.staticUrl+'pages/dashboard/training.html')
         .then(function(page){dashboardTrainingPage.template=page.data}),
         
-        axios(ws.staticUrl+'/pages/404.html')
+        axios(ws.staticUrl+'pages/404.html')
         .then(function(page){notFoundPage.template=page.data}),
     ];
 
