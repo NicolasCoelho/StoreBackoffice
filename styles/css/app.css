@@ -5,7 +5,9 @@ body {
     overflow-x: hidden;
     color: var(--text-primary);
 }
-
+#app {
+    min-height: 100vh;
+}
 a {
     text-decoration: none;
     color: var(--primary);
