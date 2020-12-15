@@ -1,6 +1,6 @@
 var ws = (function (){
-    var apiUrl = 'http://localhost:3000';
-    var staticUrl = 'http://localhost:5500';
+    var apiUrl = window.app.configs.wsUrl;
+    var staticUrl = window.app.configs.staticUrl;
     
     var authenticate = function (user, password) {
         return mockAuthenticate(user, password);

@@ -61,7 +61,7 @@
     var dashboardContractPage = {};
     
     pagesRequests = [
-        axios(configs.home || staticUrl+'./pages/home.html')
+        axios(configs.home || ws.staticUrl+'./pages/home.html')
         .then(function(page){homePage.template=page.data}),
             
         axios(ws.staticUrl+'/pages/register.html')
