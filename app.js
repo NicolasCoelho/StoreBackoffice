@@ -206,7 +206,7 @@
                     { path: 'ajuda', component: dasboardHelpPage },
                 ],
                 beforeEnter: function(to,from,next){
-                    if (!auth.isLoggedIn()) {
+                    if (!auth.isAuthenticaded()) {
                         next({
                             path: '/entrar',
                             query: { redirect: to.fullPath }
@@ -223,6 +223,18 @@
             routes
         });
 
+        // Set Token
+        if (!auth.hasToken() || (auth.hasToken() && !auth.isEmptyTokenValid() )) {
+            ws.getToken().then(
+                function(response){
+                    console.log(response);
+                }
+            ).catch(
+                function(err){
+                    document.querySelector("#app").innerHTML = "<h1 style='text-align: center; color: var(--primary);'>Erro na ativaçao do site. Por favor, contate o suporte!</h1>";
+                }
+            );
+        }
         var app = new Vue({
             router
         }).$mount('#app');

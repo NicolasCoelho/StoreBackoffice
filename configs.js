@@ -5,9 +5,9 @@ window.app = (function(){
             appTitle: 'Divulgadores',
             name: 'Ecomlab',
             staticUrl: 'https://static.divulgadores.app.br/',
-            wsUrl: 'http://localhost:3000/',
+            wsUrl: 'https://wshlg.divulgadores.app.br/',
             url: 'https://www.ecomlab.com.br',
-            storeToken: 1,
+            id: "",
             home: 'https://static.divulgadores.app.br/pages/home.html',
             favicon:'styles/images/logo-ecomlab.png',
             logo: {

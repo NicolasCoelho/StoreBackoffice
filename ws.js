@@ -1,6 +1,12 @@
 var ws = (function (){
     var apiUrl = window.app.configs.wsUrl;
     var staticUrl = window.app.configs.staticUrl;
+    var id = window.app.configs.id;
+    var header = {};
+
+    var getToken = function() {
+        return axios.post(apiUrl+"token", {storeId: id})
+    }
     
     var authenticate = function (user, password) {
         return mockAuthenticate(user, password);
@@ -31,29 +37,11 @@ var ws = (function (){
             }, (2000));
         });
     };
-
-    var mockRegister = function(data) {
-        return new Promise(function(resolve,reject){
-            setTimeout(function(){
-                var payload = {
-                    name: data.name,
-                    email: data.email,
-                    profile: "USER"
-                };
-                !rejectAll ? resolve(createMockToken(payload, 10)) : reject();
-            }, 1000);
-        })
-    };
-
-    var createMockToken = function (data, timeExp) {
-        var token = '';
-        token = btoa(JSON.stringify(data))+"."+btoa(JSON.stringify({expDate: Date.now()+(timeExp*1000*60) }));
-        return token;
-    }
     
     return {
         apiUrl,
         staticUrl,
+        getToken,
         authenticate,
         register
     };

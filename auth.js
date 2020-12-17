@@ -1,58 +1,65 @@
-var auth = (function() {
-    
-    var token = localStorage.getItem('X-Token');
+var auth = (function () {
 
-    var isLoggedIn = function () {
-        if (token === "" || token === null) return false; 
-        
-        var { expDate } = decodeToken().expTime;
-        expDate = new Date(expDate);
-        return ( expDate.getTime() > Date.now() ); 
-    };
+    var token = localStorage.getItem('Token');
 
-    var login = function (user, password) {
-        return new Promise(function(resolve,reject){
-            ws.authenticate(user,password)
-            .then(function (response){
-                if (response != null) {
-                    token = response;
-                    localStorage.setItem('X-Token', token);
-                    resolve(decodeToken());
-                }
-            }).catch(function(err){reject(err)});
-        }); 
-    };
-
-    var logOut = function (router) {
-        localStorage.removeItem('X-Token');
-        token = null;
-        router.push('/');
-    };
-
-    var getTokenInfo = function () {
-        if (token === "") return null;
-        return decodeToken();
-    };
-
-    var setToken = function (to) {
-        token = to;
-        localStorage.setItem("X-Token", token);
+    var getToken = function () {
+        return this.token;
     }
 
-    var decodeToken = function () {
-        var splited = token.split('.');
-        var decoded = {
-            data: JSON.parse(atob(splited[0])),
-            expTime: JSON.parse(atob(splited[1]))
-        }
-        return decoded;
-    };
-    
+    var setToken = function (token) {
+        this.token = token
+        localStorage.setItem('Token', token)
+    }
+
+    var isAuthenticaded = function () {
+        if (!this.hasToken()) return false
+        var data = this.getTokenData()
+        if (data.t === 1) return false
+        return !this.isTokenExpired()
+    }
+
+    var hasToken = function () {
+        return (
+            this.token !== null &&
+            this.token !== undefined &&
+            this.token !== ''
+        )
+    }
+
+    var getTokenData = function () {
+        var tokenData = this.decode(this.token);
+        return tokenData
+    }
+
+    var isTokenExpired = function () {
+        var data = this.getTokenData()
+        return (Date.now().valueOf() / 1000) > data.exp
+    }
+
+    var isEmptyTokenValid = function () {
+        if (!this.hasToken()) return false
+        return this.isTokenExpired()
+    }
+
+    var decode = function (token) {
+        var data = JSON.parse(atob(token.split('.')[1]))
+        return data
+    }
+
+    var deleteToken = function () {
+        this.token = null
+        localStorage.removeItem('Token')
+    }
+
     return {
-        isLoggedIn,
-        login,
-        logOut,
+        getToken,
         setToken,
-        getTokenInfo
-    };
+        isAuthenticaded,
+        hasToken,
+        getTokenData,
+        isTokenExpired,
+        isEmptyTokenValid,
+        decode,
+        deleteToken
+    }
 })();
