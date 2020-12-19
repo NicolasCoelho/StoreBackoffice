@@ -227,11 +227,18 @@
         if (!auth.hasToken() || (auth.hasToken() && !auth.isEmptyTokenValid() )) {
             ws.getToken().then(
                 function(response){
-                    console.log(response);
+                    auth.setToken(response.data.token)
                 }
             ).catch(
                 function(err){
-                    document.querySelector("#app").innerHTML = "<h1 style='text-align: center; color: var(--primary);'>Erro na ativaçao do site. Por favor, contate o suporte!</h1>";
+                    var errorMessage = "<h1 style='text-align: center; color: var(--primary);'>Erro na ativaçao do site. Por favor, contate o suporte!</h1>"
+                    if (err.response.status == 404) {
+                        document.querySelector("#app").innerHTML = errorMessage;
+                    } else {
+                        document.querySelector("#app").innerHTML = '';
+                        window.alert("Erro inesperado. Por favor tente mais tarde");
+                    }
+                    console.error(err);
                 }
             );
         }

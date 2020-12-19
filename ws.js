@@ -2,14 +2,26 @@ var ws = (function (){
     var apiUrl = window.app.configs.wsUrl;
     var staticUrl = window.app.configs.staticUrl;
     var id = window.app.configs.id;
-    var header = {};
+    var headers = {
+        Authorization: ''
+    };
 
     var getToken = function() {
-        return axios.post(apiUrl+"token", {storeId: id})
+        return axios.post(apiUrl+"token", {storeId: id}).then(
+            function(response) {
+                headers.Authorization = response.data.token;
+                return response;
+            }
+        )
     }
     
     var authenticate = function (user, password) {
-        return mockAuthenticate(user, password);
+        return axios.post(apiUrl+'auth', {username: user, password: password}).then(
+            function(response) {
+                headers.Authorization = response.data.token;
+                return response;
+            }
+        )
     };
 
     var register = function (data) {

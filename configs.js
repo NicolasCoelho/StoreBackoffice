@@ -1,13 +1,12 @@
-'use strict';
 window.app = (function(){
     return { 
         configs:  {
             appTitle: 'Divulgadores',
             name: 'Ecomlab',
-            staticUrl: 'https://static.divulgadores.app.br/',
-            wsUrl: 'https://wshlg.divulgadores.app.br/',
+            staticUrl: 'https://static.divulgadores.app.br',
+            wsUrl: 'https://wshlg.divulgadores.app.br',
             url: 'https://www.ecomlab.com.br',
-            id: "",
+            id: "c0491132-0528-43d7-b25f-212c4a8ddf12",
             home: 'https://static.divulgadores.app.br/pages/home.html',
             favicon:'styles/images/logo-ecomlab.png',
             logo: {
