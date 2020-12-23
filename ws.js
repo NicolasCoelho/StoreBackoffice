@@ -9,16 +9,16 @@ var ws = (function (){
     var getToken = function() {
         return axios.post(apiUrl+"token", {storeId: id}).then(
             function(response) {
-                headers.Authorization = response.data.token;
+                headers.Authorization = "Basic " + response.data.token;
                 return response;
             }
         )
     }
     
     var authenticate = function (user, password) {
-        return axios.post(apiUrl+'auth', {username: user, password: password}).then(
+        return axios.post(apiUrl+'auth', {username: user, password: password}, { headers }).then(
             function(response) {
-                headers.Authorization = response.data.token;
+                headers.Authorization = "Basic " + response.data.token;
                 return response;
             }
         )

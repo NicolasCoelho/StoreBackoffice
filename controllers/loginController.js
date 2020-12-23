@@ -39,13 +39,14 @@ window.app.controllers.LoginController = (function(){
         loading.toogleLoad();
         event.preventDefault();
         if (validateForm()) {
-            auth.login(formInputs.username.data, formInputs.password.data)
+            ws.authenticate(formInputs.username.data, formInputs.password.data)
             .then(function(response) {
                 loading.toogleLoad();
+                auth.setToken(response.data.token)
                 router.push('dashboard');
             }).catch(function(err){
                 loading.toogleLoad();
-                console.log(err);
+                alert('Login incorreto');
             })
         }
     };
