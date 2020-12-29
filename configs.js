@@ -10,7 +10,7 @@ window.app = (function(){
             staticUrl: 'http://localhost:5500/',
             wsUrl: 'http://localhost:3000/',
             url: 'https://www.ecomlab.com.br',
-            id: "c0491132-0528-43d7-b25f-212c4a8ddf12",
+            id: "f99dbab6-e66b-4e2f-a7e8-7366d911ffb1",
             home: 'https://static.divulgadores.app.br/pages/home.html',
             favicon:'styles/images/logo-ecomlab.png',
             logo: {

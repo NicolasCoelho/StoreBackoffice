@@ -1,9 +1,10 @@
 var ws = (function (){
     var apiUrl = window.app.configs.wsUrl;
     var staticUrl = window.app.configs.staticUrl;
+    var viacepUrl = "https://viacep.com.br/ws/";
     var id = window.app.configs.id;
     var headers = {
-        Authorization: ''
+        Authorization: "Basic " + localStorage.getItem("Token")
     };
 
     var getToken = function() {
@@ -24,37 +25,41 @@ var ws = (function (){
         )
     };
 
-    var register = function (data) {
-        return mockRegister(data);
+    var register = function (payload) {
+        return axios.post(apiUrl+"register", payload, {headers}).then(
+            function (response) {
+                auth.setToken(response.data.token);
+                return response;
+            }
+        )
     };
 
-    // Methods below just for mock tests
-    var rejectAll = false;
-    var mockAuthenticate = function (user, password) {
-        return new Promise(function(resolve,reject) {
-            setTimeout(function(){
-                var isValid = false;
-                if (
-                    user === 'nicolas' && password === '321' ||
-                    user === 'charles' && password === '123'
-                ) {
-                    isValid = true;
-                }
-                if (isValid && !rejectAll) {
-                    var token = createMockToken({name: user, profile: 'USER'}, 60);
-                    resolve((token));
-                } else {
-                    reject("Usuário ou senha inválidos");
-                }
-            }, (2000));
-        });
-    };
+    var getUserRequirements = function (storeId) {
+        return axios.get(apiUrl+"userRequirements/"+storeId+"/store", {headers});
+    }
+
+    var getRegisterOptions = function () {
+        return axios.get(apiUrl+"registerOptions", {headers});
+    }
+
+    var findCep = function (cep) {
+        cep = cep.replace('-','');
+        return axios.get(viacepUrl+cep+"/json");
+    }
+
+    var verifyUser = function (payload) {
+        return axios.post(apiUrl+"verify/user", payload, {headers});
+    }
     
     return {
         apiUrl,
         staticUrl,
         getToken,
         authenticate,
-        register
+        register,
+        findCep,
+        getUserRequirements,
+        getRegisterOptions,
+        verifyUser
     };
 })();

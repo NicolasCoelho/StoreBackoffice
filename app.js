@@ -110,6 +110,9 @@
     })
         
     function init() {
+        // Set Directives
+        Vue.directive('mask', VueMask.VueMaskDirective);
+
         // Set components
         Vue.component('app-header', {
             data: function() {
@@ -137,12 +140,16 @@
         Vue.component('app-registerForm', {
             data: function() {
                 return {
+                    controller: registerController,
                     formInputs: registerController.formInputs,
                     optionsLists: registerController.optionsLists
                 }
             },
             methods: {
-                submit: registerController.submit
+                cadastrar: registerController.cadastrar
+            },
+            beforeMount: function () {
+                registerController.getUserRequirements();
             },
             template: registerFormComponent   
         });

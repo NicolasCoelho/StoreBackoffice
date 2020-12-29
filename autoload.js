@@ -9,6 +9,7 @@
     var imports = [
         'https://cdn.jsdelivr.net/npm/vue@2.6.12',
         'https://unpkg.com/vue-router@3.4.3/dist/vue-router.js',
+        'https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js',
         'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js',
         'styles/css/fontAwesome/css/all.min.css',
         'styles/css/bootstrap-grid.css',
@@ -17,8 +18,8 @@
         'controllers/loginController.js',
         'controllers/registerController.js',
         'controllers/menuController.js',
-        'ws.js',
-        'auth.js'
+        'auth.js',
+        'ws.js'
     ];
 
     var requests = [];

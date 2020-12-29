@@ -3,42 +3,42 @@ var auth = (function () {
     var token = localStorage.getItem('Token');
 
     var getToken = function () {
-        return this.token;
+        return token;
     }
 
-    var setToken = function (token) {
-        this.token = token
+    var setToken = function (tkn) {
+        token = tkn
         localStorage.setItem('Token', token)
     }
 
     var isAuthenticaded = function () {
-        if (!this.hasToken()) return false
-        var data = this.getTokenData()
+        if (!hasToken()) return false
+        var data = getTokenData()
         if (data.t === 1) return false
-        return !this.isTokenExpired()
+        return !isTokenExpired()
     }
 
     var hasToken = function () {
         return (
-            this.token !== null &&
-            this.token !== undefined &&
-            this.token !== ''
+            token !== null &&
+            token !== undefined &&
+            token !== ''
         )
     }
 
     var getTokenData = function () {
-        var tokenData = this.decode(this.token);
+        var tokenData = decode(token);
         return tokenData
     }
 
     var isTokenExpired = function () {
-        var data = this.getTokenData()
+        var data = getTokenData()
         return (Date.now().valueOf() / 1000) > data.exp
     }
 
     var isEmptyTokenValid = function () {
-        if (!this.hasToken()) return false
-        return this.isTokenExpired()
+        if (!hasToken()) return false
+        return !isTokenExpired()
     }
 
     var decode = function (token) {
@@ -47,8 +47,13 @@ var auth = (function () {
     }
 
     var deleteToken = function () {
-        this.token = null
+        token = null
         localStorage.removeItem('Token')
+    }
+
+    var logOut = function (router) {
+        deleteToken()
+        location.href = '/';
     }
 
     return {
@@ -60,6 +65,7 @@ var auth = (function () {
         isTokenExpired,
         isEmptyTokenValid,
         decode,
-        deleteToken
+        deleteToken,
+        logOut
     }
 })();

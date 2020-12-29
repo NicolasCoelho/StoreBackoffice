@@ -1,83 +1,104 @@
 <div id="RegisterFormComponent">
     <form id="registerForm">
         <h2 class="primary">Dados pessoais</h2>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.name.required">
             <label for="name">Nome:</label>
             <input 
                 v-on:focusout="formInputs.name.validate()" 
-                @input="formInputs.name.data = $event.target.value"
+                v-model="formInputs.name.data"
                 id="name">
             <span v-if="formInputs.name.hasErrors == true" class="error">{{ formInputs.name.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.password.required">
             <label for="password">Senha:</label>
             <input 
                 v-on:focusout="formInputs.password.validate()" 
-                @input="formInputs.password.data = $event.target.value"
+                v-model="formInputs.password.data"
                 id="password"
                 type="password">
             <span v-if="formInputs.password.hasErrors == true" class="error">{{ formInputs.password.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.email.required">
             <label for="email">E-mail:</label>
             <input 
-                v-on:focusout="formInputs.email.validate()" 
-                @input="formInputs.email.data = $event.target.value"
+                v-on:focusout="formInputs.email.validate();formInputs.email.verifyEmail();" 
+                v-model="formInputs.email.data"
                 id="email"
                 type="email">
             <span v-if="formInputs.email.hasErrors == true" class="error">{{ formInputs.email.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
-            <label for="phone">Telefone com DDD:</label>
+        <div class="input-wrapper" v-if="formInputs.phone1.required">
+            <label for="phone1">Celular com DDD:</label>
             <input 
-                v-on:focusout="formInputs.phone.validate()" 
-                @input="formInputs.phone.data = $event.target.value"
-                id="phone"
-                type="phone">
-            <span v-if="formInputs.phone.hasErrors == true" class="error">{{ formInputs.phone.errorMessage }}</span>
+                v-on:focusout="formInputs.phone1.validate()"
+                v-on:keyup="formInputs.phone1.mask()"
+                v-model="formInputs.phone1.data"
+                id="phone1"
+                type="phone1"
+                maxlength="15">
+            <span v-if="formInputs.phone1.hasErrors == true" class="error">{{ formInputs.phone1.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.phone2.required">
+            <label for="phone2">Telefone com DDD:</label>
+            <input 
+                v-on:focusout="formInputs.phone2.validate()"
+                v-on:keyup="formInputs.phone2.mask()"
+                v-model="formInputs.phone2.data"
+                id="phone2"
+                type="phone2"
+                maxlength="15">
+            <span v-if="formInputs.phone2.hasErrors == true" class="error">{{ formInputs.phone2.errorMessage }}</span>
+        </div>
+        <div class="input-wrapper" v-if="formInputs.rg.required">
             <label for="rg">RG:</label>
             <input 
-                v-on:focusout="formInputs.rg.validate()" 
-                @input="formInputs.rg.data = $event.target.value"
+                v-on:focusout="formInputs.rg.validate()"
+                v-on:keyup="formInputs.rg.mask()"
+                v-model="formInputs.rg.data"
                 id="rg"
-                type="text">
+                type="text"
+                maxlength="15">
             <span v-if="formInputs.rg.hasErrors == true" class="error">{{ formInputs.rg.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
-            <label for="cpf">CPF:</label>
+        <div class="input-wrapper" v-if="formInputs.cpfCnpj.required">
+            <label for="cpfCnpj">CPF:</label>
             <input 
-                v-on:focusout="formInputs.cpf.validate()" 
-                @input="formInputs.cpf.data = $event.target.value"
-                id="cpf"
-                type="text">
-            <span v-if="formInputs.cpf.hasErrors == true" class="error">{{ formInputs.cpf.errorMessage }}</span>
+                v-on:focusout="formInputs.cpfCnpj.validate()" 
+                v-on:keyup="formInputs.cpfCnpj.mask(); formInputs.cpfCnpj.verifyCpfCnpj();"
+                v-model="formInputs.cpfCnpj.data"
+                id="cpfCnpj"
+                type="text"
+                maxlength="14">
+            <span v-if="formInputs.cpfCnpj.hasErrors == true" class="error">{{ formInputs.cpfCnpj.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.pis.required">
             <label for="pis">PIS:</label>
             <input 
-                v-on:focusout="formInputs.pis.validate()" 
-                @input="formInputs.pis.data = $event.target.value"
+                v-on:focusout="formInputs.pis.validate()"
+                v-on:keyup="formInputs.pis.mask()"
+                v-model="formInputs.pis.data"
                 id="pis"
                 type="text">
             <span v-if="formInputs.pis.hasErrors == true" class="error">{{ formInputs.pis.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.birthdate.required">
             <label for="birthdate">Data de nascimento:</label>
             <input 
-                v-on:focusout="formInputs.birthdate.validate()" 
-                @input="formInputs.birthdate.data = $event.target.value"
+                v-on:focusout="formInputs.birthdate.validate()"
+                v-on:keyup="formInputs.birthdate.mask()" 
+                v-model="formInputs.birthdate.data"
                 id="birthdate"
-                type="text">
+                type="text"
+                maxlength="10">
             <span v-if="formInputs.birthdate.hasErrors == true" class="error">{{ formInputs.birthdate.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.nationality.required">
             <label for="nationality">Nacionalidade:</label>
             <select 
-                @input="formInputs.nationality.data = $event.target.value" 
                 v-on:focusout="formInputs.nationality.validate()"
+                v-model="formInputs.nationality.data"
                 id="nationality">
+                <option value="" selected disabled hidden>Selecione</option>
                 <option 
                     v-for="option in optionsLists.nationalities" 
                     v-bind:value="option">
@@ -86,40 +107,43 @@
             </select>
             <span v-if="formInputs.nationality.hasErrors == true" class="error">{{ formInputs.nationality.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
-            <label for="birth_location">Estado natal:</label>
-            <select 
-                @input="formInputs.birth_location.data = $event.target.value" 
-                v-on:focusout="formInputs.birth_location.validate()"
-                id="birth_location">
+        <div class="input-wrapper" v-if="formInputs.birthLocation.required">
+            <label for="birthLocation">Estado natal:</label>
+            <select  
+                v-on:focusout="formInputs.birthLocation.validate()"
+                v-model="formInputs.birthLocation.data"
+                id="birthLocation">
+                <option value="" selected disabled hidden>Selecione</option>
                 <option 
                     v-for="option in optionsLists.originStates" 
                     v-bind:value="option.value">
                     {{ option.label }}
                 </option>
             </select>
-            <span v-if="formInputs.birth_location.hasErrors == true" class="error">{{ formInputs.birth_location.errorMessage }}</span>
+            <span v-if="formInputs.birthLocation.hasErrors == true" class="error">{{ formInputs.birthLocation.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
-            <label for="marital_status">Estado civil:</label>
-            <select 
-                @input="formInputs.marital_status.data = $event.target.value" 
-                v-on:focusout="formInputs.marital_status.validate()"
-                id="marital_status">
+        <div class="input-wrapper" v-if="formInputs.maritalStatus.required">
+            <label for="maritalStatus">Estado civil:</label>
+            <select  
+                v-on:focusout="formInputs.maritalStatus.validate()"
+                v-model="formInputs.maritalStatus.data"
+                id="maritalStatus">
+                <option value="" selected disabled hidden>Selecione</option>
                 <option 
                     v-for="option in optionsLists.maritalStatus" 
                     v-bind:value="option">
                     {{ option }}
                 </option>
             </select>
-            <span v-if="formInputs.marital_status.hasErrors == true" class="error">{{ formInputs.marital_status.errorMessage }}</span>
+            <span v-if="formInputs.maritalStatus.hasErrors == true" class="error">{{ formInputs.maritalStatus.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.gender.required">
             <label for="gender">Sexo:</label>
             <select 
-                @input="formInputs.gender.data = $event.target.value" 
                 v-on:focusout="formInputs.gender.validate()"
+                v-model="formInputs.gender.data"
                 id="gender">
+                <option value="" selected disabled hidden>Selecione</option>
                 <option 
                     v-for="option in optionsLists.genders" 
                     v-bind:value="option">
@@ -128,12 +152,13 @@
             </select>
             <span v-if="formInputs.gender.hasErrors == true" class="error">{{ formInputs.gender.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.literacy.required">
             <label for="literacy">Grau de instrução:</label>
             <select 
-                @input="formInputs.literacy.data = $event.target.value" 
                 v-on:focusout="formInputs.literacy.validate()"
+                v-model="formInputs.literacy.data"
                 id="literacy">
+                <option value="" selected disabled hidden>Selecione</option>
                 <option 
                     v-for="option in optionsLists.literacyLevels" 
                     v-bind:value="option">
@@ -143,51 +168,53 @@
             <span v-if="formInputs.literacy.hasErrors == true" class="error">{{ formInputs.literacy.errorMessage }}</span>
         </div>
         <h2 class="primary">Endereço</h2>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.cep.required">
             <label for="cep">Cep:</label>
             <input 
-                v-on:focusout="formInputs.cep.validate()" 
-                @input="formInputs.cep.data = $event.target.value"
-                id="cep">
+                v-on:focusout="formInputs.cep.validate()"
+                v-on:keyup="formInputs.cep.mask();formInputs.cep.findCep()"
+                v-model="formInputs.cep.data"
+                id="cep"
+                maxlength="9">
             <span v-if="formInputs.cep.hasErrors == true" class="error">{{ formInputs.cep.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.address.required">
             <label for="address">Endereço:</label>
             <input 
                 v-on:focusout="formInputs.address.validate()" 
-                @input="formInputs.address.data = $event.target.value"
+                v-model="formInputs.address.data"
                 id="address">
             <span v-if="formInputs.address.hasErrors == true" class="error">{{ formInputs.address.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
-            <label for="address_number">Número:</label>
+        <div class="input-wrapper" v-if="formInputs.addressNumber.required">
+            <label for="addressNumber">Número:</label>
             <input
-                v-on:focusout="formInputs.address_number.validate()" 
-                @input="formInputs.address_number.data = $event.target.value"
-                id="address_number">
-            <span v-if="formInputs.address_number.hasErrors == true" class="error">{{ formInputs.address_number.errorMessage }}</span>
+                v-on:focusout="formInputs.addressNumber.validate()" 
+                v-model="formInputs.addressNumber.data"
+                id="addressNumber">
+            <span v-if="formInputs.addressNumber.hasErrors == true" class="error">{{ formInputs.addressNumber.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.neighborhood.required">
             <label for="neighborhood">Bairro:</label>
             <input
                 v-on:focusout="formInputs.neighborhood.validate()" 
-                @input="formInputs.neighborhood.data = $event.target.value"
+                v-model="formInputs.neighborhood.data"
                 id="neighborhood">
             <span v-if="formInputs.neighborhood.hasErrors == true" class="error">{{ formInputs.neighborhood.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.city.required">
             <label for="city">Cidade:</label>
             <input
                 v-on:focusout="formInputs.city.validate()" 
-                @input="formInputs.city.data = $event.target.value"
+                v-model="formInputs.city.data"
                 id="city">
             <span v-if="formInputs.city.hasErrors == true" class="error">{{ formInputs.city.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.state.required">
             <label for="state">Estado:</label>
             <select 
-                @input="formInputs.state.data = $event.target.value" 
-                v-on:focusout="formInputs.state.validate()"
+                v-on:focusout="formInputs.state.validate()" 
+                v-model="formInputs.state.data"
                 id="state">
                 <option 
                     v-for="option in optionsLists.states" 
@@ -198,12 +225,13 @@
             <span v-if="formInputs.state.hasErrors == true" class="error">{{ formInputs.state.errorMessage }}</span>
         </div>
         <h2 class="primary">Dados bancários</h2>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.bank.required">
             <label for="bank">Banco:</label>
-            <select 
-                @input="formInputs.bank.data = $event.target.value" 
+            <select  
                 v-on:focusout="formInputs.bank.validate()"
+                v-model="formInputs.bank.data"
                 id="bank">
+                <option value="" selected disabled hidden>Selecione</option>
                 <option 
                     v-for="option in optionsLists.banks" 
                     v-bind:value="option">
@@ -212,40 +240,43 @@
             </select>
             <span v-if="formInputs.bank.hasErrors == true" class="error">{{ formInputs.bank.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.agency.required">
             <label for="agency">Agência:</label>
             <input
                 v-on:focusout="formInputs.agency.validate()" 
-                @input="formInputs.agency.data = $event.target.value"
+                v-model="formInputs.agency.data"
                 id="agency">
             <span v-if="formInputs.agency.hasErrors == true" class="error">{{ formInputs.agency.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
+        <div class="input-wrapper" v-if="formInputs.account.required">
             <label for="account">Conta Corrente:</label>
             <input
                 v-on:focusout="formInputs.account.validate()" 
-                @input="formInputs.account.data = $event.target.value"
+                v-model="formInputs.account.data"
                 id="account">
             <span v-if="formInputs.account.hasErrors == true" class="error">{{ formInputs.account.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
-            <label for="account_owner">Titular:</label>
+        <div class="input-wrapper" v-if="formInputs.accountOwner.required">
+            <label for="accountOwner">Titular:</label>
             <input
-                v-on:focusout="formInputs.account_owner.validate()" 
-                @input="formInputs.account_owner.data = $event.target.value"
-                id="account_owner">
-            <span v-if="formInputs.account_owner.hasErrors == true" class="error">{{ formInputs.account_owner.errorMessage }}</span>
+                v-on:focusout="formInputs.accountOwner.validate()" 
+                v-model="formInputs.accountOwner.data"
+                id="accountOwner">
+            <span v-if="formInputs.accountOwner.hasErrors == true" class="error">{{ formInputs.accountOwner.errorMessage }}</span>
         </div>
-        <div class="input-wrapper">
-            <label for="account_owner_cpf">Cpf do Titular:</label>
+        <div class="input-wrapper" v-if="formInputs.accountOwnerCpf.required">
+            <label for="accountOwnerCpf">Cpf do Titular:</label>
             <input
-                v-on:focusout="formInputs.account_owner_cpf.validate()" 
-                @input="formInputs.account_owner_cpf.data = $event.target.value"
-                id="account_owner_cpf">
-            <span v-if="formInputs.account_owner_cpf.hasErrors == true" class="error">{{ formInputs.account_owner_cpf.errorMessage }}</span>
+                v-on:focusout="formInputs.accountOwnerCpf.validate()"
+                v-on:keyup="formInputs.accountOwnerCpf.mask();"
+                v-model="formInputs.accountOwnerCpf.data"
+                id="accountOwnerCpf"
+                maxlength="15">
+            <span v-if="formInputs.accountOwnerCpf.hasErrors == true" class="error">{{ formInputs.accountOwnerCpf.errorMessage }}</span>
         </div>
-        <div class="align-center">
-            <button v-on:click="submit($router, $event)" class="button primary-button upcase-button align-center">Cadastrar</button>
+        <div class="align-center" style="padding: 20px 0px;">
+            <div class="primary form-general-error" v-if="controller.hasFormErrors">Há erros no preenchimento do formulário!</div>
+            <button v-on:click="cadastrar($router, $event)" class="button primary-button upcase-button align-center">Cadastrar</button>
         </div>
     </form>
 </div>

@@ -1,5 +1,9 @@
 window.app.controllers.RegisterController = (function(){
     
+    var registerRequirements = new Object();
+
+    var hasFormErrors = false;
+
     var optionsLists = {
         maritalStatus: [
             'Selecione',
@@ -328,6 +332,7 @@ window.app.controllers.RegisterController = (function(){
     var formInputs = {
         name: {
             data:'',
+            required: true,
             hasErrors: false,
             errorMessage: '* Digite seu nome completo',
             validate: function () {
@@ -340,6 +345,7 @@ window.app.controllers.RegisterController = (function(){
         },
         password: {
             data:'',
+            required: true,
             hasErrors: false,
             errorMessage: '* Digite sua senha',
             validate: function () {
@@ -352,18 +358,61 @@ window.app.controllers.RegisterController = (function(){
         },
         email: {
             data:'',
+            required: true,
             hasErrors: false,
+            isValid: true,
             errorMessage: 'Digite seu email corretamente',
+            errorDefault: 'Campo Obrigatório',
+            validate: function () {
+                var data = this.data;
+                var isValid = this.isValid
+                this.hasErrors = (
+                    data.length === 0 &&
+                    data.length < 5
+                ) || !isValid;
+                return !this.hasErrors;
+            },
+            verifyEmail: function() {
+                if (this.data.length >= 5) {
+                    var scope = this;   
+                    ws.verifyUser({email: this.data}).then(function(response){
+                        if (response.data.exists) {
+                            scope.hasErrors = true;
+                            scope.isValid = false;
+                            scope.errorMessage = 'E-mail já cadastrado';
+                        } else {
+                            scope.hasErrors = false;
+                            scope.isValid = true;
+                            scope.errorMessage = scope.errorDefault;
+                        }
+                    });
+                } 
+            }
+        },
+        phone1: {
+            data:'',
+            required: false,
+            hasErrors: false,
+            errorMessage: 'Celular Obrigatório',
             validate: function () {
                 var data = this.data;
                 this.hasErrors = (
                     data.length === 0
                 );
                 return !this.hasErrors;
+            },
+            mask: function() {
+                this.data = this.data.replace(/\D/g,"");
+                this.data = this.data.replace(/^(\d\d)(\d)/g,"($1) $2");
+                this.data = this.data.replace(/(\d{5})(\d)/,"$1-$2");
+            },
+            unmask: function () {
+                return parseInt(this.data.replace(/\D/g, ""));
             }
         },
-        phone: {
+        phone2: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Telefone Obrigatório',
             validate: function () {
@@ -372,10 +421,19 @@ window.app.controllers.RegisterController = (function(){
                     data.length === 0
                 );
                 return !this.hasErrors;
+            },
+            mask: function() {
+                this.data = this.data.replace(/\D/g,"");
+                this.data = this.data.replace(/^(\d\d)(\d)/g,"($1) $2");
+                this.data = this.data.replace(/(\d{5})(\d)/,"$1-$2");
+            },
+            unmask: function () {
+                return parseInt(this.data.replace(/\D/g, ""));
             }
         },
         rg: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -384,22 +442,61 @@ window.app.controllers.RegisterController = (function(){
                     data.length === 0
                 );
                 return !this.hasErrors;
+            },
+            mask: function () {
+                this.data = this.data.replace(/\D/g,"");
+                this.data = this.data.replace(/(\d{3})(\d)/,"$1.$2");      
+                this.data = this.data.replace(/(\d{3})(\d)/,"$1.$2");
+                this.data = this.data.replace(/(\d{2})(\d{1,2})$/,"$1-$2");
+            },
+            unmask: function () {
+                return parseInt(this.data.replace(/\D/g, ""));
             }
         },
-        cpf: {
+        cpfCnpj: {
             data:'',
+            required: false,
             hasErrors: false,
+            isValid: true,
             errorMessage: 'Campo Obrigatório',
+            errorDefault: 'Campo Obrigatório',
             validate: function () {
                 var data = this.data;
+                var isValid = this.isValid
                 this.hasErrors = (
-                    data.length === 0
-                );
+                    data.length < 14
+                ) || !isValid;
                 return !this.hasErrors;
+            },
+            mask: function () {
+                this.data = this.data.replace(/\D/g,"");      
+                this.data = this.data.replace(/(\d{3})(\d)/,"$1.$2");      
+                this.data = this.data.replace(/(\d{3})(\d)/,"$1.$2");
+                this.data = this.data.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
+            },
+            unmask: function () {
+                return parseInt(this.data.replace(/\D/g, ""));
+            },
+            verifyCpfCnpj: function() {
+                if (this.data.length >= 14) {
+                    var scope = this;
+                    ws.verifyUser({cpfCnpj: this.unmask()}).then(function(response){
+                        if (response.data.exists) {
+                            scope.hasErrors = true;
+                            scope.isValid = false;
+                            scope.errorMessage = 'CPF já cadastrado';
+                        } else {
+                            scope.hasErrors = false;
+                            scope.isValid = true;
+                            scope.errorMessage = scope.errorDefault;
+                        }
+                    });
+                } 
             }
         },
         pis: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -408,10 +505,17 @@ window.app.controllers.RegisterController = (function(){
                     data.length === 0
                 );
                 return !this.hasErrors;
+            },
+            mask: function () {
+                this.data = this.data.replace(/\D/g,"");
+            },
+            unmask: function () {
+                return parseInt(this.data.replace(/\D/g, ""));
             }
         },
         birthdate: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -420,10 +524,17 @@ window.app.controllers.RegisterController = (function(){
                     data.length === 0
                 );
                 return !this.hasErrors;
+            },
+            mask: function () {
+                this.data = this.data.replace(/\D/g,"");
+                this.data = this.data.replace(/(\d{2})(\d)/,"$1/$2");
+                this.data = this.data.replace(/(\d{2})(\d)/,"$1/$2");
+                this.data = this.data.replace(/(\d{2})(\d{2})$/,"$1$2");
             }
         },
         nationality: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -435,8 +546,9 @@ window.app.controllers.RegisterController = (function(){
                 return !this.hasErrors;
             }
         },
-        birth_location: {
+        birthLocation: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -447,8 +559,9 @@ window.app.controllers.RegisterController = (function(){
                 return !this.hasErrors;
             }
         },
-        marital_status: {
+        maritalStatus: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -461,6 +574,7 @@ window.app.controllers.RegisterController = (function(){
         },
         gender: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -473,6 +587,7 @@ window.app.controllers.RegisterController = (function(){
         },
         literacy: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -485,6 +600,7 @@ window.app.controllers.RegisterController = (function(){
         },
         cep: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -493,10 +609,28 @@ window.app.controllers.RegisterController = (function(){
                     data.length === 0
                 );
                 return !this.hasErrors;
+            },
+            mask: function () {
+                this.data = this.data.replace(/D/g,"")
+                this.data = this.data.replace(/^(\d{5})(\d)/,"$1-$2");
+            },
+            unmask: function () {
+                return parseInt(this.data.replace(/\D/g, ""));
+            },
+            findCep: function() {
+                if (this.data.length >= 9) {   
+                    ws.findCep(this.data).then(function(response){
+                        formInputs.address.data = response.data.logradouro;
+                        formInputs.neighborhood.data = response.data.bairro;
+                        formInputs.city.data = response.data.localidade;
+                        formInputs.state.data = response.data.uf;
+                    });
+                } 
             }
         },
         address: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -507,8 +641,9 @@ window.app.controllers.RegisterController = (function(){
                 return !this.hasErrors;
             }
         },
-        address_number: {
+        addressNumber: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -521,6 +656,7 @@ window.app.controllers.RegisterController = (function(){
         },
         neighborhood: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -533,6 +669,7 @@ window.app.controllers.RegisterController = (function(){
         },
         city: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -545,6 +682,7 @@ window.app.controllers.RegisterController = (function(){
         },
         state: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -558,6 +696,7 @@ window.app.controllers.RegisterController = (function(){
         },
         bank: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -571,6 +710,7 @@ window.app.controllers.RegisterController = (function(){
         },
         agency: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -583,6 +723,7 @@ window.app.controllers.RegisterController = (function(){
         },
         account: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -593,8 +734,9 @@ window.app.controllers.RegisterController = (function(){
                 return !this.hasErrors;
             }
         },
-        account_owner: {
+        accountOwner: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -605,8 +747,9 @@ window.app.controllers.RegisterController = (function(){
                 return !this.hasErrors;
             }
         },
-        account_owner_cpf: {
+        accountOwnerCpf: {
             data:'',
+            required: false,
             hasErrors: false,
             errorMessage: 'Campo Obrigatório',
             validate: function () {
@@ -615,8 +758,17 @@ window.app.controllers.RegisterController = (function(){
                     data.length === 0
                 );
                 return !this.hasErrors;
+            },
+            mask: function () {
+                this.data = this.data.replace(/\D/g,"");      
+                this.data = this.data.replace(/(\d{3})(\d)/,"$1.$2");      
+                this.data = this.data.replace(/(\d{3})(\d)/,"$1.$2");
+                this.data = this.data.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
+            },
+            unmask: function () {
+                return parseInt(this.data.replace(/\D/g, ""));
             }
-        },
+        }
     };
 
     var validateForm = function() {
@@ -624,33 +776,59 @@ window.app.controllers.RegisterController = (function(){
         var keys = Object.keys(formInputs);
         var payload = {};
         for(var i = 0; i < keys.length; i++) {
+            if (!formInputs[keys[i]].required) continue;
+            
             var validation = formInputs[keys[i]].validate();
+            
             if (!validation) {
-                console.log(validation)
-                isValid = false; 
+                isValid = false;
+                hasFormErrors = true;
             } else {
-                payload[keys[i]] = formInputs[keys[i]].data;
+                if (formInputs[keys[i]].unmask === undefined) {
+                    payload[keys[i]] = formInputs[keys[i]].data;
+                } else {
+                    payload[keys[i]] = formInputs[keys[i]].unmask();
+                }
             }
         }
         return {isValid: isValid, payload: payload};
     };
     
-    var submit = function(router,event) {
+    var cadastrar = function(router,event) {
         event.preventDefault();
-        var validation = validateForm(); 
+        var validation = validateForm();
         if (validation.isValid) {    
             ws.register(validation.payload).then(
                 function (response) {
-                    auth.setToken(response);
                     router.push('dashboard');       
                 }
-            );
+            ).catch(function (err) {
+                console.log(err)
+            })
         }   
     };
+
+    var getUserRequirements = function(params) {
+        ws.getRegisterOptions().then(function(response){
+            Object.assign(registerRequirements, response.data);
+            setRequiredInputs();
+        }).catch(function(err){
+            console.error(err);
+            alert("Erro ao carregar conteúdo. Tente novamente mais tarde");
+        })
+    }
+
+    var setRequiredInputs = function() {
+        Object.keys(formInputs).forEach(function (key) {
+            formInputs[key].required = registerRequirements.requirements[key] !== undefined ? registerRequirements.requirements[key] : true;
+        });
+    }
     
     return {
         formInputs,
+        hasFormErrors,
         optionsLists,
-        submit
+        cadastrar,
+        getUserRequirements
     };
 })();

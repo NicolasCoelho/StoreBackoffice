@@ -168,6 +168,10 @@ select,input {
         font-size: 20px;
     }
 
+.form-general-error {
+    margin: 10px 0px;
+}
+
 #HeaderComponent {
     padding: 10px 0px;
     background-color: var(--bg1);
