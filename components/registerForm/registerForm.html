@@ -9,15 +9,6 @@
                 id="name">
             <span v-if="formInputs.name.hasErrors == true" class="error">{{ formInputs.name.errorMessage }}</span>
         </div>
-        <div class="input-wrapper" v-if="formInputs.password.required">
-            <label for="password">Senha:</label>
-            <input 
-                v-on:focusout="formInputs.password.validate()" 
-                v-model="formInputs.password.data"
-                id="password"
-                type="password">
-            <span v-if="formInputs.password.hasErrors == true" class="error">{{ formInputs.password.errorMessage }}</span>
-        </div>
         <div class="input-wrapper" v-if="formInputs.email.required">
             <label for="email">E-mail:</label>
             <input 
@@ -26,6 +17,15 @@
                 id="email"
                 type="email">
             <span v-if="formInputs.email.hasErrors == true" class="error">{{ formInputs.email.errorMessage }}</span>
+        </div>
+        <div class="input-wrapper" v-if="formInputs.password.required">
+            <label for="password">Senha:</label>
+            <input 
+                v-on:focusout="formInputs.password.validate()" 
+                v-model="formInputs.password.data"
+                id="password"
+                type="password">
+            <span v-if="formInputs.password.hasErrors == true" class="error">{{ formInputs.password.errorMessage }}</span>
         </div>
         <div class="input-wrapper" v-if="formInputs.phone1.required">
             <label for="phone1">Celular com DDD:</label>
@@ -276,7 +276,10 @@
         </div>
         <div class="align-center" style="padding: 20px 0px;">
             <div class="primary form-general-error" v-if="controller.hasFormErrors">Há erros no preenchimento do formulário!</div>
-            <button v-on:click="cadastrar($router, $event)" class="button primary-button upcase-button align-center">Cadastrar</button>
+            <button v-on:click="cadastrar($router, $event, modal, loading)" class="button primary-button upcase-button align-center">
+                <span v-if="!loading.loading">Cadastrar</span>
+                <app-loading></app-loading>
+            </button>
         </div>
     </form>
 </div>

@@ -7,15 +7,17 @@
     var registerController = new Object();
     var loadingController = new Object();
     var menuController = new Object();
+    var modalController = new Object();
     Object.assign(loginController, window.app.controllers.LoginController);
     Object.assign(registerController, window.app.controllers.RegisterController);
     Object.assign(loadingController ,window.app.controllers.LoadingController);
     Object.assign(menuController, window.app.controllers.MenuController);
+    Object.assign(modalController, window.app.controllers.ModalController);
     // Import components 
     var componentsRequests = [];
     var headerComponent, loginBoxComponent, registerFormComponent,
     menuComponent, cardComponent, linksGeneratorComponent, generatorInfoComponent,
-    loadingComponent;
+    loadingComponent, modalComponent;
 
     componentsRequests = [
         axios(ws.staticUrl+'components/header/header.html')
@@ -40,7 +42,10 @@
         .then(function(res){generatorInfoComponent=res.data}), 
         
         axios(ws.staticUrl+'components/loading/loading.html')
-        .then(function(res){loadingComponent=res.data}), 
+        .then(function(res){loadingComponent=res.data}),
+
+        axios(ws.staticUrl+'components/modal/modal.html')
+        .then(function(res){modalComponent=res.data})
     ];
 
     // Import pages async
@@ -58,6 +63,7 @@
     var dashboardChangePasswordPage = {};
     var dashboardCustumerDataPage = {};
     var dashboardContractPage = {};
+    var dashboardUsersPage = {};
     
     pagesRequests = [
         axios(configs.home || ws.staticUrl+'./pages/home.html')
@@ -95,6 +101,9 @@
         
         axios(ws.staticUrl+'pages/dashboard/training.html')
         .then(function(page){dashboardTrainingPage.template=page.data}),
+
+        axios(ws.staticUrl+'pages/dashboard/users.html')
+        .then(function(page){dashboardUsersPage.template=page.data}),        
         
         axios(ws.staticUrl+'pages/404.html')
         .then(function(page){notFoundPage.template=page.data}),
@@ -142,7 +151,9 @@
                 return {
                     controller: registerController,
                     formInputs: registerController.formInputs,
-                    optionsLists: registerController.optionsLists
+                    optionsLists: registerController.optionsLists,
+                    modal: modalController,
+                    loading: loadingController,
                 }
             },
             methods: {
@@ -156,7 +167,8 @@
         Vue.component('app-menu', {
             data: function() {
                 return {
-                    menu: menuController
+                    menu: menuController,
+                    user: auth
                 }
             },
             template: menuComponent
@@ -196,11 +208,41 @@
             },
             template: loadingComponent
         });
-         
+        Vue.component('app-modal', {
+            data: function() {
+                return {
+                    modal: modalController
+                }
+            },
+            template: modalComponent
+        });
+        
         var routes = [
             { path: '/', component: homePage },
-            { path: '/cadastro', component: registerPage },
-            { path: '/entrar', component: loginPage },
+            { path: '/cadastro', component: registerPage,
+                beforeEnter: function(to,from,next){
+                    if (auth.isAuthenticaded()) {
+                        next({
+                            path: '/dashboard',
+                            query: { redirect: to.fullPath }
+                        })
+                    } else {
+                        next();
+                    }
+                }  
+            },
+            { path: '/entrar', component: loginPage,
+                beforeEnter: function(to,from,next){
+                    if (auth.isAuthenticaded()) {
+                        next({
+                            path: '/dashboard',
+                            query: { redirect: to.fullPath }
+                        })
+                    } else {
+                        next();
+                    }
+                }  
+            },
             { path: '/dashboard', component: dashboardPage ,
                 children: [
                     { path: '', component: dashboardHomePage },
@@ -211,6 +253,7 @@
                     { path: 'alterar-senha', component: dashboardChangePasswordPage },
                     { path: 'contrato', component: dashboardContractPage },
                     { path: 'ajuda', component: dasboardHelpPage },
+                    { path: 'usuarios', component: dashboardUsersPage }
                 ],
                 beforeEnter: function(to,from,next){
                     if (!auth.isAuthenticaded()) {
@@ -221,7 +264,7 @@
                     } else {
                         next();
                     }
-                } 
+                }
             },
             { path: '**', component: notFoundPage }
         ];

@@ -45,4 +45,7 @@
     --loading-icon: var(--primary);
     --loading-spinner: var(--primary);
     --loading-spinner-border: rgba(255, 255, 255, 0.3);
+
+    /* MODAL */
+    --modal-bg: var(--content-bg);
 }

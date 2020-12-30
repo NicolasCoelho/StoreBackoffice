@@ -26,6 +26,7 @@ var ws = (function (){
     };
 
     var register = function (payload) {
+        //return new Promise(function(res){setTimeout(function(){res()},1000)})
         return axios.post(apiUrl+"register", payload, {headers}).then(
             function (response) {
                 auth.setToken(response.data.token);

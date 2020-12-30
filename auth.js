@@ -7,15 +7,15 @@ var auth = (function () {
     }
 
     var setToken = function (tkn) {
-        token = tkn
-        localStorage.setItem('Token', token)
+        token = tkn;
+        localStorage.setItem('Token', token);
     }
 
     var isAuthenticaded = function () {
-        if (!hasToken()) return false
-        var data = getTokenData()
-        if (data.t === 1) return false
-        return !isTokenExpired()
+        if (!hasToken()) return false;
+        var data = getTokenData();
+        if (data.t === 1) return false;
+        return !isTokenExpired();
     }
 
     var hasToken = function () {
@@ -28,32 +28,37 @@ var auth = (function () {
 
     var getTokenData = function () {
         var tokenData = decode(token);
-        return tokenData
+        return tokenData;
     }
 
     var isTokenExpired = function () {
-        var data = getTokenData()
-        return (Date.now().valueOf() / 1000) > data.exp
+        var data = getTokenData();
+        return (Date.now().valueOf() / 1000) > data.exp;
     }
 
     var isEmptyTokenValid = function () {
-        if (!hasToken()) return false
-        return !isTokenExpired()
+        if (!hasToken()) return false;
+        return !isTokenExpired();
     }
 
     var decode = function (token) {
-        var data = JSON.parse(atob(token.split('.')[1]))
-        return data
+        var data = JSON.parse(atob(token.split('.')[1]));
+        return data;
     }
 
     var deleteToken = function () {
-        token = null
-        localStorage.removeItem('Token')
+        token = null;
+        localStorage.removeItem('Token');
     }
 
     var logOut = function (router) {
-        deleteToken()
+        deleteToken();
         location.href = '/';
+    }
+
+    var isAdmin = function() {
+        var user = getTokenData();
+        return (user.t === 3);
     }
 
     return {
@@ -66,6 +71,7 @@ var auth = (function () {
         isEmptyTokenValid,
         decode,
         deleteToken,
+        isAdmin,
         logOut
     }
 })();

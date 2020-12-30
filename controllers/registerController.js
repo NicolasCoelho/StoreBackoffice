@@ -794,13 +794,18 @@ window.app.controllers.RegisterController = (function(){
         return {isValid: isValid, payload: payload};
     };
     
-    var cadastrar = function(router,event) {
+    var cadastrar = function(router,event, modal, loading) {
         event.preventDefault();
         var validation = validateForm();
-        if (validation.isValid) {    
+        if (validation.isValid) { 
+            loading.toogleLoad();
             ws.register(validation.payload).then(
                 function (response) {
-                    router.push('dashboard');       
+                    loading.toogleLoad();
+                    modal.registerComplete(
+                        function(){router.push('dashboard'); modal.toggle()},
+                        registerRequirements.protectedRegister
+                    )       
                 }
             ).catch(function (err) {
                 console.log(err)
@@ -826,6 +831,7 @@ window.app.controllers.RegisterController = (function(){
     
     return {
         formInputs,
+        registerRequirements,
         hasFormErrors,
         optionsLists,
         cadastrar,

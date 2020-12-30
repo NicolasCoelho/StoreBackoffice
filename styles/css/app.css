@@ -218,14 +218,33 @@ select,input {
     }
 
 #ModalComponent {
-    width: 200px;
-    top: 10px;
-    transform: translate(-50%, 0);
     position: absolute;
-    background: #fff;
-    box-shadow: 2px #000;
-    border-radius: 5px;
+    margin: auto;
+    height: auto;
+    top: 30%;
+    left: 0;
+    right: 0;
+    border-radius: var(--border-radius);
+    background: var(--modal-bg);
+    padding: 30px 10px;
+    text-align: center;
+    box-shadow: 1px 0px 1px 200vw rgba(0,0,0,0.3);
+    border: 10px solid rgba(0,0,0,0.3);
 }
+    #ModalComponent .icon {
+        font-size: 80px;
+    }
+    #ModalComponent .close-modal {
+        position: absolute;
+        font-size: 20px;
+        top: 15px;
+        right: 15px;
+        transition: 100ms;
+    }
+        #ModalComponent .close-modal:hover {
+            cursor: pointer;
+            transform: rotate(360deg);
+        }
 
 #Loading {
     position: absolute;

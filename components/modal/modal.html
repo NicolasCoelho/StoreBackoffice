@@ -1,3 +1,8 @@
-<div id="LoadingModalComponent">
-    <h3>Carregando...</h3>
+<div id="ModalComponent" :style={maxWidth:modal.width} v-if="modal.isActive">
+    <i class="fas fa-times close-modal" v-on:click="modal.toggle()"></i>
+    <i v-if="modal.icon !== ''" :class="[modal.icon]" class="icon"></i>
+    <h2 v-if="modal.title !== ''">{{ modal.title }}</h2>
+    <p v-if="modal.content !== ''">{{ modal.content }}</p>
+    <button v-if="modal.action" v-on:click="modal.action()" class="button">{{ modal.actionText }}</button> <br>
+    <small v-if="modal.footer !== ''">{{ modal.footer }}</small>
 </div>
