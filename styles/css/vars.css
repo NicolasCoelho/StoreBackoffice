@@ -20,6 +20,14 @@
     --menu-text-hover: #6d6d6d;
     --menu-border-hover: var(--primary);
 
+    /* TABLE */
+    --table-header-bg: var(--primary);
+    --table-header-color: var(--secondary);
+    --table-variation: #ededed;
+    --table-font-size: 14px;
+    --table-padding: 5px;
+    --table-text-align: center;
+
     /* INPUT */
     --input-bg: #f5f5f5;
     --input-border: 1px solid #6d6d6d;

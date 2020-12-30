@@ -407,7 +407,7 @@ window.app.controllers.RegisterController = (function(){
                 this.data = this.data.replace(/(\d{5})(\d)/,"$1-$2");
             },
             unmask: function () {
-                return parseInt(this.data.replace(/\D/g, ""));
+                return this.data.replace(/\D/g, "");
             }
         },
         phone2: {
@@ -428,7 +428,7 @@ window.app.controllers.RegisterController = (function(){
                 this.data = this.data.replace(/(\d{5})(\d)/,"$1-$2");
             },
             unmask: function () {
-                return parseInt(this.data.replace(/\D/g, ""));
+                return this.data.replace(/\D/g, "");
             }
         },
         rg: {
@@ -450,7 +450,7 @@ window.app.controllers.RegisterController = (function(){
                 this.data = this.data.replace(/(\d{2})(\d{1,2})$/,"$1-$2");
             },
             unmask: function () {
-                return parseInt(this.data.replace(/\D/g, ""));
+                return this.data.replace(/\D/g, "");
             }
         },
         cpfCnpj: {
@@ -475,7 +475,7 @@ window.app.controllers.RegisterController = (function(){
                 this.data = this.data.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
             },
             unmask: function () {
-                return parseInt(this.data.replace(/\D/g, ""));
+                return this.data.replace(/\D/g, "");
             },
             verifyCpfCnpj: function() {
                 if (this.data.length >= 14) {
@@ -510,7 +510,7 @@ window.app.controllers.RegisterController = (function(){
                 this.data = this.data.replace(/\D/g,"");
             },
             unmask: function () {
-                return parseInt(this.data.replace(/\D/g, ""));
+                return this.data.replace(/\D/g, "");
             }
         },
         birthdate: {
@@ -615,7 +615,7 @@ window.app.controllers.RegisterController = (function(){
                 this.data = this.data.replace(/^(\d{5})(\d)/,"$1-$2");
             },
             unmask: function () {
-                return parseInt(this.data.replace(/\D/g, ""));
+                return this.data.replace(/\D/g, "");
             },
             findCep: function() {
                 if (this.data.length >= 9) {   
@@ -766,7 +766,7 @@ window.app.controllers.RegisterController = (function(){
                 this.data = this.data.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
             },
             unmask: function () {
-                return parseInt(this.data.replace(/\D/g, ""));
+                return this.data.replace(/\D/g, "");
             }
         }
     };

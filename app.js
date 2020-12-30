@@ -8,11 +8,13 @@
     var loadingController = new Object();
     var menuController = new Object();
     var modalController = new Object();
+    var usersListController = new Object();
     Object.assign(loginController, window.app.controllers.LoginController);
     Object.assign(registerController, window.app.controllers.RegisterController);
     Object.assign(loadingController ,window.app.controllers.LoadingController);
     Object.assign(menuController, window.app.controllers.MenuController);
     Object.assign(modalController, window.app.controllers.ModalController);
+    Object.assign(usersListController, window.app.controllers.UsersListController);
     // Import components 
     var componentsRequests = [];
     var headerComponent, loginBoxComponent, registerFormComponent,
@@ -63,7 +65,16 @@
     var dashboardChangePasswordPage = {};
     var dashboardCustumerDataPage = {};
     var dashboardContractPage = {};
-    var dashboardUsersPage = {};
+    var dashboardUsersPage = {
+        data: function(){
+            return {
+                controller: usersListController
+            }
+        },
+        beforeMount: function () {
+            usersListController.getUsers();
+        } 
+    };
     
     pagesRequests = [
         axios(configs.home || ws.staticUrl+'./pages/home.html')
@@ -253,7 +264,10 @@
                     { path: 'alterar-senha', component: dashboardChangePasswordPage },
                     { path: 'contrato', component: dashboardContractPage },
                     { path: 'ajuda', component: dasboardHelpPage },
-                    { path: 'usuarios', component: dashboardUsersPage }
+                    { 
+                        path: 'usuarios', 
+                        component: dashboardUsersPage
+                    }
                 ],
                 beforeEnter: function(to,from,next){
                     if (!auth.isAuthenticaded()) {

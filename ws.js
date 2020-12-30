@@ -48,6 +48,15 @@ var ws = (function (){
         return axios.get(viacepUrl+cep+"/json");
     }
 
+    var getUsers = function(params) {
+        var queryString = ""; 
+        Object.keys(params).forEach(function(key){
+            queryString += queryString === '' ? '?' : '&';
+            queryString +=  key+'='+params[key];   
+        });
+        return axios.get(apiUrl+'users'+queryString, {headers});
+    }
+
     var verifyUser = function (payload) {
         return axios.post(apiUrl+"verify/user", payload, {headers});
     }
@@ -61,6 +70,7 @@ var ws = (function (){
         findCep,
         getUserRequirements,
         getRegisterOptions,
+        getUsers,
         verifyUser
     };
 })();
