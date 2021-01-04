@@ -459,7 +459,7 @@ window.app.controllers.RegisterController = (function(){
         },
         cpfCnpj: {
             data:'',
-            required: false,
+            required: true,
             hasErrors: false,
             isValid: true,
             errorMessage: 'Campo Obrigatório',
