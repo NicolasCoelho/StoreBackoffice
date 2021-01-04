@@ -9,12 +9,14 @@
     var menuController = new Object();
     var modalController = new Object();
     var usersListController = new Object();
+    var userController = new Object();
     Object.assign(loginController, window.app.controllers.LoginController);
     Object.assign(registerController, window.app.controllers.RegisterController);
     Object.assign(loadingController ,window.app.controllers.LoadingController);
     Object.assign(menuController, window.app.controllers.MenuController);
     Object.assign(modalController, window.app.controllers.ModalController);
     Object.assign(usersListController, window.app.controllers.UsersListController);
+    Object.assign(userController, window.app.controllers.UserController);
     // Import components 
     var componentsRequests = [];
     var headerComponent, loginBoxComponent, registerFormComponent,
@@ -65,7 +67,7 @@
     var dashboardChangePasswordPage = {};
     var dashboardCustumerDataPage = {};
     var dashboardContractPage = {};
-    var dashboardUsersPage = {
+    var dashboardUsersListPage = {
         data: function(){
             return {
                 controller: usersListController
@@ -75,6 +77,16 @@
             usersListController.getUsers();
         } 
     };
+    var dashboardUserPage = {
+        data: function() {
+            return {
+                controller: userController
+            }
+        },
+        beforeMount: function () {
+            userController.getUserData(this.$route.params.id, registerController);
+        } 
+    }
     
     pagesRequests = [
         axios(configs.home || ws.staticUrl+'./pages/home.html')
@@ -114,7 +126,10 @@
         .then(function(page){dashboardTrainingPage.template=page.data}),
 
         axios(ws.staticUrl+'pages/dashboard/users.html')
-        .then(function(page){dashboardUsersPage.template=page.data}),        
+        .then(function(page){dashboardUsersListPage.template=page.data}),
+
+        axios(ws.staticUrl+'pages/dashboard/user.html')
+        .then(function(page){dashboardUserPage.template=page.data}),        
         
         axios(ws.staticUrl+'pages/404.html')
         .then(function(page){notFoundPage.template=page.data}),
@@ -264,10 +279,8 @@
                     { path: 'alterar-senha', component: dashboardChangePasswordPage },
                     { path: 'contrato', component: dashboardContractPage },
                     { path: 'ajuda', component: dasboardHelpPage },
-                    { 
-                        path: 'usuarios', 
-                        component: dashboardUsersPage
-                    }
+                    { path: 'usuarios', component: dashboardUsersListPage },
+                    { path: 'usuario/:id', component: dashboardUserPage, props: true }
                 ],
                 beforeEnter: function(to,from,next){
                     if (!auth.isAuthenticaded()) {

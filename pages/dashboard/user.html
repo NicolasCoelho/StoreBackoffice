@@ -1,0 +1,42 @@
+<div id="UserPage">
+    <div class="dash-title">
+        <h3>{{ controller.user.name }}</h3>
+    </div>
+    <div class="row">
+        <ul class="option-bar">
+            <li class="selected" v-on:click="controller.changeUserView($event, true)">Dados</li>
+            <li v-on:click="controller.changeUserView($event, false)">Vendas</li>
+        </ul>
+        <div class="col-12 user-data" v-if="controller.isDataPage">
+            <br>
+            <div class="row">
+                <div class="card col-12">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <span class="primary">Nome:</span>
+                            <br>
+                            <span>{{ controller.user.name }}</span>
+                            <br><br>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <span class="primary">E-mail:</span>
+                            <br>
+                            <span>{{ controller.user.email }}</span>
+                            <br><br>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <span class="primary">Cpf:</span>
+                            <br>
+                            <span>{{ controller.user.cpfCnpj }}</span>
+                            <br><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-registerForm></app-registerForm>
+        </div>
+        <div class="col-12 seles" v-if="!controller.isDataPage">
+            <h3>Em desenvolvimento</h3>
+        </div>
+    </div>
+</div>

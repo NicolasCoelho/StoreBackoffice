@@ -20,6 +20,7 @@
         'controllers/menuController.js',
         'controllers/modalController.js',
         'controllers/usersListController.js',
+        'controllers/userController.js',
         'auth.js',
         'ws.js'
     ];

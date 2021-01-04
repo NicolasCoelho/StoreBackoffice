@@ -57,6 +57,14 @@ var ws = (function (){
         return axios.get(apiUrl+'users'+queryString, {headers});
     }
 
+    var getUserByPublicId = function(userId) {
+        return axios.get(apiUrl+"user/"+userId, {headers});
+    }
+
+    var changeUser = function(userId, payload) {
+        return axios.put(apiUrl+'user/'+userId, payload, {headers})
+    }
+
     var verifyUser = function (payload) {
         return axios.post(apiUrl+"verify/user", payload, {headers});
     }
@@ -71,6 +79,8 @@ var ws = (function (){
         getUserRequirements,
         getRegisterOptions,
         getUsers,
+        getUserByPublicId,
+        changeUser,
         verifyUser
     };
 })();

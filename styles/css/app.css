@@ -121,6 +121,10 @@ select,input {
     color: var(--primary);
 }
 
+.click:hover {
+    cursor: pointer;
+}
+
 .button {
     position: relative;
     min-height: 50px;
@@ -170,6 +174,28 @@ select,input {
         }
     }
 
+.option-bar {
+    display: flex;
+    list-style: none;
+    width: 100%;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+}
+    .option-bar li {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+        color: var(--text-secondary);
+        background: var(--button-bg-primary);
+    }
+    .option-bar li.selected {
+        background: var(--primary);
+    }
+    .option-bar li:hover {
+        cursor: pointer;
+    }
+
 .apresentation {
     margin: 30px 0px;
 }
@@ -204,6 +230,9 @@ select,input {
 }
 
 #RegisterPage {
+    width: 100%;
+}
+#RegisterFormComponent {
     width: 100%;
 }
     @media(min-width: 1200px) {

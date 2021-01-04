@@ -29,9 +29,9 @@
                         <td>{{ controller.formatStatus(user.status) }}</td>
                         <td>{{ controller.formatDate(user.createdAt) }}</td>
                         <td>
-                            <i class="fas fa-check action-button-table" title="Aprovar" v-if="user.status == 1"></i>
-                            <i class="fas fa-pencil-alt action-button-table" title="Editar"></i>
-                            <i class="fas fa-times action-button-table" title="Inativar"></i>
+                            <i v-on:click="controller.disableUser(user.id)" class="fas fa-check action-button-table click" title="Aprovar" v-if="user.status == 1"></i>
+                            <i v-on:click="controller.editUser($router, user.publicId)" class="fas fa-pencil-alt action-button-table click" title="Editar"></i>
+                            <i v-on:click="controller.disableUser(user.id)" class="fas fa-times action-button-table click" title="Inativar"></i>
                         </td>
                     </tr>
                 </tbody>

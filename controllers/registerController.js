@@ -4,6 +4,10 @@ window.app.controllers.RegisterController = (function(){
 
     var hasFormErrors = false;
 
+    var isEditing = false;
+    
+    var userId = 0;
+
     var optionsLists = {
         maritalStatus: [
             'Selecione',
@@ -794,7 +798,7 @@ window.app.controllers.RegisterController = (function(){
         return {isValid: isValid, payload: payload};
     };
     
-    var cadastrar = function(router,event, modal, loading) {
+    var register = function(router,event, modal, loading) {
         event.preventDefault();
         var validation = validateForm();
         if (validation.isValid) { 
@@ -813,6 +817,25 @@ window.app.controllers.RegisterController = (function(){
         }   
     };
 
+    var saveUser = function (router,event, modal, loading) {
+        event.preventDefault();
+        var validation = validateForm();
+        if (validation.isValid) { 
+            loading.toogleLoad();
+            validation.payload.password = "#######";
+            validation.payload.email = formInputs.email.data;
+            validation.payload.cpfCnpj = formInputs.cpfCnpj.data;
+            ws.changeUser(this.userId, validation.payload).then(
+                function(response){
+                    console.log(response.data);
+                }
+            ).catch(function(err){
+                console.error(err);
+                alert("Erro inesperado. Tente novamente mais tarde");
+            }).finally(function(){loading.toogleLoad();})
+        }   
+    }
+
     var getUserRequirements = function(params) {
         ws.getRegisterOptions().then(function(response){
             Object.assign(registerRequirements, response.data);
@@ -825,8 +848,25 @@ window.app.controllers.RegisterController = (function(){
 
     var setRequiredInputs = function() {
         Object.keys(formInputs).forEach(function (key) {
+            if (key === "password" || key === "email" || key === "cpfCnpj") return;
             formInputs[key].required = registerRequirements.requirements[key] !== undefined ? registerRequirements.requirements[key] : true;
         });
+    }
+
+    var setDataToEdit = function(user) {
+        this.isEditing = true;
+        this.userId = user.id
+        formInputs.password.required = false;
+        formInputs.email.required = false;
+        formInputs.cpfCnpj.required = false;
+        Object.keys(user).forEach(function(key){
+            if (user[key] !== null && formInputs[key] !== undefined) {
+                formInputs[key].data = user[key];
+                if (formInputs[key].mask !== undefined) {
+                    formInputs[key].mask();
+                }
+            }
+        })
     }
     
     return {
@@ -834,7 +874,10 @@ window.app.controllers.RegisterController = (function(){
         registerRequirements,
         hasFormErrors,
         optionsLists,
-        cadastrar,
-        getUserRequirements
+        isEditing,
+        saveUser,
+        register,
+        getUserRequirements,
+        setDataToEdit
     };
 })();

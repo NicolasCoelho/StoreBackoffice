@@ -80,6 +80,18 @@ window.app.controllers.UsersListController = (function(){
         }
     }
 
+    var editUser = function(router, userId) {
+        router.push('usuario/'+userId);
+    }
+
+    var enableUser = function(userId) {
+        console.log(userId)
+    }
+
+    var disableUser = function(userId) {
+        console.log(userId)
+    }
+
     return {
         users,
         table,
@@ -89,6 +101,9 @@ window.app.controllers.UsersListController = (function(){
         formatStatus,
         formatCpfCnpj,
         formatDate,
+        editUser,
+        enableUser,
+        disableUser,
         nextPage,
         previousPage
     }

@@ -15,7 +15,16 @@
                     Usuários
                 </router-link>
             </li>
-            
+            <li v-on:click="menu.changeScreen($event)" v-if="user.isAdmin">
+                <router-link to="/dashboard/configuracoes" :class="[menu.checkCurrentRoute('/dashboard/configuracoes') ? 'active' : '' ]">
+                    Configurações
+                </router-link>
+            </li>
+            <li v-on:click="menu.changeScreen($event)" v-if="user.isAdmin">
+                <router-link to="/dashboard/contrato" :class="[menu.checkCurrentRoute('/dashboard/contrato') ? 'active' : '' ]">
+                    contrato
+                </router-link>
+            </li>
             <li v-on:click="menu.changeScreen($event)" v-if="!user.isAdmin">
                 <router-link to="/dashboard/relatorios" :class="[menu.checkCurrentRoute('/dashboard/relatorios') ? 'active' : '' ]">
                     Relatórios
@@ -58,5 +67,4 @@
             </li>
         </ul>
     </nav>
-    <app-loading></app-loading>
 </div>
