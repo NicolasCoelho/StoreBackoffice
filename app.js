@@ -67,10 +67,14 @@
     var dashboardChangePasswordPage = {};
     var dashboardCustumerDataPage = {};
     var dashboardContractPage = {};
+    var dashboardConfigsPage = {};
     var dashboardUsersListPage = {
         data: function(){
             return {
-                controller: usersListController
+                controller: usersListController,
+                formatCpfCnpj: userController.formatCpfCnpj,
+                formatDate: userController.formatDate,
+                formatStatus: userController.formatStatus
             }
         },
         beforeMount: function () {
@@ -129,7 +133,10 @@
         .then(function(page){dashboardUsersListPage.template=page.data}),
 
         axios(ws.staticUrl+'pages/dashboard/user.html')
-        .then(function(page){dashboardUserPage.template=page.data}),        
+        .then(function(page){dashboardUserPage.template=page.data}),
+
+        axios(ws.staticUrl+'pages/dashboard/configs.html')
+        .then(function(page){dashboardConfigsPage.template=page.data}),        
         
         axios(ws.staticUrl+'pages/404.html')
         .then(function(page){notFoundPage.template=page.data}),
@@ -279,6 +286,7 @@
                     { path: 'alterar-senha', component: dashboardChangePasswordPage },
                     { path: 'contrato', component: dashboardContractPage },
                     { path: 'ajuda', component: dasboardHelpPage },
+                    { path: 'configuracoes', component: dashboardConfigsPage },
                     { path: 'usuarios', component: dashboardUsersListPage },
                     { path: 'usuario/:id', component: dashboardUserPage, props: true }
                 ],

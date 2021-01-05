@@ -107,6 +107,15 @@ select,input {
     color: var(--icons-color);
 }
 
+.dash-title .page-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+    .dash-title .page-actions .fa-times {
+        font-size: 22px;
+    }
+
 .align-center {
     text-align: center;
 }

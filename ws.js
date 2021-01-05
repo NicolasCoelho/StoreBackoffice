@@ -35,10 +35,6 @@ var ws = (function (){
         )
     };
 
-    var getUserRequirements = function (storeId) {
-        return axios.get(apiUrl+"userRequirements/"+storeId+"/store", {headers});
-    }
-
     var getRegisterOptions = function () {
         return axios.get(apiUrl+"registerOptions", {headers});
     }
@@ -46,6 +42,10 @@ var ws = (function (){
     var findCep = function (cep) {
         cep = cep.replace('-','');
         return axios.get(viacepUrl+cep+"/json");
+    }
+
+    var getUserRequirements = function (storeId) {
+        return axios.get(apiUrl+"userRequirements/"+storeId+"/store", {headers});
     }
 
     var getUsers = function(params) {
@@ -65,6 +65,10 @@ var ws = (function (){
         return axios.put(apiUrl+'user/'+userId, payload, {headers})
     }
 
+    var changeUserStatus = function(userId, payload) {
+        return axios.put(apiUrl+'user/'+userId+'/changeStatus', payload, {headers});
+    }
+
     var verifyUser = function (payload) {
         return axios.post(apiUrl+"verify/user", payload, {headers});
     }
@@ -81,6 +85,7 @@ var ws = (function (){
         getUsers,
         getUserByPublicId,
         changeUser,
+        changeUserStatus,
         verifyUser
     };
 })();

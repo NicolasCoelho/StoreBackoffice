@@ -25,13 +25,13 @@
                     <tr v-for="user in controller.users">
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
-                        <td>{{ controller.formatCpfCnpj(user.cpfCnpj) }}</td>
-                        <td>{{ controller.formatStatus(user.status) }}</td>
-                        <td>{{ controller.formatDate(user.createdAt) }}</td>
+                        <td>{{ formatCpfCnpj(user.cpfCnpj) }}</td>
+                        <td>{{ formatStatus(user.status) }}</td>
+                        <td>{{ formatDate(user.createdAt) }}</td>
                         <td>
-                            <i v-on:click="controller.disableUser(user.id)" class="fas fa-check action-button-table click" title="Aprovar" v-if="user.status == 1"></i>
+                            <i v-on:click="controller.enableUser(user.id)" class="fas fa-check action-button-table click" title="Aprovar" v-if="user.status != 2"></i>
                             <i v-on:click="controller.editUser($router, user.publicId)" class="fas fa-pencil-alt action-button-table click" title="Editar"></i>
-                            <i v-on:click="controller.disableUser(user.id)" class="fas fa-times action-button-table click" title="Inativar"></i>
+                            <i v-on:click="controller.disableUser(user.id)" class="fas fa-times action-button-table click" title="Inativar"  v-if="user.status != 3"></i>
                         </td>
                     </tr>
                 </tbody>

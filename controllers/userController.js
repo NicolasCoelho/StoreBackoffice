@@ -37,6 +37,29 @@ window.app.controllers.UserController = (function(){
 
     var isDataPage = true;
 
+    var formatStatus = function (status) {
+        switch(status) {
+            case 1: 
+                return "Em análise"
+            case 2: 
+                return "Ativo"
+            case 3: 
+                return "Desabilitado"
+            case 4: 
+                return "Deletado"
+            default:
+                return "?" 
+        }
+    }
+
+    var formatCpfCnpj = function(value) {
+        return value.toString().replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})$/,"$1.$2.$3-$4");
+    }
+
+    var formatDate = function(date) {
+        return new Date(date).toLocaleString().slice(0,10);
+    }
+
     var getUserData = function(id, form) {
         ws.getUserByPublicId(id).then(
             function(response) {
@@ -49,6 +72,39 @@ window.app.controllers.UserController = (function(){
         })
     }
 
+    var setUserNew = function(userId) {
+        ws.changeUserStatus(userId, { status: 1 }).then(
+            function(response){
+                window.location.reload();
+            }
+        ).catch(function(err){
+            console.error(err);
+            alert("Erro inesperado. Tente novamente mais tarde!");
+        });
+    }
+
+    var enableUser = function(userId) {
+        ws.changeUserStatus(userId, { status: 2 }).then(
+            function(response){
+                window.location.reload();
+            }
+        ).catch(function(err){
+            console.error(err);
+            alert("Erro inesperado. Tente novamente mais tarde!");
+        });
+    }
+
+    var disableUser = function(userId) {
+        ws.changeUserStatus(userId, { status: 3 }).then(
+            function(response){
+                window.location.reload();
+            }
+        ).catch(function(err){
+            console.error(err);
+            alert("Erro inesperado. Tente novamente mais tarde!");
+        });
+    }
+
     var changeUserView = function($event, dataPage) {
         this.isDataPage = dataPage;
         $event.target.parentElement.querySelectorAll('li').forEach(function(ele){ele.classList.remove('selected')});
@@ -58,6 +114,12 @@ window.app.controllers.UserController = (function(){
     return {
         user,
         isDataPage,
+        formatStatus,
+        formatCpfCnpj,
+        formatDate,
+        enableUser,
+        disableUser,
+        setUserNew,
         changeUserView,
         getUserData
     };

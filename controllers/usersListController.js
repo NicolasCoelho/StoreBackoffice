@@ -25,29 +25,6 @@ window.app.controllers.UsersListController = (function(){
         });
     }
 
-    var formatStatus = function (status) {
-        switch(status) {
-            case 1: 
-                return "Em análise"
-            case 2: 
-                return "Ativo"
-            case 3: 
-                return "Desabilitado"
-            case 4: 
-                return "Deletado"
-            default:
-                return "?" 
-        }
-    }
-
-    var formatCpfCnpj = function(value) {
-        return value.toString().replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})$/,"$1.$2.$3-$4");
-    }
-
-    var formatDate = function(date) {
-        return new Date(date).toLocaleString().slice(0,10);
-    }
-
     var findUser = function () {
         if (search.timer !== null) {
             clearTimeout(search.timer);
@@ -85,11 +62,25 @@ window.app.controllers.UsersListController = (function(){
     }
 
     var enableUser = function(userId) {
-        console.log(userId)
+        ws.changeUserStatus(userId, { status: 2 }).then(
+            function(response){
+                getUsers();
+            }
+        ).catch(function(err){
+            console.error(err);
+            alert("Erro inesperado. Tente novamente mais tarde!");
+        });
     }
 
     var disableUser = function(userId) {
-        console.log(userId)
+        ws.changeUserStatus(userId, { status: 3 }).then(
+            function(response){
+                getUsers();
+            }
+        ).catch(function(err){
+            console.error(err);
+            alert("Erro inesperado. Tente novamente mais tarde!");
+        });
     }
 
     return {
@@ -98,9 +89,6 @@ window.app.controllers.UsersListController = (function(){
         search,
         findUser,
         getUsers,
-        formatStatus,
-        formatCpfCnpj,
-        formatDate,
         editUser,
         enableUser,
         disableUser,
