@@ -21,6 +21,7 @@
         'controllers/modalController.js',
         'controllers/usersListController.js',
         'controllers/userController.js',
+        'controllers/contractController.js',
         'auth.js',
         'ws.js'
     ];

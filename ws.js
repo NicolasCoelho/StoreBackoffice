@@ -72,6 +72,14 @@ var ws = (function (){
     var verifyUser = function (payload) {
         return axios.post(apiUrl+"verify/user", payload, {headers});
     }
+
+    var getContract = function (storeId) {
+        return axios.get(apiUrl+"contract/"+storeId, {headers});
+    }
+
+    var changeContract = function (id, payload) {
+        return axios.put(apiUrl+"contract/"+id, payload, {headers}); 
+    }
     
     return {
         apiUrl,
@@ -86,6 +94,8 @@ var ws = (function (){
         getUserByPublicId,
         changeUser,
         changeUserStatus,
-        verifyUser
+        verifyUser,
+        getContract,
+        changeContract
     };
 })();

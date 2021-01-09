@@ -73,7 +73,12 @@ label {
     margin-bottom: 10px;
     display: block;
 }
-select,input {
+textarea {
+    resize: none;
+    max-width: 100%;
+    max-height: 100%;
+}
+select,input, textarea {
     width: 100%;
     transition: 100ms;
     color: var(--input-color);
@@ -84,7 +89,7 @@ select,input {
     border-radius: var(--input-border-radius);
     box-shadow: none;
 }
-    select:focus,input:focus {
+    select:focus,input:focus, textarea:focus {
         outline: none;
         transform: scale(1.02);
     }
@@ -377,6 +382,15 @@ select,input {
     animation: loadicons 3s 2s infinite ease-in-out;
 }
 
+#Contract {
+    width: 100%;
+}
+    #Contract .contract-table {
+        white-space:pre-line;
+    }    
+        #Contract .contract-table * {
+            text-align: justify;
+        }
 /* 
  * Menu 
  */

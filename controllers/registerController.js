@@ -827,7 +827,7 @@ window.app.controllers.RegisterController = (function(){
             validation.payload.cpfCnpj = formInputs.cpfCnpj.data;
             ws.changeUser(this.userId, validation.payload).then(
                 function(response){
-                    console.log(response.data);
+                    window.location.reload();
                 }
             ).catch(function(err){
                 console.error(err);

@@ -10,6 +10,7 @@
     var modalController = new Object();
     var usersListController = new Object();
     var userController = new Object();
+    var contractController = new Object();
     Object.assign(loginController, window.app.controllers.LoginController);
     Object.assign(registerController, window.app.controllers.RegisterController);
     Object.assign(loadingController ,window.app.controllers.LoadingController);
@@ -17,11 +18,12 @@
     Object.assign(modalController, window.app.controllers.ModalController);
     Object.assign(usersListController, window.app.controllers.UsersListController);
     Object.assign(userController, window.app.controllers.UserController);
+    Object.assign(contractController, window.app.controllers.ContractController);
     // Import components 
     var componentsRequests = [];
     var headerComponent, loginBoxComponent, registerFormComponent,
     menuComponent, cardComponent, linksGeneratorComponent, generatorInfoComponent,
-    loadingComponent, modalComponent;
+    loadingComponent, modalComponent, contractComponent;
 
     componentsRequests = [
         axios(ws.staticUrl+'components/header/header.html')
@@ -48,6 +50,9 @@
         axios(ws.staticUrl+'components/loading/loading.html')
         .then(function(res){loadingComponent=res.data}),
 
+        axios(ws.staticUrl+'components/contract/contract.html')
+        .then(function(res){contractComponent=res.data}),
+
         axios(ws.staticUrl+'components/modal/modal.html')
         .then(function(res){modalComponent=res.data})
     ];
@@ -66,7 +71,14 @@
     var dasboardHelpPage = {};
     var dashboardChangePasswordPage = {};
     var dashboardCustumerDataPage = {};
-    var dashboardContractPage = {};
+    var dashboardContractPage = {
+        data: function() {
+            return {
+                controller: contractController,
+                user: auth
+            }
+        }
+    };
     var dashboardConfigsPage = {};
     var dashboardUsersListPage = {
         data: function(){
@@ -249,6 +261,17 @@
             },
             template: modalComponent
         });
+        Vue.component('app-contract', {
+            data: function() {
+                return {
+                    controller: contractController
+                }
+            },
+            beforeMount: function () {
+                contractController.getContract();
+            },
+            template: contractComponent
+        })
         
         var routes = [
             { path: '/', component: homePage },
