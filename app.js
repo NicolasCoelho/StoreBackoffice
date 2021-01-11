@@ -11,6 +11,11 @@
     var usersListController = new Object();
     var userController = new Object();
     var contractController = new Object();
+    var configsController = new Object();
+    var storeController = new Object();
+    var requirementsController = new Object();
+    var salesStatusController = new Object();
+
     Object.assign(loginController, window.app.controllers.LoginController);
     Object.assign(registerController, window.app.controllers.RegisterController);
     Object.assign(loadingController ,window.app.controllers.LoadingController);
@@ -19,11 +24,17 @@
     Object.assign(usersListController, window.app.controllers.UsersListController);
     Object.assign(userController, window.app.controllers.UserController);
     Object.assign(contractController, window.app.controllers.ContractController);
+    Object.assign(configsController, window.app.controllers.ConfigsController);
+    Object.assign(storeController, window.app.controllers.StoreController);
+    Object.assign(requirementsController, window.app.controllers.RequirementsController);
+    Object.assign(salesStatusController, window.app.controllers.SalesStatusController);
+
     // Import components 
     var componentsRequests = [];
     var headerComponent, loginBoxComponent, registerFormComponent,
     menuComponent, cardComponent, linksGeneratorComponent, generatorInfoComponent,
-    loadingComponent, modalComponent, contractComponent;
+    loadingComponent, modalComponent, contractComponent, storeComponent, 
+    requirementsComponent, salesStatusComponent;
 
     componentsRequests = [
         axios(ws.staticUrl+'components/header/header.html')
@@ -52,6 +63,15 @@
 
         axios(ws.staticUrl+'components/contract/contract.html')
         .then(function(res){contractComponent=res.data}),
+        
+        axios(ws.staticUrl+'components/store/store.html')
+        .then(function(res){storeComponent=res.data}),
+
+        axios(ws.staticUrl+'components/requirements/requirements.html')
+        .then(function(res){requirementsComponent=res.data}),
+        
+        axios(ws.staticUrl+'components/salesStatus/salesStatus.html')
+        .then(function(res){salesStatusComponent=res.data}),
 
         axios(ws.staticUrl+'components/modal/modal.html')
         .then(function(res){modalComponent=res.data})
@@ -79,7 +99,13 @@
             }
         }
     };
-    var dashboardConfigsPage = {};
+    var dashboardConfigsPage = {
+        data: function() {
+            return {
+                controller: configsController
+            }
+        }
+    };
     var dashboardUsersListPage = {
         data: function(){
             return {
@@ -164,9 +190,6 @@
     })
         
     function init() {
-        // Set Directives
-        Vue.directive('mask', VueMask.VueMaskDirective);
-
         // Set components
         Vue.component('app-header', {
             data: function() {
@@ -272,6 +295,39 @@
             },
             template: contractComponent
         })
+        Vue.component('app-store', {
+            data: function() {
+                return {
+                    controller: storeController
+                }
+            },
+            beforeMount: function () {
+                console.log("Store");
+            },
+            template: storeComponent
+        });
+        Vue.component('app-requirements', {
+            data: function() {
+                return {
+                    controller: requirementsController
+                }
+            },
+            beforeMount: function () {
+                console.log("Requirements")
+            },
+            template: requirementsComponent
+        });
+        Vue.component('app-salesStatus', {
+            data: function() {
+                return {
+                    controller: salesStatusController
+                }
+            },
+            beforeMount: function () {
+                console.log("Sales status")
+            },
+            template: salesStatusComponent
+        });
         
         var routes = [
             { path: '/', component: homePage },

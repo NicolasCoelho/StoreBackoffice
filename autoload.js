@@ -9,7 +9,6 @@
     var imports = [
         'https://cdn.jsdelivr.net/npm/vue@2.6.12',
         'https://unpkg.com/vue-router@3.4.3/dist/vue-router.js',
-        'https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js',
         'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js',
         'styles/css/fontAwesome/css/all.min.css',
         'styles/css/bootstrap-grid.css',
@@ -22,6 +21,10 @@
         'controllers/usersListController.js',
         'controllers/userController.js',
         'controllers/contractController.js',
+        'controllers/configsController.js',
+        'controllers/storeController.js',
+        'controllers/requirementsController.js',
+        'controllers/salesStatusController.js',
         'auth.js',
         'ws.js'
     ];
