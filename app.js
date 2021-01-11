@@ -196,6 +196,8 @@
                 return {
                     currentRoute: window.location.href.split('#')[1],
                     logOut: auth.logOut,
+                    isAuthenticaded: auth.isAuthenticaded,
+                    user: auth.getTokenData,
                     configs: configs
                 }
             },
