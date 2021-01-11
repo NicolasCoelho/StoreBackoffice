@@ -16,7 +16,14 @@
                         <th style="width: 20%;">Nome</th>
                         <th style="width: 20%;">E-mail</th>
                         <th style="width: 20%;">Cpf</th>
-                        <th style="width: 15%;">Status</th>
+                        <th style="width: 15%;">
+                            <select class="custom" v-on:change="controller.setStatusFilter($event)">
+                                <option value="" selected>Status</option>
+                                <option value="1">Em análise</option>
+                                <option value="2">Ativo</option>
+                                <option value="3">Dasablitado</option>
+                            </select>
+                        </th>
                         <th style="width: 15%;">Data Cadastro</th>
                         <th style="width: 10%;">Ações</th>
                     </tr>

@@ -43,6 +43,15 @@ window.app.controllers.UsersListController = (function(){
         },700);
     }
 
+    var setStatusFilter = function ($event) {
+        if ($event.target.value !== '') {
+            table.params.status = $event.target.value;
+        } else {
+            if (table.params.status !== undefined) delete table.params.status; 
+        }
+        getUsers();
+    }
+
     var previousPage = function() {
         if (table.currentPage > 1 && table.currentPage <= table.totalPages) {
             table.params.page--;
@@ -89,6 +98,7 @@ window.app.controllers.UsersListController = (function(){
         search,
         findUser,
         getUsers,
+        setStatusFilter,
         editUser,
         enableUser,
         disableUser,
