@@ -300,11 +300,13 @@
         Vue.component('app-store', {
             data: function() {
                 return {
-                    controller: storeController
+                    controller: storeController,
+                    utils: utils,
+                    loading: loadingController,
                 }
             },
             beforeMount: function () {
-                console.log("Store");
+                storeController.getStore();
             },
             template: storeComponent
         });

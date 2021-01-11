@@ -26,6 +26,7 @@
         'controllers/requirementsController.js',
         'controllers/salesStatusController.js',
         'auth.js',
+        'utils.js',
         'ws.js'
     ];
 

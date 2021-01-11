@@ -80,6 +80,14 @@ var ws = (function (){
     var changeContract = function (id, payload) {
         return axios.put(apiUrl+"contract/"+id, payload, {headers}); 
     }
+
+    var getStore = function () {
+        return axios.get(apiUrl+"store", {headers});
+    }
+
+    var changeStore = function(payload) {
+        return axios.put(apiUrl+"store", payload, {headers});
+    }
     
     return {
         apiUrl,
@@ -96,6 +104,8 @@ var ws = (function (){
         changeUserStatus,
         verifyUser,
         getContract,
-        changeContract
+        changeContract,
+        getStore,
+        changeStore
     };
 })();
