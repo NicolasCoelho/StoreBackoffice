@@ -232,6 +232,14 @@ select,input, textarea {
         font-size: 20px;
     }
 
+.center {
+    text-align: center;
+}
+
+.full {
+    width: 100%;
+}
+
 form {
     width: 100%;
 }

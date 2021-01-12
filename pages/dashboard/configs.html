@@ -9,12 +9,22 @@
             <li v-bind:class="{selected: controller.page == 3}" v-on:click="controller.changeUserView($event, 3)">Status de venda</li>
         </ul>
         <div class="col-12 store-data" v-if="controller.page == 1">
+            <p class="center">
+                Edite as configurações da sua loja.
+                Tenha cuidado ao alterar, pois as mudanças são instantâneas!
+            </p>
             <app-store></app-store>
         </div>
         <div class="col-12 requirements-data" v-if="controller.page == 2">
+            <p class="center">
+               Decida quais dados são obrigatórios no cadastro de usuários.
+            </p>
             <app-requirements></app-requirements>
         </div>
         <div class="col-12 sales-data" v-if="controller.page == 3">
+            <p class="center">
+                Ajuste os ID's correspondetes aos status das vendas.
+            </p>
             <app-salesStatus></app-salesStatus>
         </div>
     </div>
