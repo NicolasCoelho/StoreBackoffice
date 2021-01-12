@@ -205,6 +205,9 @@
                 return {
                     currentRoute: window.location.href.split('#')[1],
                     logOut: auth.logOut,
+                    myAccout: function (router) {
+                        router.replace('/dashboard'); 
+                    },
                     isAuthenticaded: auth.isAuthenticaded,
                     user: auth.getTokenData,
                     configs: configs
