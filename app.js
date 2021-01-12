@@ -104,7 +104,10 @@
             return {
                 controller: configsController
             }
-        }
+        }, 
+        beforeMount: function () {
+            configsController.setInitialPage();
+        } 
     };
     var dashboardUsersListPage = {
         data: function(){

@@ -86,7 +86,6 @@ window.app.controllers.SalesStatusController = (function(){
         var tempForm = formInputs;
         ws.getSalesStatus(auth.getTokenData().s).then(
             function(response) {
-                console.log(response.data);
                 Object.assign(tempSalesStatus, response.data);
                 Object.keys(tempForm).forEach(function(key){
                     tempForm[key].data = tempSalesStatus[key];

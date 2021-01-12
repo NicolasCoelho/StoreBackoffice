@@ -8,8 +8,13 @@ window.app.controllers.ConfigsController = (function(){
         $event.target.classList.toggle('selected');
     }
 
+    var setInitialPage = function() {
+        this.page = 1;
+    }
+
     return {
         page,
-        changeUserView
+        changeUserView,
+        setInitialPage
     }
 })();
