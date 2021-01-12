@@ -330,7 +330,7 @@
                 }
             },
             beforeMount: function () {
-                console.log("Sales status")
+                salesStatusController.getSalesStatus();
             },
             template: salesStatusComponent
         });

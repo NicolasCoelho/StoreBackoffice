@@ -92,6 +92,14 @@ var ws = (function (){
     var changeStore = function(payload) {
         return axios.put(apiUrl+"store", payload, {headers});
     }
+
+    var getSalesStatus = function(storeId) {
+        return axios.get(apiUrl+'salesStatus/'+storeId+"/store", {headers});
+    }
+
+    var changeSalesStatus = function(id, payload) {
+        return axios.put(apiUrl+'salesStatus/'+id, payload, {headers});
+    }
     
     return {
         apiUrl,
@@ -111,6 +119,8 @@ var ws = (function (){
         changeContract,
         getStore,
         changeStore,
-        changeRequirements
+        changeRequirements,
+        getSalesStatus,
+        changeSalesStatus
     };
 })();

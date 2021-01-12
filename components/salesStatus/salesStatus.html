@@ -1,3 +1,53 @@
 <div id="SalesStatusComponent">
     <h3>Status de vendas</h3>
+    <form class="row">
+        <div class="col-12">
+            <div class="input-wrapper">
+                <label for="received">Venda Recebida:</label>
+                <input 
+                    v-on:focusout="controller.formInputs.received.validate()"
+                    v-model="controller.formInputs.received.data"
+                    id="received"
+                    type="number">
+                <span v-if="controller.formInputs.received.hasErrors == true" class="error">
+                    {{ controller.formInputs.received.errorMessage }}
+                </span>
+            </div>    
+        </div>
+        <div class="col-12">
+            <div class="input-wrapper">
+                <label for="completed">Venda Completa:</label>
+                <input
+                    v-on:focusout="controller.formInputs.completed.validate()"
+                    v-model="controller.formInputs.completed.data"
+                    id="completed"
+                    type="number"
+                    >
+                <span v-if="controller.formInputs.completed.hasErrors == true" class="error">
+                    {{ controller.formInputs.completed.errorMessage }}
+                </span>
+            </div>    
+        </div>
+        <div class="col-12">
+            <div class="input-wrapper">
+                <label for="canceled">Venda Cancelada:</label>
+                <input 
+                v-on:focusout="controller.formInputs.canceled.validate()"
+                v-model="controller.formInputs.canceled.data"
+                id="canceled"
+                type="number">
+                <span v-if="controller.formInputs.canceled.hasErrors == true" class="error">
+                    {{ controller.formInputs.canceled.errorMessage }}
+                </span>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="align-center" style="padding: 20px 0px;">
+                <button v-on:click="controller.saveSalesStatus($event, loading, controller.getSalesStatus)" class="button primary-button upcase-button align-center">
+                    <span v-if="!loading.loading">Salvar</span>
+                    <app-loading></app-loading>
+                </button>
+            </div>
+        </div>
+    </form>
 </div>
