@@ -1,4 +1,6 @@
 <div id="Contract">
-    <pre v-if="!controller.isEditing" v-html="controller.contract.content" class="contract-table"></pre> 
+    <div class="card" v-if="!controller.isEditing">
+        <pre v-html="controller.contract.content" class="contract-table"></pre> 
+    </div>
     <textarea v-if="controller.isEditing" v-model="controller.contract.contentEditable" style="min-height: 500px;"></textarea>
 </div>

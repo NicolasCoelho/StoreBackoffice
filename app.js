@@ -79,7 +79,15 @@
 
     // Import pages async
     var pagesRequests;
-    var homePage = {}; 
+    var homePage = {
+        data: function() {
+            return {
+                configs: configs,
+                auth: auth,
+                utils: utils
+            }
+        }
+    }; 
     var registerPage = {};
     var loginPage = {};
     var dashboardPage = {};
