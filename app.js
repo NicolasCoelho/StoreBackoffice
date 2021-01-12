@@ -84,7 +84,13 @@
     var loginPage = {};
     var dashboardPage = {};
     var notFoundPage = {};
-    var dashboardHomePage = {};
+    var dashboardHomePage = {
+        data: function () {
+            return {
+                isAdmin: auth.isAdmin
+            }
+        }
+    };
     var dashboardReportsPage = {};
     var dashboardLinksGeneratorPage = {};
     var dashboardTrainingPage = {};

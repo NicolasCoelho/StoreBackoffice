@@ -2,21 +2,41 @@
     <div class="dash-title">
         <h3>Dashboard</h3>
     </div>
-    <div class="row justify-content-lg-between justify-content-center">
-        <div class="col col-12 col-lg-4 small-card">
-            <app-card icon="fas fa-funnel-dollar" title="Vendas Faturadas" value="R$ 300,00" foot="Todo o período"></app-card>
-        </div>
-        <div class="col col-12 col-lg-4 small-card">
-            <app-card icon="fas fa-ban" title="Vendas Canceladas" value="R$ 300,00" foot="Todo o período"></app-card>
-        </div>
-        <div class="col col-12 col-lg-4 small-card">
-            <app-card icon="fas fa-hand-holding-usd" title="Comissão a receber" value="R$ 300,00" foot="Todo o período"></app-card>
-        </div>
+    <div v-if="isAdmin">
+        <h1 class="center">Bem-vindo</h1>
+        <p class="desc-p">
+            Este é seu painel admistrativo.
+            Aqui você poderá controlar todos os aspectos do sistema de divulgadores.
+            Todas as opções são alteradas em tempo real, agilizando o processo de gestão e controle
+        </p>
+        <p class="desc-p">
+            Para garantir a disponibilidade e a confiabilidade dos serviços aqui listados,
+            toda a hospedagem e infraestrutura foi provisionda no maior provedor 
+            de computação em nuvem do mundo, a Amazom AWS.
+            Assim, temos como prover um SLA de 99% ao ano, possibilitando que cada usuário não seja
+            privado de efetuar sua venda ou de acessar seus recursos.
+        </p>
+        <p class="desc-p">
+            Acesse o menu lateral e explore as opções disponíveis.
+        </p>
     </div>
-    <div class="row">
-        <app-linksGenerator></app-linksGenerator>
-    </div>
-    <div class="row">
-        <app-generatorInfo></app-generatorInfo>
+    <div v-if="!isAdmin">
+        <div class="row justify-content-lg-between justify-content-center">
+            <div class="col col-12 col-lg-4 small-card">
+                <app-card icon="fas fa-funnel-dollar" title="Vendas Faturadas" value="R$ 300,00" foot="Todo o período"></app-card>
+            </div>
+            <div class="col col-12 col-lg-4 small-card">
+                <app-card icon="fas fa-ban" title="Vendas Canceladas" value="R$ 300,00" foot="Todo o período"></app-card>
+            </div>
+            <div class="col col-12 col-lg-4 small-card">
+                <app-card icon="fas fa-hand-holding-usd" title="Comissão a receber" value="R$ 300,00" foot="Todo o período"></app-card>
+            </div>
+        </div>
+        <div class="row">
+            <app-linksGenerator></app-linksGenerator>
+        </div>
+        <div class="row">
+            <app-generatorInfo></app-generatorInfo>
+        </div>
     </div>
 </div>
