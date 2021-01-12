@@ -96,7 +96,6 @@
                     v-model="controller.formInputs.comissionValue.data"
                     maxlength="13"
                     id="comissionValue">
-                </select>
                 <span v-if="controller.formInputs.comissionValue.hasErrors == true" class="error">{{ controller.formInputs.comissionValue.errorMessage }}</span>
             </div>
             <div class="input-wrapper" v-if="controller.formInputs.minimumValue.required">
@@ -106,7 +105,6 @@
                     v-model="controller.formInputs.minimumValue.data"
                     v-on:keyup="controller.formInputs.minimumValue.mask();"
                     id="minimumValue">
-                </select>
                 <span v-if="controller.formInputs.minimumValue.hasErrors == true" class="error">{{ controller.formInputs.minimumValue.errorMessage }}</span>
             </div>
         </div>

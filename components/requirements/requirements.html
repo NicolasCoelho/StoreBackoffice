@@ -1,3 +1,290 @@
 <div id="RequirementsComponent">
     <h3>Dados do cadastro</h3>
+    <form id="requirementsForm" class="row justify-content-between">
+        <div class="col-12 col-md-5">
+            <div class="input-wrapper">
+                <label for="account">Conta:</label>
+                <select 
+                    v-model="controller.requirements.account"
+                    id="account">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="accountOwner">Proprietário da Conta:</label>
+                <select 
+                    v-model="controller.requirements.accountOwner"
+                    id="accountOwner">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="accountOwnerCpf">Cpf do Proprietário:</label>
+                <select 
+                    v-model="controller.requirements.accountOwnerCpf"
+                    id="accountOwnerCpf">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="agency">Agência:</label>
+                <select 
+                    v-model="controller.requirements.agency"
+                    id="agency">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="bank">Banco:</label>
+                <select 
+                    v-model="controller.requirements.bank"
+                    id="bank">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="address">Endereço:</label>
+                <select 
+                    v-model="controller.requirements.address"
+                    id="address">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="addressNumber">Número da residência:</label>
+                <select 
+                    v-model="controller.requirements.addressNumber"
+                    id="addressNumber">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="cep">Cep:</label>
+                <select 
+                    v-model="controller.requirements.cep"
+                    id="cep">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="neighborhood">Bairro:</label>
+                <select 
+                    v-model="controller.requirements.neighborhood"
+                    id="neighborhood">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="city">Cidade:</label>
+                <select 
+                    v-model="controller.requirements.city"
+                    id="city">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="state">Estado:</label>
+                <select 
+                    v-model="controller.requirements.state"
+                    id="state">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12 col-md-5">
+            <div class="input-wrapper">
+                <label for="birthLocation">Local de nascimento:</label>
+                <select 
+                    v-model="controller.requirements.birthLocation"
+                    id="birthLocation">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="birthdate">Data de nascimento:</label>
+                <select 
+                    v-model="controller.requirements.birthdate"
+                    id="birthdate">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="gender">Gênero:</label>
+                <select 
+                    v-model="controller.requirements.gender"
+                    id="gender">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="literacy">Grau de alfabetização:</label>
+                <select 
+                    v-model="controller.requirements.literacy"
+                    id="literacy">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="maritalStatus">Estado civil:</label>
+                <select 
+                    v-model="controller.requirements.maritalStatus"
+                    id="maritalStatus">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="nationality">Nacionalidade:</label>
+                <select 
+                    v-model="controller.requirements.nationality"
+                    id="nationality">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="phone1">Celular:</label>
+                <select 
+                    v-model="controller.requirements.phone1"
+                    id="phone1">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="phone2">Telefone:</label>
+                <select 
+                    v-model="controller.requirements.phone2"
+                    id="phone2">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="pis">PIS:</label>
+                <select 
+                    v-model="controller.requirements.pis"
+                    id="pis">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="rg">RG:</label>
+                <select 
+                    v-model="controller.requirements.rg"
+                    id="rg">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="align-center" style="padding: 20px 0px;">
+                <button v-on:click="controller.saveRequirements($event, loading, controller.getRequirements)" class="button primary-button upcase-button align-center">
+                    <span v-if="!loading.loading">Salvar</span>
+                    <app-loading></app-loading>
+                </button>
+            </div>
+        </div>
+    </form>
 </div>

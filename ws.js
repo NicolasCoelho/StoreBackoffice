@@ -48,6 +48,10 @@ var ws = (function (){
         return axios.get(apiUrl+"userRequirements/"+storeId+"/store", {headers});
     }
 
+    var changeRequirements = function(id, payload) {
+        return axios.put(apiUrl+"userRequirements/"+id, payload, {headers});
+    }
+
     var getUsers = function(params) {
         var queryString = ""; 
         Object.keys(params).forEach(function(key){
@@ -106,6 +110,7 @@ var ws = (function (){
         getContract,
         changeContract,
         getStore,
-        changeStore
+        changeStore,
+        changeRequirements
     };
 })();

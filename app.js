@@ -313,18 +313,20 @@
         Vue.component('app-requirements', {
             data: function() {
                 return {
-                    controller: requirementsController
+                    controller: requirementsController,
+                    loading: loadingController,
                 }
             },
             beforeMount: function () {
-                console.log("Requirements")
+                requirementsController.getRequirements();
             },
             template: requirementsComponent
         });
         Vue.component('app-salesStatus', {
             data: function() {
                 return {
-                    controller: salesStatusController
+                    controller: salesStatusController,
+                    loading: loadingController
                 }
             },
             beforeMount: function () {
