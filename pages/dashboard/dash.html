@@ -2,7 +2,7 @@
     <div class="dash-title">
         <h3>Dashboard</h3>
     </div>
-    <div v-if="isAdmin">
+    <div v-if="isAdmin()">
         <h1 class="center">Bem-vindo</h1>
         <p class="desc-p">
             Este é seu painel admistrativo.
@@ -20,7 +20,7 @@
             Acesse o menu lateral e explore as opções disponíveis.
         </p>
     </div>
-    <div v-if="!isAdmin">
+    <div v-if="!isAdmin()">
         <div class="row justify-content-lg-between justify-content-center">
             <div class="col col-12 col-lg-4 small-card">
                 <app-card icon="fas fa-funnel-dollar" title="Vendas Faturadas" value="R$ 300,00" foot="Todo o período"></app-card>

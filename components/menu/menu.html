@@ -10,37 +10,37 @@
                     Dashboard
                 </router-link>
             </li>
-            <li v-on:click="menu.changeScreen($event)" v-if="user.isAdmin">
+            <li v-on:click="menu.changeScreen($event)" v-if="user.isAdmin()">
                 <router-link to="/dashboard/usuarios" :class="[menu.checkCurrentRoute('/dashboard/usuarios') ? 'active' : '' ]">
                     Usuários
                 </router-link>
             </li>
-            <li v-on:click="menu.changeScreen($event)" v-if="user.isAdmin">
+            <li v-on:click="menu.changeScreen($event)" v-if="user.isAdmin()">
                 <router-link to="/dashboard/configuracoes" :class="[menu.checkCurrentRoute('/dashboard/configuracoes') ? 'active' : '' ]">
                     Configurações
                 </router-link>
             </li>
-            <li v-on:click="menu.changeScreen($event)" v-if="user.isAdmin">
+            <li v-on:click="menu.changeScreen($event)" v-if="user.isAdmin()">
                 <router-link to="/dashboard/contrato" :class="[menu.checkCurrentRoute('/dashboard/contrato') ? 'active' : '' ]">
                     contrato
                 </router-link>
             </li>
-            <li v-on:click="menu.changeScreen($event)" v-if="!user.isAdmin">
+            <li v-on:click="menu.changeScreen($event)" v-if="!user.isAdmin()">
                 <router-link to="/dashboard/relatorios" :class="[menu.checkCurrentRoute('/dashboard/relatorios') ? 'active' : '' ]">
                     Relatórios
                 </router-link>
             </li>
-            <li v-on:click="menu.changeScreen($event)" v-if="!user.isAdmin">
+            <li v-on:click="menu.changeScreen($event)" v-if="!user.isAdmin()">
                 <router-link to="/dashboard/gerador-de-links" :class="[menu.checkCurrentRoute('/dashboard/gerador-de-links') ? 'active' : '' ]">
                     Gerador de links
                 </router-link>
             </li>
-            <li v-on:click="menu.changeScreen($event)" v-if="!user.isAdmin">
+            <li v-on:click="menu.changeScreen($event)" v-if="!user.isAdmin()">
                 <router-link to="/dashboard/material-de-treinamento">
                     Material de treinamento
                 </router-link>
             </li>
-            <li class="sub-menu" v-if="!user.isAdmin">
+            <li class="sub-menu" v-if="!user.isAdmin()">
                 <a>
                     Minha conta <i class="fa fa-chevron-down" aria-hidden="true"></i>
                 </a>
@@ -62,7 +62,7 @@
                     </li>
                 </ul>
             </li>
-            <li v-on:click="menu.changeScreen($event)" v-if="!user.isAdmin">
+            <li v-on:click="menu.changeScreen($event)" v-if="!user.isAdmin()">
                 <router-link to="/dashboard/ajuda">Ajuda</router-link>
             </li>
         </ul>

@@ -84,7 +84,10 @@
             return {
                 configs: configs,
                 auth: auth,
-                utils: utils
+                utils: utils,
+                openAnw: function(anw) {
+                    document.querySelector(anw).classList.toggle('display-question');
+                }
             }
         }
     }; 

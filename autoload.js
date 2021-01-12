@@ -10,6 +10,7 @@
         'https://cdn.jsdelivr.net/npm/vue@2.6.12',
         'https://unpkg.com/vue-router@3.4.3/dist/vue-router.js',
         'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js',
+        'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap',
         'styles/css/fontAwesome/css/all.min.css',
         'styles/css/bootstrap-grid.css',
         'styles/css/app.css',

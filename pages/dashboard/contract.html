@@ -4,9 +4,9 @@
             <h3>Contrato</h3>
         </div>
         <div class="col-12 col-md-6 page-actions">
-            <i v-if="!controller.isEditing && user.isAdmin" v-on:click="controller.edit()" class="fas fa-pencil-alt action-button-table click" title="Editar Contrato"></i>
-            <i v-if="controller.isEditing && user.isAdmin" v-on:click="controller.cancelEdit()" class="fas fa-times action-button-table click" title="Cancelar edição"></i>
-            <i v-if="controller.isEditing && user.isAdmin" v-on:click="controller.save()" class="fas fa-check action-button-table click" title="Salvar"></i>
+            <i v-if="!controller.isEditing && user.isAdmin()" v-on:click="controller.edit()" class="fas fa-pencil-alt action-button-table click" title="Editar Contrato"></i>
+            <i v-if="controller.isEditing && user.isAdmin()" v-on:click="controller.cancelEdit()" class="fas fa-times action-button-table click" title="Cancelar edição"></i>
+            <i v-if="controller.isEditing && user.isAdmin()" v-on:click="controller.save()" class="fas fa-check action-button-table click" title="Salvar"></i>
         </div>
     </div>
     <div class="row">
