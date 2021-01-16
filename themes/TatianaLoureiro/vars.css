@@ -1,5 +1,5 @@
 :root {
-    font-family: "Lato", sans-serif;
+    font-family: "Montserrat", sans-serif;
     /* GENERAL */
     --primary: #d9888a;
     --secondary: #fff;
@@ -10,7 +10,7 @@
     --login-box-bg: var(--card-bg);
     --text-primary: #635a58;
     --links-color: #635a58;
-    --links-weight: bold;
+    --links-weight: 600;
     --text-secondary: #fff;
     --border-radius: 0px;
     --icons-color: var(--primary); 
@@ -67,19 +67,61 @@
     border-top: 3px solid var(--primary);
     border-bottom: 3px solid var(--primary);
 }
+    #HomePage h2 {
+        font-weight: 400;
+        margin: 25px 0px;
+    }
+
+header a {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
 header .header-content {
     padding: 30px 0px;
+}
+
+.home-banner { 
+    background-color: var(--card-bg);
+    margin-top: 30px;
+}
+    .home-banner .text { 
+        padding-right: 10%;
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .home-banner .text h1{
+        font-size: 24px;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+    .home-banner .banner-img { 
+        margin-top: -40px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+.steps {
+    margin: 50px 0px;
+}
+
+.home-register-link {
+    border-bottom: 1px solid var(--primary);
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--primary);
 }
 
 .questions ul {
 	list-style: decimal;
 	text-align: left;
-	font-family: "Lato";
+	font-family: "Montserrat";
 }	
 .questions ul li {
-	font-family: "Lato";
-	padding: 20px 5px;
-    font-size: 20px;
+	padding: 15px 5px;
+    font-size: 15px;
+    font-weight: 500;
 	border-bottom: 1px solid #ede;
 }
 .questions ul li:hover {
@@ -87,9 +129,15 @@ header .header-content {
 	cursor: pointer;
 }
 .questions .answear {
+    font-size: 13px;
+    font-weight: 400;
 	margin: 15px 0px;
 	display:none;
 }
 .display-question {
 	display: block !important;
+}
+
+#HomePage footer {
+    padding: 50px 0px;
 }

@@ -20,9 +20,9 @@
     <main>
         <section class="home-banner">
             <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-6 text">
-                        <h1 class="primary">Circulo Vírtuoso</h1>
+                <div class="row align-items-center">
+                    <div class="col-12 col-lg-6 text">
+                        <h1>Circulo Vírtuoso</h1>
                         <p>
                             Tatiana Loureiro, primeira marca especializada em flats também arrasa 
                             quando assunto é salto médio. Confira nossos produtos da nova coleção
@@ -30,17 +30,15 @@
                             Tatiana Loureiro, primeira marca especializada em flats.
                         </p>
                     </div>
-                    <div class="col-12 col-md-6 banner-img">
-                        <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/banner.webp']" alt="Tatiana Loureiro">
-                    </div>
+                    <div class="col-12 col-lg-6 banner-img"><img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/banner.webp']" alt="Tatiana Loureiro"></div>
                 </div>
             </div>
         </section>
-        <section class="steps container center">
-            <h2>Comece a ganhar divulgando na internet</h2>
+        <section class="container center">
+            <h2 class="primary">Comece a ganhar divulgando na internet</h2>
             <p>Toda venda realizada através dessa divulgação é convertida em comissão para o divulgador</p>
         
-            <div class="row">
+            <div class="row steps">
                 <div class="col">
                     <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/1.png']" alt="Passo 1">
                     <p>
@@ -71,7 +69,10 @@
             </div>
             <div class="row">
                 <div class="col-12 center">
-                    <router-link to='/cadatro'>Faça seu cadastro</router-link>
+                    <router-link to='/cadatro' class="home-register-link">
+                        Faça seu cadastro
+                        <i class="fas fa-chevron-right"></i>
+                    </router-link>
                 </div>
             </div>
         </section>
@@ -122,7 +123,7 @@
         </section>
         <section class="card">
             <div class="container center">
-                <h2>Perguntas Frequentes</h2>
+                <h2 class="primary">Perguntas Frequentes</h2>
                 <div class="row questions">
                     <ul>
                         <li v-on:click="openAnw('#anw-1')">O que preciso para poder me cadastrar no programa Divulgadores {{ configs.name }}?</li>
@@ -190,9 +191,10 @@
     </main>
     <footer class="container center">
         <h2>Se precisar, entre em contato</h2>
-        <p>duvidas@tatianaloureiro.com.br</p>
-        <router-link to="/cadastro">Faça seu cadastro</router-link>
-        <br>
-        <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/logo.png']" alt="Logo">          
-    </footer>
+        <p class="primary">duvidas@tatianaloureiro.com.br</p>
+        <router-link to="/cadastro" class="home-register-link">
+            Faça seu cadastro
+            <i class="fas fa-chevron-right"></i>
+        </router-link>
+   </footer>
 </div>
