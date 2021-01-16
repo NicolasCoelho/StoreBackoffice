@@ -2,4 +2,33 @@
     <div class="dash-title">
         <h3>Dados Cadastrais</h3>
     </div>
+    <div class="row card user-data">
+        <div class="col-12 col-md-6">
+            <span class="primary">Nome:</span>
+            <br>
+            <span>{{ controller.user.name }}</span>
+            <br><br>
+        </div>
+        <div class="col-12 col-md-6">
+            <span class="primary">E-mail:</span>
+            <br>
+            <span>{{ controller.user.email }}</span>
+            <br><br>
+        </div>
+        <div class="col-12 col-md-6">
+            <span class="primary">Cpf:</span>
+            <br>
+            <span>{{ controller.formatCpfCnpj(controller.user.cpfCnpj) }}</span>
+            <br><br>
+        </div>
+        <div class="col-12 col-md-6">
+            <span class="primary">Status</span>
+            <br>
+            <span>{{ controller.formatStatus(controller.user.status) }}</span>
+            <br><br>
+        </div>
+    </div>
+    <div class="row card">
+        <app-registerForm></app-registerForm>
+    </div>
 </div>

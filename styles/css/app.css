@@ -10,7 +10,8 @@ body {
 }
 a {
     text-decoration: none;
-    color: var(--primary);
+    color: var(--links-color);
+    font-weight: var(--links-weight);
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
@@ -160,7 +161,7 @@ select,input, textarea {
 
 .button {
     position: relative;
-    min-height: 50px;
+    min-height: 40px;
     min-width: 75px;
     transition: 1s;
     padding: var(--button-padding);
@@ -196,6 +197,16 @@ select,input, textarea {
     .action-button-table {
         margin: 0px 2px;
     }
+    .button.primary-button:disabled {
+        background-color: var(--button-bg-disabled-primary);
+    }
+    .button.secondary-button:disabled {
+        background-color: var(--button-bg-disabled-secondary);
+    }
+    .button:disabled:hover {
+        cursor: not-allowed;
+    }
+
 .full-banner {
     width: 100%;
     height: auto;
@@ -481,7 +492,6 @@ nav {
   */
 .card {
     width: 100%;
-    height: 100%;
     padding: 20px 25px;
     margin-bottom: 25px;
     position: relative;

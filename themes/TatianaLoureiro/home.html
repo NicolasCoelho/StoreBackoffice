@@ -1,26 +1,14 @@
 <div id="HomePage">
     <header class="container">
         <div class="header-content row justify-content-between align-items-center">
-            <div class="social">
-                <a href="https://www.instagram.com/tatianaloureirooficial/" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/tatianaloureirooficial/" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://api.whatsapp.com/send?1=pt_BR&phone=5511973293667" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                <a href="https://www.tatianaloureiro.com.br/development/onde-encontrar">
-                    Lojas&nbsp;
-                    <i class="fas fa-map-marker-alt"></i>
-                </a>
-            </div>
             <div class="logo">
                 <img :src="[configs.logo.src]" :width="[configs.logo.width]" :height="[configs.logo.height]" alt="Logo">
             </div>
             <div v-if="!auth.isAuthenticaded()" class="account align-right">
                 <router-link to="/cadastro" class="">Faça seu cadastro</router-link>
+                &nbsp;
+                &bull;
+                &nbsp;
                 <router-link to="/dashboard"  class="">Acessar minha área</router-link>
             </div>
             <div v-if="auth.isAuthenticaded()" class="account align-right">

@@ -1,16 +1,19 @@
 <div id="LinksGenerator" class="card">
 	<i class="fa fa-link card-icon right" aria-hidden="true"></i>
 	<h3>Gerar URL de divulgação pra ofertas/campanhas</h3>
+	<p v-if="auth.getTokenData().e === 1" class="primary">
+		Aguarde seu cadastro ser aprovado para poder gerar seus links
+	</p>
 	<div id="message" class="primary"></div>
 	<div class="input-wrapper">
 		<label>Cole abaixo a Url da página que deseja divulgar</label>
-		<input type="text" id="url">
+		<input type="text" id="url" :disabled="auth.getTokenData().e === 1">
 	</div>
 	<div class="input-wrapper">
 		<label>Copie sua Url para divulgação</label>
-		<input type="text" id="targetUrl">
+		<input type="text" id="targetUrl" :disabled="auth.getTokenData().e === 1">
 	</div>
-	<button class="button primary-button" id="generateUrl">Gerar Url</button>
-	<button class="button primary-button" id="shortUrl">Converter para Url curta</button>
-	<button class="button secondary-button" id="copyUrl">Copiar Url</button>
+	<button :disabled="auth.getTokenData().e === 1" class="button primary-button" id="generateUrl">Gerar Url</button>
+	<button :disabled="auth.getTokenData().e === 1" class="button primary-button" id="shortUrl">Converter para Url curta</button>
+	<button :disabled="auth.getTokenData().e === 1" class="button secondary-button" id="copyUrl">Copiar Url</button>
 </div>

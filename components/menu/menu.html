@@ -46,9 +46,7 @@
                 </a>
                 <ul>
                     <li>
-                        <router-link to="/dashboard/dados-cadastrais">
-                            Dados cadastrais
-                        </router-link>
+                        <a :href="'#/dashboard/dados-cadastrais/'+user.getTokenData().u">Dados cadastrais</a> 
                     </li>
                     <li>
                         <router-link to="/dashboard/alterar-senha">

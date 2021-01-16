@@ -390,7 +390,7 @@
                     { path: 'relatorios', component: dashboardReportsPage },
                     { path: 'gerador-de-links', component: dashboardLinksGeneratorPage },
                     { path: 'material-de-treinamento', component: dashboardTrainingPage },
-                    { path: 'dados-cadastrais', component: dashboardCustumerDataPage },
+                    { path: 'dados-cadastrais/:id', component: dashboardUserPage, props: true },
                     { path: 'alterar-senha', component: dashboardChangePasswordPage },
                     { path: 'contrato', component: dashboardContractPage },
                     { path: 'ajuda', component: dasboardHelpPage },

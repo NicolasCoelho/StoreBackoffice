@@ -10,9 +10,9 @@ window.app = (function(){
             home: 'http://127.0.0.1:5500/themes/TatianaLoureiro/home.html',
             favicon:'styles/images/logo-ecomlab.png',
             logo: {
-                src: 'http://tatianaloureiro.com.br/custom/content/themes/TatianaLoureiro/Imagens/logo-tatiana-loureiro.png',
-                width: 250,
-                height: 60
+                src: '/themes/TatianaLoureiro/assets/images/logo.png',
+                width: 308,
+                height: 119
             },
             styleVars: '/themes/TatianaLoureiro/vars.css'
         },

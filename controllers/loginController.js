@@ -3,7 +3,7 @@ window.app.controllers.LoginController = (function(){
         username: {
             data:'',
             hasErrors: false,
-            errorMessage: '* Digite seu nome completo',
+            errorMessage: '* Digite seu e-mail corretamente',
             validate: function () {
                 var data = this.data;
                 this.hasErrors = (

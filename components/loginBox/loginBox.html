@@ -1,5 +1,5 @@
 <div id="LoginBoxComponent">
-    <img src="./styles/images/logo-generico.png" width="150" alt="">
+    <img :src=[configs.logo.src] width="150" alt="Logo">
     <form id="authForm">
         <div class="input-wrapper">
             <label for="username">E-mail ou CPF: </label>
@@ -19,11 +19,15 @@
                 type="password">
             <span class="error" v-if="formInputs.password.hasErrors == true">{{ formInputs.password.errorMessage }}</span>    
         </div>
-        <button v-on:click="submit($router, $event, loading)" class="button primary-button upcase-button">
-            <span v-if="!loading.loading">Entrar</span>
+        <button v-on:click="submit($router, $event, loading)" style="min-width: 130px;" class="button primary-button upcase-button">
+            <span v-if="!loading.loading">Entrar &nbsp; <i class="fas fa-chevron-right" style="position: absolute; right: 20px;top: 12px;"></i></span>
             <app-loading></app-loading>
         </button>
     </form>
-    <router-link to="/cadastro">Esqueceu a senha?</router-link> <br>
-    <span>Ainda não é cadastrado?<router-link to="/cadastro">Cadastre-se agora</router-link></span>
+    <br>
+    <div>
+        <router-link to="/cadastro">Esqueceu a senha?</router-link> 
+        <br>
+        <span>Ainda não é cadastrado?&nbsp;<router-link to="/cadastro">Cadastre-se agora</router-link></span>
+    </div>
 </div>
