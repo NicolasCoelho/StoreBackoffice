@@ -3,11 +3,11 @@ window.app = (function(){
         configs:  {
             appTitle: 'Divulgadores',
             name: 'Tatiana Loureiro',
-            staticUrl: 'http://localhost:5500/',
-            wsUrl: 'http://localhost:3000/',
+            staticUrl: 'https://static.divulgadores.app.br/',
+            wsUrl: 'https://wshlg.divulgadores.app.br/',
             url: 'www.tatianaloureiro.com.br',
-            id: "f99dbab6-e66b-4e2f-a7e8-7366d911ffb1",
-            home: 'http://127.0.0.1:5500/themes/TatianaLoureiro/home.html',
+            id: "d481382e-e153-4dd1-a42c-7f6eeb3ebaf1",
+            home: 'https://static.divulgadores.app.br/themes/TatianaLoureiro/home.html',
             favicon:'styles/images/logo-ecomlab.png',
             logo: {
                 src: '/themes/TatianaLoureiro/assets/images/logo.png',
