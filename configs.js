@@ -3,10 +3,6 @@ window.app = (function(){
         configs:  {
             appTitle: 'Divulgadores',
             name: 'Ecomlab',
-            /*
-            staticUrl: 'https://static.divulgadores.app.br',
-            wsUrl: 'https://wshlg.divulgadores.app.br',
-             */
             staticUrl: 'http://localhost:5500/',
             wsUrl: 'http://localhost:3000/',
             url: 'https://www.ecomlab.com.br',
