@@ -26,7 +26,6 @@ var ws = (function (){
     };
 
     var register = function (payload) {
-        //return new Promise(function(res){setTimeout(function(){res()},1000)})
         return axios.post(apiUrl+"register", payload, {headers}).then(
             function (response) {
                 auth.setToken(response.data.token);
@@ -74,7 +73,11 @@ var ws = (function (){
     }
 
     var verifyUser = function (payload) {
-        return axios.post(apiUrl+"verify/user", payload, {headers});
+        return axios.post(apiUrl+"user/verify", payload, {headers});
+    }
+
+    var getUserShareInfos = function(userId) {
+        return axios.get(apiUrl+"user/"+userId+"/shareInfos", {headers});
     }
 
     var getContract = function (storeId) {
@@ -100,6 +103,14 @@ var ws = (function (){
     var changeSalesStatus = function(id, payload) {
         return axios.put(apiUrl+'salesStatus/'+id, payload, {headers});
     }
+
+    var getSales = function() {
+        return axios.get(apiUrl+'sales', {headers});
+    }
+    
+    var getSalesStats = function() {
+        return axios.get(apiUrl+'sales/stats/all', {headers})
+    }
     
     return {
         apiUrl,
@@ -115,12 +126,15 @@ var ws = (function (){
         changeUser,
         changeUserStatus,
         verifyUser,
+        getUserShareInfos,
         getContract,
         changeContract,
         getStore,
         changeStore,
         changeRequirements,
         getSalesStatus,
-        changeSalesStatus
+        changeSalesStatus,
+        getSales,
+        getSalesStats
     };
 })();

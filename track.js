@@ -61,7 +61,7 @@
                 order.qtd = item.Quantity;
             }
         });        
-        order.total = EasyCheckout.ModelData.Basket.Total;
+        order.total = EasyCheckout.ModelData.Basket.SubTotal;
         try {
             order.orderId = Order.OrderID;
             order.orderNumber = Order.OrderNumber;

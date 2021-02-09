@@ -4,16 +4,25 @@
 	<p v-if="auth.getTokenData().e === 1" class="primary">
 		Aguarde seu cadastro ser aprovado para poder gerar seus links
 	</p>
+	<p v-if="controller.messageFeedback.m !== ''" class="primary">{{ controller.messageFeedback.m }}</p>
 	<div id="message" class="primary"></div>
 	<div class="input-wrapper">
 		<label>Cole abaixo a Url da página que deseja divulgar</label>
-		<input type="text" id="url" :disabled="auth.getTokenData().e === 1">
+		<input 
+			v-model="controller.inputs.url"
+			type="text"
+			id="url"
+			:disabled="auth.getTokenData().e === 1">
 	</div>
 	<div class="input-wrapper">
 		<label>Copie sua Url para divulgação</label>
-		<input type="text" id="targetUrl" :disabled="auth.getTokenData().e === 1">
+		<input 
+			v-model="controller.inputs.targetUrl"
+			type="text"
+			id="targetUrl"
+			:disabled="auth.getTokenData().e === 1">
 	</div>
-	<button :disabled="auth.getTokenData().e === 1" class="button primary-button" id="generateUrl">Gerar Url</button>
-	<button :disabled="auth.getTokenData().e === 1" class="button primary-button" id="shortUrl">Converter para Url curta</button>
-	<button :disabled="auth.getTokenData().e === 1" class="button secondary-button" id="copyUrl">Copiar Url</button>
+	<button :disabled="auth.getTokenData().e === 1" v-on:click="controller.generateUrl()" class="button primary-button" id="generateUrl">Gerar Url</button>
+	<button :disabled="auth.getTokenData().e === 1" v-on:click="controller.shortUrl()" class="button primary-button" id="shortUrl">Converter para Url curta</button>
+	<button :disabled="auth.getTokenData().e === 1" v-on:click="controller.copyUrl()" class="button secondary-button" id="copyUrl">Copiar Url</button>
 </div>

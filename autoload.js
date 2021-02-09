@@ -28,6 +28,8 @@
         'controllers/storeController.js',
         'controllers/requirementsController.js',
         'controllers/salesStatusController.js',
+        'controllers/linksGeneratorController.js',
+        'controllers/salesListController.js',
         'auth.js',
         'utils.js',
         'ws.js'

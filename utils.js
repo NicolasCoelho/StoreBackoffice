@@ -35,11 +35,16 @@ var utils = (function(){
     var formatDate = function(date) {
         return new Date(date).toLocaleString().slice(0,10);
     }
+
+    var formatCurrency = function(value) {
+        return "R$ "+ value.toString().replace('.',',')
+    }
     
     return {
         formatUserStatus,
         formatStoreStatus,
         formatCpfCnpj,
         formatDate,
+        formatCurrency
     }
 })();

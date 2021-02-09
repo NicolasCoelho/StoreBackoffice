@@ -15,6 +15,8 @@
     var storeController = new Object();
     var requirementsController = new Object();
     var salesStatusController = new Object();
+    var linksGeneratorController = new Object();
+    var salesListController = new Object();
 
     Object.assign(loginController, window.app.controllers.LoginController);
     Object.assign(registerController, window.app.controllers.RegisterController);
@@ -28,6 +30,8 @@
     Object.assign(storeController, window.app.controllers.StoreController);
     Object.assign(requirementsController, window.app.controllers.RequirementsController);
     Object.assign(salesStatusController, window.app.controllers.SalesStatusController);
+    Object.assign(linksGeneratorController, window.app.controllers.LinksGeneratorController);
+    Object.assign(salesListController, window.app.controllers.SalesListController);
 
     // Import components 
     var componentsRequests = [];
@@ -102,7 +106,16 @@
             }
         }
     };
-    var dashboardReportsPage = {};
+    var dashboardReportsPage = {
+        data: function () {
+            return {
+                controller: salesListController
+            }
+        },
+        beforeMount: function() {
+            salesListController.getSales();
+        }
+    };
     var dashboardLinksGeneratorPage = {};
     var dashboardTrainingPage = {};
     var dasboardHelpPage = {};
@@ -279,8 +292,11 @@
             props: ['baseUrl'],
             data: function() {
                 return {
-                    currentRoute: window.location.href.split('#')[1]
+                    controller: linksGeneratorController
                 }
+            },
+            beforeMount: function () {
+                linksGeneratorController.getShareInfos();
             },
             template: linksGeneratorComponent
         });
