@@ -7,6 +7,10 @@ var ws = (function (){
         Authorization: "Basic " + localStorage.getItem("Token")
     };
 
+    var updateHeaders = function(newToken) {
+        headers.Authorization = "Basic " + newToken; 
+    }
+
     var getToken = function() {
         return axios.post(apiUrl+"token", {storeId: id}).then(
             function(response) {
@@ -115,6 +119,7 @@ var ws = (function (){
     return {
         apiUrl,
         staticUrl,
+        updateHeaders,
         getToken,
         authenticate,
         register,

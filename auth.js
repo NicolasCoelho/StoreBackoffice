@@ -8,6 +8,7 @@ var auth = (function () {
 
     var setToken = function (tkn) {
         token = tkn;
+        ws.updateHeaders(tkn);
         localStorage.setItem('Token', token);
     }
 
