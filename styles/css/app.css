@@ -283,6 +283,9 @@ form {
     background-color: var(--login-box-bg);
     border-radius: var(--border-radius);
 }
+#LoginBoxComponent .logo-login-container {
+    width: 100%;
+}
 
 #RegisterPage {
     width: 100%;

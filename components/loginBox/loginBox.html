@@ -1,5 +1,7 @@
 <div id="LoginBoxComponent">
-    <img :src=[configs.logo.src] width="150" alt="Logo">
+    <div class="logo-login-container">
+        <img :src=[configs.logo.src] width="150" alt="Logo">
+    </div>
     <form id="authForm">
         <div class="input-wrapper">
             <label for="username">E-mail ou CPF: </label>
@@ -26,8 +28,10 @@
     </form>
     <br>
     <div>
-        <router-link to="/cadastro">Esqueceu a senha?</router-link> 
+        <strong>
+            <router-link to="/cadastro">Esqueceu a senha?</router-link>
+        </strong> 
         <br>
-        <span>Ainda não é cadastrado?&nbsp;<router-link to="/cadastro">Cadastre-se agora</router-link></span>
+        <span>Ainda não é cadastrado?&nbsp; <strong><router-link to="/cadastro">Cadastre-se agora</router-link></strong> </span>
     </div>
 </div>
