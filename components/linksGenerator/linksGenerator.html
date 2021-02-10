@@ -24,5 +24,5 @@
 	</div>
 	<button :disabled="auth.getTokenData().e === 1" v-on:click="controller.generateUrl()" class="button primary-button links-generetor-button" id="generateUrl">Gerar Url</button>
 	<button :disabled="auth.getTokenData().e === 1" v-on:click="controller.shortUrl()" class="button primary-button links-generetor-button" id="shortUrl">Converter para Url curta</button>
-	<button :disabled="auth.getTokenData().e === 1" v-on:click="controller.copyUrl()" class="button secondary-button links-generetor-button" id="copyUrl">Copiar Url</button>
+	<button :disabled="auth.getTokenData().e === 1" v-on:click="controller.copyUrl()" class="button primary-button links-generetor-button" id="copyUrl">Copiar Url</button>
 </div>
