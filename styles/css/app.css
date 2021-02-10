@@ -310,6 +310,10 @@ form {
         }
     }
 
+#LinksGenerator .links-generetor-button {
+     padding: 15px 40px;
+}
+
 #ModalComponent {
     position: fixed;
     margin: auto;
@@ -535,7 +539,7 @@ nav {
     }
     .card-value {
         color: var(--primary);
-        font-weight: 500;
+        font-weight: 300;
         font-size: 32px;
     }
     .card-footer {
@@ -545,12 +549,12 @@ nav {
             color: var(--primary);
         }
     .card.info {
-        background: var(--primary);
-        color: var(--text-secondary);
+        background: var(--card-bg);
+        color: var(--text-primary);
         align-items: center;
     }
         .card.info .icon {
-            color: var(--secondary);
+            color: var(--primary);
             font-size: 80px;
         }
         @media (min-width: 992px) {
