@@ -147,8 +147,8 @@
                 <option value="" selected disabled hidden>Selecione</option>
                 <option 
                     v-for="option in optionsLists.genders" 
-                    v-bind:value="option">
-                    {{ option }}
+                    v-bind:value="option.value">
+                    {{ option.viewValue }}
                 </option>
             </select>
             <span v-if="formInputs.gender.hasErrors == true" class="error">{{ formInputs.gender.errorMessage }}</span>

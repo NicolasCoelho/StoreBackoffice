@@ -17,10 +17,10 @@ window.app.controllers.RegisterController = (function(){
             'Viúvu'
         ],
         genders: [
-            'Selecione',
-            'Masculino',
-            'Feminino',
-            'Indiferente'
+            { viewValue: 'Selecione', value: null},
+            { viewValue: 'Masculino', value: 'M'},
+            { viewValue: 'Feminino', value: 'F'},
+            { viewValue: 'Indiferente', value: 'I'},            
         ],
         literacyLevels: [
             'Selecione',
@@ -805,6 +805,7 @@ window.app.controllers.RegisterController = (function(){
             loading.toogleLoad();
             ws.register(validation.payload).then(
                 function (response) {
+                    auth.setToken(response.data.token);
                     loading.toogleLoad();
                     modal.registerComplete(
                         function(){router.push('dashboard'); modal.toggle()},
