@@ -1,11 +1,27 @@
 window.app.controllers.SalesListController = (function(){
 
+    var salesStatus = [
+        {viewValue: "Realizadas", value: "1"},
+        {viewValue: "Confirmadas", value: "2"},
+        {viewValue: "Completas", value: "3"},
+        {viewValue: "Pagas", value: "4"},
+        {viewValue: "Em revisão", value: "6"},
+        {viewValue: "Canceladas", value: "5"},
+        {viewValue: "Estornadas", value: "7"}
+    ];
+
+    var salesPeriods = [
+        {viewValue: "Último mês", value: "1"},
+        {viewValue: "Últimos 3 meses", value: "2"},
+        {viewValue: "Todo perído", value: "3"}
+    ];
+
     var salesValues = {
         sales: "",
         comission: "",
         confirmed: "",
         canceled: ""
-    }
+    };
 
     var sales = [];
     var table = {
@@ -66,6 +82,8 @@ window.app.controllers.SalesListController = (function(){
         sales,
         table,
         salesValues,
+        salesStatus,
+        salesPeriods,
         getSales,
         setStatusFilter,
         nextPage,

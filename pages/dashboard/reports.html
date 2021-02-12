@@ -4,12 +4,27 @@
             <h3>Relatórios</h3>
         </div>
         <div class="col-12 col-md-6 page-actions">
-            <select style="display: none;" class="custom" v-on:change="controller.setStatusFilter($event)">
-                <option value="" selected>Status</option>
-                <option value="1">Em análise</option>
-                <option value="2">Ativo</option>
-                <option value="3">Dasablitado</option>
-            </select>
+            <div class="select-header-container">
+                <i class="fas fa-eye"></i>
+                <select class="custom header" v-on:change="controller.setStatusFilter($event)">
+                    <option value="" selected>Status</option>
+                    <option 
+                        v-for="status in controller.salesStatus" 
+                        v-bind:value="status.value">
+                        {{ status.viewValue }}
+                    </option>
+                </select>    
+            </div>
+            <div class="select-header-container">
+                <i class="far fa-calendar-alt"></i>
+                <select class="custom header" v-on:change="controller.setStatusFilter($event)">
+                    <option 
+                        v-for="status in controller.salesPeriods" 
+                        v-bind:value="status.value">
+                        {{ status.viewValue }}
+                    </option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="row justify-content-lg-between justify-content-center">

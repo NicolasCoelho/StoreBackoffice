@@ -104,12 +104,26 @@ select,input, textarea {
         margin: 20px 0px;
         text-align: left;
     }
-    
+    .select-header-container {
+        display: flex;
+        align-items: center;
+    }
+    .select-header-container i{
+        margin-left: 20px;
+    }
     select.custom {
         background: none; 
         color: inherit;
         border: none;  
         font-weight: inherit;
+        transition: none;
+    }
+    select.custom.header {
+        padding-left: 5px;
+        background: none; 
+        color: inherit;
+        border: none;  
+        font-weight: bold;
         transition: none;
     }
         select.custom:focus {

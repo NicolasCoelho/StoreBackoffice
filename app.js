@@ -429,6 +429,7 @@
         ];
     
         var router = new VueRouter({
+            mode: "hash",
             routes
         });
 
