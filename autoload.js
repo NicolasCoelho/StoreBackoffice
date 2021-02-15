@@ -9,9 +9,8 @@
     addElement(window.app.configs.styleVars);
 
     var imports = [
-        'https://cdn.jsdelivr.net/npm/vue@2.6.12',
-        'https://unpkg.com/vue-router@3.4.3/dist/vue-router.js',
-        'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js',
+        'dependencies/vue.js',
+        'dependencies/axios.js',
         fontUrl,
         'styles/css/fontAwesome/css/all.min.css',
         'styles/css/bootstrap-grid.css',
@@ -40,7 +39,11 @@
         requests.push(addElement(imports[i]))
     }
     Promise.all(requests).then(function(){
-        addElement('app.js');
+        addElement('dependencies/vue-router.js').then(
+            function(){
+                addElement('app.js');
+            }
+        )
     }).catch(function(){console.log("Erro de conexão. Tente novamente mais tarde!")});
 
     function addElement(src) {
