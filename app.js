@@ -155,7 +155,8 @@
     var dashboardUserPage = {
         data: function() {
             return {
-                controller: userController
+                controller: userController,
+                auth: auth
             }
         },
         beforeMount: function () {

@@ -56,11 +56,7 @@ var ws = (function (){
     }
 
     var getUsers = function(params) {
-        var queryString = ""; 
-        Object.keys(params).forEach(function(key){
-            queryString += queryString === '' ? '?' : '&';
-            queryString +=  key+'='+params[key];   
-        });
+        var queryString = setUrlParams(params);
         return axios.get(apiUrl+'users'+queryString, {headers});
     }
 
@@ -108,17 +104,28 @@ var ws = (function (){
         return axios.put(apiUrl+'salesStatus/'+id, payload, {headers});
     }
 
-    var getSales = function() {
-        return axios.get(apiUrl+'sales', {headers});
+    var getSales = function(params) {
+        var queryString = setUrlParams(params);
+        return axios.get(apiUrl+'sales'+queryString, {headers});
     }
     
     var getSalesStats = function() {
         return axios.get(apiUrl+'sales/stats/all', {headers})
     }
+
+    var setUrlParams = function(params) {
+        var queryString = ""; 
+        Object.keys(params).forEach(function(key){
+            queryString += queryString === '' ? '?' : '&';
+            queryString +=  key+'='+params[key];   
+        });
+        return queryString
+    }
     
     return {
         apiUrl,
         staticUrl,
+        setUrlParams,
         updateHeaders,
         getToken,
         authenticate,
