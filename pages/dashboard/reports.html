@@ -40,7 +40,15 @@
     </div>
     <div class="row">
         <div class="table-container">
-            <table>
+            <div class="center" v-if="controller.table.totalItems === 0">
+                <h2>Você não realizou nenhuma venda nesse período</h2>
+                <p>Aproveite e compartilhe seu link para gerar uma renda extra ;)</p>
+            </div>
+            <div class="center" v-if="controller.table.totalItems === 0 && controller.sales.length === 0">
+                <h2>Não vendas neste perído</h2>
+                <p>Utilize o filtro acima para vizualiar outras vendas ;)</p>
+            </div>
+            <table v-if="controller.table.totalItems > 0 && controller.sales.length > 0">
                 <thead>
                     <tr>
                         <th style="width: 20%;">Nome do produto</th>

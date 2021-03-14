@@ -325,6 +325,7 @@ window.app.controllers.RegisterController = (function(){
             "081-7 – Concórdia Banco S.A.",
             "487 – Deutsche Bank S.A. – Banco Alemão",
             "751 – Dresdner Bank Brasil S.A. – Banco Múltiplo",
+            "260 - Nu Pagamentos S.A.",
             "062 – Hipercard Banco Múltiplo S.A.",
             "492 – ING Bank N.V.",
             "488 – JPMorgan Chase Bank",

@@ -29,6 +29,9 @@
         'controllers/salesStatusController.js',
         'controllers/linksGeneratorController.js',
         'controllers/salesListController.js',
+        'controllers/paymentsListController.js',
+        'controllers/paymentController.js',
+        'controllers/passwordRecoveryController.js',
         'auth.js',
         'utils.js',
         'ws.js'

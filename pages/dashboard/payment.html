@@ -1,0 +1,92 @@
+<div id="PaymentPage">
+    <div class="dash-title row">
+        <div class="col-12 col-md-6">
+            <h3>Pagamento n&deg; {{ controller.payment.id }}</h3>
+        </div>
+        <div class="col-12 col-md-6 page-actions">
+            <i v-on:click="controller.print()" class="fas fa-print action-button-table click" title="Imprimir"></i>
+            <i v-if="auth.isAdmin() && controller.payment.status !== 1" v-on:click="controller.setPaymentStatus(1)" class="far fa-clock action-button-table click" title="Colocar em pendente"></i>
+            <i v-if="auth.isAdmin() && controller.payment.status !== 2" v-on:click="controller.setPaymentStatus(2)" class="fas fa-file-invoice-dollar action-button-table click" title="Pagar"></i>
+            <i v-if="auth.isAdmin() && controller.payment.status !== 3" v-on:click="controller.setPaymentStatus(3)" class="fas fa-search-dollar action-button-table click" title="Colocar em análise"></i>
+            <i v-if="auth.isAdmin() && controller.payment.status !== 4" v-on:click="controller.setPaymentStatus(4)" class="fas fa-ban action-button-table click" title="Bloquear"></i>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card col-12">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <span class="primary">Nome:</span>
+                    <br>
+                    <span>{{ controller.payment.user.name }}</span>
+                    <br><br>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <span class="primary">Cpf:</span>
+                    <br>
+                    <span>{{ utils.formatCpfCnpj(controller.payment.user.cpfCnpj) }}</span>
+                    <br><br>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <span class="primary">Status:</span>
+                    <br>
+                    <span>{{ utils.formatPaymentsStatus(controller.payment.status) }}</span>
+                    <br><br>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <span class="primary">Data do pagamento:</span>
+                    <br>
+                    <span>{{ utils.formatDate(controller.payment.date) }}</span>
+                    <br><br>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <span class="primary">Valor em vendas:</span>
+                    <br>
+                    <span>{{ utils.formatCurrency(controller.payment.salesValue) }}</span>
+                    <br><br>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <span class="primary">Comissão</span>
+                    <br>
+                    <span>{{ utils.formatCurrency(controller.payment.value) }}</span>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Nome do produto</th>
+                        <th style="width: 15%;">Quantidade</th>
+                        <th style="width: 20%;">Valor do produto</th>
+                        <th style="width: 15%;">Total da venda</th>
+                        <th style="width: 15%;">Comissão</th>
+                        <th style="width: 10%;">Id do pedido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="sale in controller.payment.sales">
+                        <td>{{ sale.productName }}</td>
+                        <td>{{ sale.qtd }}</td>
+                        <td>{{ utils.formatCurrency(sale.productPrice) }}</td>
+                        <td>{{ utils.formatCurrency(sale.total) }}</td>
+                        <td>{{ utils.formatCurrency(sale.comission) }}</td>
+                        <td>{{ sale.orderNumber }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="center">
+                        <td><strong>Total:</strong> {{ controller.payment.sales.length }}</td>
+                        <td>{{ controller.salesInfos.qtd }}</td>
+                        <td></td>
+                        <td>{{ utils.formatCurrency(controller.payment.salesValue) }}</td>
+                        <td>{{ utils.formatCurrency(controller.payment.value) }}</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

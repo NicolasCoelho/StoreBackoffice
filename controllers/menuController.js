@@ -8,14 +8,25 @@ window.app.controllers.MenuController = (function(){
             element.classList.remove('active');
         });
         target.classList.toggle('active');
+        closeMenuMobile();
     }
 
     var checkCurrentRoute = function(route) {
         return route === window.location.href.split('#')[1]
     }
+
+    var toggleMobileMenu = function() {
+        document.querySelector("#MenuComponent nav").classList.toggle('menuOpened');
+    }
+
+    var closeMenuMobile = function() {
+        document.querySelector("#MenuComponent nav").classList.remove('menuOpened');
+    }
     
     return {
         changeScreen,
-        checkCurrentRoute
+        checkCurrentRoute,
+        toggleMobileMenu,
+        closeMenuMobile
     }
 })();

@@ -17,6 +17,9 @@
     var salesStatusController = new Object();
     var linksGeneratorController = new Object();
     var salesListController = new Object();
+    var paymentsListController = new Object();
+    var paymentController = new Object();
+    var passwordRecoveryController = new Object();
 
     Object.assign(loginController, window.app.controllers.LoginController);
     Object.assign(registerController, window.app.controllers.RegisterController);
@@ -32,6 +35,9 @@
     Object.assign(salesStatusController, window.app.controllers.SalesStatusController);
     Object.assign(linksGeneratorController, window.app.controllers.LinksGeneratorController);
     Object.assign(salesListController, window.app.controllers.SalesListController);
+    Object.assign(paymentsListController, window.app.controllers.PaymentsListController);
+    Object.assign(paymentController, window.app.controllers.PaymentController);
+    Object.assign(passwordRecoveryController, window.app.controllers.PasswordRecoveryController);
 
     // Import components 
     var componentsRequests = [];
@@ -162,7 +168,41 @@
         beforeMount: function () {
             userController.getUserData(this.$route.params.id, registerController);
         } 
+    };
+    var dashboardPaymentsListPage = {
+        data: function() {
+            return {
+                controller: paymentsListController,
+                utils: utils
+            }
+        },
+        beforeMount: function() {
+            paymentsListController.getPayments();
+        }
+    };
+    var dashboardPaymentPage = {
+        data: function() {
+            return {
+                controller: paymentController,
+                utils: utils,
+                auth: auth
+            }
+        },
+        beforeMount: function() {
+            paymentController.getPayment(this.$route.params.id)
+        }
     }
+    var passwordRecoveryPage = {
+        data: function() {
+            return {
+                controller: passwordRecoveryController,
+                loading: loadingController
+            }
+        },
+        beforeMount: function() {
+            passwordRecoveryController.setRecoveryToken(this.$route.params.token);
+        }
+    };
     
     pagesRequests = [
         axios(configs.home || ws.staticUrl+'./pages/home.html')
@@ -207,6 +247,15 @@
         axios(ws.staticUrl+'pages/dashboard/user.html')
         .then(function(page){dashboardUserPage.template=page.data}),
 
+        axios(ws.staticUrl+'pages/dashboard/paymentsList.html')
+        .then(function(page){dashboardPaymentsListPage.template=page.data}),
+
+        axios(ws.staticUrl+'pages/dashboard/payment.html')
+        .then(function(page){dashboardPaymentPage.template=page.data}),
+
+        axios(ws.staticUrl+'pages/passwordRecovery.html')
+        .then(function(page){passwordRecoveryPage.template=page.data}),
+
         axios(ws.staticUrl+'pages/dashboard/configs.html')
         .then(function(page){dashboardConfigsPage.template=page.data}),        
         
@@ -245,7 +294,8 @@
                 return {
                     formInputs: loginController.formInputs,
                     loading: loadingController,
-                    configs: configs
+                    configs: configs,
+                    controller: loginController
                 }
             },
             methods: {
@@ -377,6 +427,7 @@
         
         var routes = [
             { path: '/', component: homePage },
+            { path: '/recuperar-senha/:token', component: passwordRecoveryPage },
             { path: '/cadastro', component: registerPage,
                 beforeEnter: function(to,from,next){
                     if (auth.isAuthenticaded()) {
@@ -405,6 +456,8 @@
                 children: [
                     { path: '', component: dashboardHomePage },
                     { path: 'relatorios', component: dashboardReportsPage },
+                    { path: 'pagamentos', component: dashboardPaymentsListPage },
+                    { path: 'pagamento/:id', component: dashboardPaymentPage },
                     { path: 'gerador-de-links', component: dashboardLinksGeneratorPage },
                     { path: 'material-de-treinamento', component: dashboardTrainingPage },
                     { path: 'dados-cadastrais/:id', component: dashboardUserPage, props: true },

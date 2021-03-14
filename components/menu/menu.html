@@ -1,6 +1,6 @@
 <div id="MenuComponent">
     <div class="dash-title">
-        <h3><button class="menu-button button"><i class="fa fa-bars"></i></button>&nbsp;Menu</h3>
+        <h3><button class="menu-button button" v-on:click="menu.toggleMobileMenu();"><i class="fa fa-bars"></i></button>&nbsp;Menu</h3>
     </div>
     <nav>
         <ul>
@@ -13,6 +13,11 @@
             <li v-on:click="menu.changeScreen($event)" v-if="user.isAdmin()">
                 <router-link to="/dashboard/usuarios" :class="[menu.checkCurrentRoute('/dashboard/usuarios') ? 'active' : '' ]">
                     Usuários
+                </router-link>
+            </li>
+            <li v-on:click="menu.changeScreen($event)">
+                <router-link to="/dashboard/pagamentos" :class="[menu.checkCurrentRoute('/dashboard/pagamentos') ? 'active' : '' ]">
+                    Pagamentos
                 </router-link>
             </li>
             <li v-on:click="menu.changeScreen($event)" v-if="user.isAdmin()">

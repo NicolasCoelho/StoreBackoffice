@@ -133,6 +133,24 @@ select,input, textarea {
             color: #000;
         }
 
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
 .error {
     color: var(--input-error-color);
     position: absolute;
@@ -291,15 +309,25 @@ form {
     background-color: var(--login-page-bg);
 }
 #LoginBoxComponent {
-    max-width: 450px;
+    max-width: 430px;
     padding: 20px 40px;
     text-align: center;
     background-color: var(--login-box-bg);
     border-radius: var(--border-radius);
 }
-#LoginBoxComponent .logo-login-container {
-    width: 100%;
-}
+    #LoginBoxComponent .logo-login-container {
+        width: 100%;
+    }
+    #LoginBoxComponent #recoveryForm h4 {
+        text-align: left;
+        margin: 20px 0px 0px;
+    }
+    @media(min-width: 556px) {
+        #LoginBoxComponent {
+            max-width: 430px;
+            min-width: 430px;
+        }       
+    }
 
 #RegisterPage {
     width: 100%;
@@ -469,9 +497,12 @@ nav {
 	}
 	@media(max-width: 768px) {
 		nav {
-            width: 100%;
+            max-width: 100%;
 			display: none;
 		}
+        nav.menuOpened {
+            display: block;
+        }
 		.menu-button {
 			display: inline-block;
 		}
@@ -593,3 +624,18 @@ nav {
                 margin-bottom: 20px;
             }
         }
+
+@media print {
+    #MenuComponent,
+    #HeaderComponent .align-items-center .align-right,
+    .page-actions i{
+        display: none;
+    }
+    #HeaderComponent .align-items-center .col-12:nth-child(1) {
+        text-align: center;
+    }
+    #PaymentPage .card .row .col-12{
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+}

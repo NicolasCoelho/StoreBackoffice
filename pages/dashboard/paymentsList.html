@@ -1,0 +1,91 @@
+<div id="PaymentsListPage">
+    <div class="dash-title row">
+        <div class="col-12 col-md-6">
+            <h3>Pagamentos</h3>
+        </div>
+        <div class="col-12 col-md-6 page-actions">
+            <div class="select-header-container">
+                <i class="fas fa-eye"></i>
+                <select class="custom header" v-on:change="controller.setFilter($event)">
+                    <option value="" selected>Todos</option>
+                    <option 
+                        v-for="status in controller.paymentsStatus" 
+                        v-bind:value="status.value">
+                        {{ status.viewValue }}
+                    </option>
+                </select>    
+            </div>
+            <div class="select-header-container">
+                <i class="far fa-calendar-alt"></i>
+                <select class="custom header" v-on:change="controller.setFilter($event)">
+                    <option 
+                        v-for="status in controller.paymentsPeriods" 
+                        v-bind:value="status.value">
+                        {{ status.viewValue }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-lg-between justify-content-center">
+        <div class="col col-12 col-lg-4 small-card">
+            <app-card icon="fas fa-money-bill" title="Transações" v-bind:value="controller.table.totalItems"></app-card>
+        </div>
+        <div class="col col-12 col-lg-4 small-card">
+            <app-card icon="far fa-chart-bar" title="Valores a receber" value="0"></app-card>
+        </div>
+        <div class="col col-12 col-lg-4 small-card">
+            <app-card icon="fas fa-coins" title="Valores pagos" value="0"></app-card>
+        </div>
+    </div>
+    <div class="row">
+        <div class="table-container">
+            <div class="center" v-if="controller.table.totalItems === 0">
+                <h2>Não há nenhum pagamento registrado =(</h2>
+                <p>Aproveite e compartilhe seu link para gerar uma renda extra ;)</p>
+            </div>
+            <div class="center" v-if="controller.table.totalItems === 0 && controller.payments.length === 0">
+                <h2>Sem pagamentos neste perído</h2>
+                <p>Utilize o filtro acima para vizualiar outras registros ;)</p>
+            </div>
+            <table v-if="controller.table.totalItems > 0 && controller.payments.length > 0">
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">id</th>
+                        <th style="width: 15%;">Status</th>
+                        <th style="width: 15%;">Valor</th>
+                        <th style="width: 20%;">Data de pagamento</th>
+                        <th style="width: 20%;">Data de criação</th>
+                        <th style="width: 20%;">Última atualização</th>
+                        <th style="width: 5%;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="pay in controller.payments">
+                        <td>{{ pay.id }}</td>
+                        <td>{{ utils.formatPaymentsStatus(pay.status) }}</td>
+                        <td>{{ utils.formatCurrency(pay.value) }}</td>
+                        <td>{{ utils.formatDate(pay.date) }}</td>
+                        <td>{{ utils.formatDate(pay.createdAt) }}</td>
+                        <td>{{ utils.formatDate(pay.updatedAt) }}</td>
+                        <td>
+                            <i v-on:click="controller.details($router, pay.id)" class="fas fas fa-receipt action-button-table click" title="Ver detalhes"></i>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"><strong>Total:</strong> {{ controller.table.totalItems }}</td>
+                        <td colspan="5" style="text-align: right;">
+                            <i class="fas fa-chevron-left" title="Página anterior" v-on:click="controller.previousPage()"></i>
+                            &nbsp;
+                            Pagina {{ controller.table.currentPage }} de {{ controller.table.totalPages }}
+                            &nbsp;
+                            <i class="fas fa-chevron-right" title="Próxima página" v-on:click="controller.nextPage()"></i>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

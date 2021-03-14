@@ -28,6 +28,21 @@ var utils = (function(){
         }
     }
 
+    var formatPaymentsStatus = function(status) {
+        switch(status) {
+            case 1: 
+                return "Pendente"
+            case 2: 
+                return "Pago"
+            case 3: 
+                return "Em análise"
+            case 4:
+                return "Bloqueado"
+            default:
+                return "?" 
+        }
+    }
+
     var formatCpfCnpj = function(value) {
         return value.toString().replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})$/,"$1.$2.$3-$4");
     }
@@ -39,12 +54,19 @@ var utils = (function(){
     var formatCurrency = function(value) {
         return "R$ "+ value.toString().replace('.',',')
     }
+
+    var handleGenericError = function(err) {
+        console.error(err);
+        window.alert("Erro inesperado. Tente novamente mais tarde!");
+    }
     
     return {
         formatUserStatus,
         formatStoreStatus,
+        formatPaymentsStatus,
         formatCpfCnpj,
         formatDate,
-        formatCurrency
+        formatCurrency,
+        handleGenericError
     }
 })();
