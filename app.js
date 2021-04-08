@@ -14,7 +14,6 @@
     var configsController = new Object();
     var storeController = new Object();
     var requirementsController = new Object();
-    var salesStatusController = new Object();
     var linksGeneratorController = new Object();
     var salesListController = new Object();
     var paymentsListController = new Object();
@@ -32,7 +31,6 @@
     Object.assign(configsController, window.app.controllers.ConfigsController);
     Object.assign(storeController, window.app.controllers.StoreController);
     Object.assign(requirementsController, window.app.controllers.RequirementsController);
-    Object.assign(salesStatusController, window.app.controllers.SalesStatusController);
     Object.assign(linksGeneratorController, window.app.controllers.LinksGeneratorController);
     Object.assign(salesListController, window.app.controllers.SalesListController);
     Object.assign(paymentsListController, window.app.controllers.PaymentsListController);
@@ -79,9 +77,6 @@
 
         axios(ws.staticUrl+'components/requirements/requirements.html')
         .then(function(res){requirementsComponent=res.data}),
-        
-        axios(ws.staticUrl+'components/salesStatus/salesStatus.html')
-        .then(function(res){salesStatusComponent=res.data}),
 
         axios(ws.staticUrl+'components/modal/modal.html')
         .then(function(res){modalComponent=res.data})
@@ -411,18 +406,6 @@
                 requirementsController.getRequirements();
             },
             template: requirementsComponent
-        });
-        Vue.component('app-salesStatus', {
-            data: function() {
-                return {
-                    controller: salesStatusController,
-                    loading: loadingController
-                }
-            },
-            beforeMount: function () {
-                salesStatusController.getSalesStatus();
-            },
-            template: salesStatusComponent
         });
         
         var routes = [

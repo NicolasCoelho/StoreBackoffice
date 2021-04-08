@@ -10,31 +10,30 @@ window.app.controllers.RegisterController = (function(){
 
     var optionsLists = {
         maritalStatus: [
-            'Selecione',
-            'Solteiro',
-            'Casado',
-            'Divoricado',
-            'Viúvu'
+            { viewValue: 'Selecione', value: null },
+            { viewValue: 'Solteiro', value: "S" },
+            { viewValue: 'Casado', value: "C" },
+            { viewValue: 'Divoricado', value: "D" },
+            { viewValue: 'Viúvu', value: "V" },
         ],
         genders: [
-            { viewValue: 'Selecione', value: null},
+            { viewValue: 'Selecione', value: ''},
             { viewValue: 'Masculino', value: 'M'},
             { viewValue: 'Feminino', value: 'F'},
             { viewValue: 'Indiferente', value: 'I'},            
         ],
         literacyLevels: [
-            'Selecione',
-            'Analfabeto',
-            'Ensino fundamental incompleto',
-            'Ensino fundamental completo',
-            'Ensino médio incompleto',
-            'Ensino médio completo',
-            'Superior incompleto',
-            'Superior completo',
-            'Pós-graduado',
-            'Mestrado',
-            'Mestrado',
-            'Pós-Doutorado'
+            { viewValue: 'Selecione', value: null},
+            { viewValue: 'Analfabeto', value: 'A'},
+            { viewValue: 'Ensino fundamental incompleto', value: "EFI"},
+            { viewValue: 'Ensino fundamental completo', value: "EFC"},
+            { viewValue: 'Ensino médio incompleto', value: "EMI"},
+            { viewValue: 'Ensino médio completo', value: "EMC"},
+            { viewValue: 'Superior incompleto', value: "SI"},
+            { viewValue: 'Superior completo', value: 'SC'},
+            { viewValue: 'Pós-graduado', value: "PG"},
+            { viewValue: 'Mestrado', value: "M"},
+            { viewValue: 'Doutorado', value: "D"},
         ],
         states: [
             {label: "Selecione", value: null },
@@ -526,7 +525,7 @@ window.app.controllers.RegisterController = (function(){
             validate: function () {
                 var data = this.data;
                 this.hasErrors = (
-                    data.length === 0
+                    data.length < 10
                 );
                 return !this.hasErrors;
             },
@@ -535,6 +534,11 @@ window.app.controllers.RegisterController = (function(){
                 this.data = this.data.replace(/(\d{2})(\d)/,"$1/$2");
                 this.data = this.data.replace(/(\d{2})(\d)/,"$1/$2");
                 this.data = this.data.replace(/(\d{2})(\d{2})$/,"$1$2");
+            },
+            unmask: function () {
+                var formated = this.data.split('/');
+                formated = formated[1]+"-"+formated[0]+"-"+formated[2];
+                return formated;
             }
         },
         nationality: {
@@ -572,6 +576,7 @@ window.app.controllers.RegisterController = (function(){
             validate: function () {
                 var data = this.data;
                 this.hasErrors = (
+                    data === null ||
                     data.length === 0
                 );
                 return !this.hasErrors;
@@ -709,6 +714,20 @@ window.app.controllers.RegisterController = (function(){
                 this.hasErrors = (
                     data.length === 0 ||
                     data === 'Selecione seu banco'
+                );
+                return !this.hasErrors;
+            }
+        },
+        pix: {
+            data:'',
+            required: false,
+            hasErrors: false,
+            errorMessage: 'Campo Obrigatório',
+            validate: function () {
+                var data = this.data;
+                this.hasErrors = (
+                    data.length === 0 ||
+                    data === 'Digite seu pix'
                 );
                 return !this.hasErrors;
             }
@@ -865,7 +884,11 @@ window.app.controllers.RegisterController = (function(){
             if (user[key] !== null && formInputs[key] !== undefined) {
                 formInputs[key].data = user[key];
                 if (formInputs[key].mask !== undefined) {
-                    formInputs[key].mask();
+                    if (key === 'birthdate') {
+                        formInputs[key].data = new Date(formInputs[key].data).toLocaleDateString()
+                    } else {
+                        formInputs[key].mask();
+                    } 
                 }
             }
         })

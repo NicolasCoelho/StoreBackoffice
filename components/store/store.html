@@ -11,7 +11,7 @@
                 <div class="col-12 col-md-6">
                     <span class="primary">Url:</span>
                     <br>
-                    <span>{{ controller.store.url }}</span>
+                    <span>{{ controller.store.storeUrl }}</span>
                     <br><br>
                 </div>
                 <div class="col-12 col-md-6">
@@ -45,6 +45,15 @@
                     </option>
                 </select>
                 <span v-if="controller.formInputs.allowRegister.hasErrors == true" class="error">{{ controller.formInputs.allowRegister.errorMessage }}</span>
+            </div>
+            <div class="input-wrapper" v-if="controller.formInputs.appTitle.required">
+                <label for="appTitle">Título da página</label>
+                <input 
+                    v-on:focusout="controller.formInputs.appTitle.validate()"
+                    v-model="controller.formInputs.appTitle.data"
+                    id="appTitle">
+                </select>
+                <span v-if="controller.formInputs.appTitle.hasErrors == true" class="error">{{ controller.formInputs.appTitle.errorMessage }}</span>
             </div>
             <div class="input-wrapper" v-if="controller.formInputs.comissionType.required">
                 <label for="comissionType">Tipo de comissão:</label>
@@ -86,6 +95,21 @@
                     </option>
                 </select>
                 <span v-if="controller.formInputs.protectedRegister.hasErrors == true" class="error">{{ controller.formInputs.protectedRegister.errorMessage }}</span>
+            </div>
+            <div class="input-wrapper" v-if="controller.formInputs.paymentTrigger.required">
+                <label for="paymentTrigger">Gatilho para pagamento:</label>
+                <select 
+                    v-on:focusout="controller.formInputs.paymentTrigger.validate()"
+                    v-model="controller.formInputs.paymentTrigger.data"
+                    id="paymentTrigger">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.optionsList.paymentTriggers" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+                <span v-if="controller.formInputs.paymentTrigger.hasErrors == true" class="error">{{ controller.formInputs.paymentTrigger.errorMessage }}</span>
             </div>
             <div class="input-wrapper" v-if="controller.formInputs.comissionValue.required">
                 <label for="comissionValue">Valor da comissão:</label>

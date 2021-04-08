@@ -6,7 +6,6 @@
         <ul class="option-bar">
             <li v-bind:class="{selected: controller.page == 1}" v-on:click="controller.changeUserView($event, 1)">Loja</li>
             <li v-bind:class="{selected: controller.page == 2}" v-on:click="controller.changeUserView($event, 2)">Dados de cadastro</li>
-            <li v-bind:class="{selected: controller.page == 3}" v-on:click="controller.changeUserView($event, 3)">Status de venda</li>
         </ul>
         <div class="col-12 store-data" v-if="controller.page == 1">
             <p class="center">
@@ -20,12 +19,6 @@
                Decida quais dados são obrigatórios no cadastro de usuários.
             </p>
             <app-requirements></app-requirements>
-        </div>
-        <div class="col-12 sales-data" v-if="controller.page == 3">
-            <p class="center">
-                Ajuste os ID's correspondetes aos status das vendas.
-            </p>
-            <app-salesStatus></app-salesStatus>
         </div>
     </div>
 </div>
