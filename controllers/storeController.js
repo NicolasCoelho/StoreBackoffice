@@ -8,11 +8,20 @@ window.app.controllers.StoreController = (function(){
         comission: [
             {label: "Porcentagem", value: 1},
             {label: "Valor fixo", value: 2},   
+        ],
+        paymentTriggers: [
+            { label: "Venda Realizada", value: 1 },
+            { label: "Pagamento Aprovado", value: 2 },
+            { label: "Pedido Entregue", value: 3 },
+            { label: "Pedido Finalizado", value: 4 },
+            
         ]
     };
 
+
     var store = {
         allowRegister: true,
+        appTitle: '',
         comissionType: 1,
         comissionValue: "0",
         createdAt: "",
@@ -21,6 +30,7 @@ window.app.controllers.StoreController = (function(){
         minimumValue: "0",
         name: "",
         paymentTime: 0,
+        paymentTrigger: 0,
         protectedRegister: true,
         publicId: "",
         status: 1,
@@ -136,6 +146,35 @@ window.app.controllers.StoreController = (function(){
                 var data = this.data;
                 this.hasErrors = (
                     data === ''
+                );
+                return !this.hasErrors;
+            }
+        },
+        appTitle:  {
+            data:'',
+            required: true,
+            hasErrors: false,
+            errorMessage: '* Campo Obrigatório',
+            validate: function () {
+                var data = this.data;
+                this.hasErrors = (
+                    data === ''
+                );
+                return !this.hasErrors;
+            }
+        },
+        paymentTrigger: {
+            data:'',
+            required: true,
+            hasErrors: false,
+            errorMessage: '* Campo Obrigatório',
+            validate: function () {
+                var data = this.data;
+                this.hasErrors = (
+                    data === '' ||
+                    data === 0  ||
+                    data < 1    ||
+                    data > 4
                 );
                 return !this.hasErrors;
             }

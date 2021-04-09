@@ -72,6 +72,10 @@ var ws = (function (){
         return axios.put(apiUrl+'user/'+userId+'/changeStatus', payload, {headers});
     }
 
+    var denyUserRegister = function(userId, payload) {
+        return axios.post(apiUrl+'user/'+userId+'/register/deny', payload, {headers})
+    }
+
     var verifyUser = function (payload) {
         return axios.post(apiUrl+"user/verify", payload, {headers});
     }
@@ -121,6 +125,27 @@ var ws = (function (){
         });
         return queryString
     }
+
+    var getPayments = function(params) {
+        var queryString = setUrlParams(params);
+        return axios.get(apiUrl+'payments'+queryString, {headers});
+    }
+
+    var getPaymentDetails = function(paymentId) {
+        return axios.get(apiUrl+'payment/'+paymentId, {headers});
+    }
+
+    var changePaymentStatus = function(paymentId, payload) {
+        return axios.put(apiUrl+'payment/'+paymentId+'/changeStatus', payload, {headers});
+    }
+
+    var sendRecoveryEmail = function(payload) {
+        return axios.post(apiUrl+"auth/recovery", payload, {headers});
+    }
+
+    var changePassword = function(payload) {
+        return axios.post(apiUrl+"auth/changePassword", payload, {headers});
+    }
     
     return {
         apiUrl,
@@ -137,6 +162,7 @@ var ws = (function (){
         getUserByPublicId,
         changeUser,
         changeUserStatus,
+        denyUserRegister,
         verifyUser,
         getUserShareInfos,
         getContract,
@@ -147,6 +173,11 @@ var ws = (function (){
         getSalesStatus,
         changeSalesStatus,
         getSales,
-        getSalesStats
+        getSalesStats,
+        getPayments,
+        getPaymentDetails,
+        changePaymentStatus,
+        sendRecoveryEmail,
+        changePassword
     };
 })();

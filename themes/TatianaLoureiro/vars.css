@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 /* Custom Home */
 #HomePage {
     border-top: 4px solid #635a58;
     border-bottom: 4px solid #635a58;
+}
+#HomePage header a{
+    font-weight: 700;
 }
 #HomePage p {
     font-size: 15px;
@@ -13,6 +15,20 @@
     }
 #HomePage .home-card {
     max-width: 350px;
+}
+#HomePage .home-card h3 {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-weight: 300;
+}
+#HomePage .home-card h3 img{
+    margin: 0px 20px 0px -30px;
+}
+#HomePage .home-card p {
+    font-size: 14px;
 }
 @media(max-width: 992px) {
     #HomePage .home-card {
@@ -45,15 +61,38 @@ header .header-content {
     }
     .home-banner p {
         font-family: 'EB Garamond', serif;
-        font-size: 20px;
+        font-size: 20px !important;
         letter-spacing: 0.3px;
         margin: 25px 0px;
         line-height: 25px;
+        font-weight: 500;
+    }
+    .home-banner .banner-img img {
+        max-width: 100%; 
     }
     .home-banner .banner-img { 
         margin-top: -40px;
         display: flex;
         justify-content: flex-end;
+    }
+    @media(max-width:992px) {
+        .home-banner .banner-img {
+            margin-top: 0px;
+            justify-content: center;
+        }
+        .home-banner .text {
+             padding: 0;
+             text-align:center;
+         }
+         #HomePage header .logo {
+            width: 100%;
+            text-align:center;
+        }
+          #HomePage header .account {
+              width: 100%;
+              text-align: center;
+              padding-top: 40px;
+         }
     }
 
 .steps {
@@ -99,4 +138,7 @@ header .header-content {
 
 #HomePage footer {
     padding: 50px 0px 150px;
+}
+#LoginBoxComponent .logo-login-container {
+     text-align: left;
 }

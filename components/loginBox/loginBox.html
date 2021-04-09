@@ -2,36 +2,66 @@
     <div class="logo-login-container">
         <img :src=[configs.logo.src] width="150" alt="Logo">
     </div>
-    <form id="authForm">
-        <div class="input-wrapper">
-            <label for="username">E-mail ou CPF: </label>
-            <input 
-                v-on:focusout="formInputs.username.validate()" 
-                @input="formInputs.username.data = $event.target.value"
-                id="username" 
-                type="text">
-            <span v-if="formInputs.username.hasErrors == true" class="error">{{ formInputs.username.errorMessage }}</span>    
-        </div>
-        <div class="input-wrapper">
-            <label for="password">Senha: </label>
-            <input
-                v-on:focusout="formInputs.password.validate(formInputs.password.data)" 
-                @input="formInputs.password.data = $event.target.value" 
-                id="passwword"
-                type="password">
-            <span class="error" v-if="formInputs.password.hasErrors == true">{{ formInputs.password.errorMessage }}</span>    
-        </div>
-        <button v-on:click="submit($router, $event, loading)" style="min-width: 130px;" class="button primary-button upcase-button">
-            <span v-if="!loading.loading">Entrar &nbsp; <i class="fas fa-chevron-right" style="position: absolute; right: 20px;top: 12px;"></i></span>
-            <app-loading></app-loading>
-        </button>
-    </form>
-    <br>
-    <div>
-        <strong>
-            <router-link to="/cadastro">Esqueceu a senha?</router-link>
-        </strong> 
+    <div class="login-container" v-if="!controller.isRecovery">
+        <form id="authForm">
+            <div class="input-wrapper">
+                <label for="username">E-mail ou CPF: </label>
+                <input 
+                    v-on:focusout="formInputs.username.validate()" 
+                    @input="formInputs.username.data = $event.target.value"
+                    id="username" 
+                    type="text">
+                <span v-if="formInputs.username.hasErrors == true" class="error">{{ formInputs.username.errorMessage }}</span>    
+            </div>
+            <div class="input-wrapper">
+                <label for="password">Senha: </label>
+                <input
+                    v-on:focusout="formInputs.password.validate(formInputs.password.data)" 
+                    @input="formInputs.password.data = $event.target.value" 
+                    id="passwword"
+                    type="password">
+                <span class="error" v-if="formInputs.password.hasErrors == true">{{ formInputs.password.errorMessage }}</span>    
+            </div>
+            <button v-on:click="submit($router, $event, loading)" style="min-width: 130px;" class="button primary-button upcase-button">
+                <span v-if="!loading.loading">Entrar &nbsp; <i class="fas fa-chevron-right" style="position: absolute; right: 20px;top: 12px;"></i></span>
+                <app-loading></app-loading>
+            </button>
+        </form>
         <br>
-        <span>Ainda não é cadastrado?&nbsp; <strong><router-link to="/cadastro">Cadastre-se agora</router-link></strong> </span>
+        <div>
+            <strong>
+                <a href="" v-on:click="controller.setRecovery($event)">Esqueceu a senha?</a>
+            </strong> 
+            <br>
+            <span>Ainda não é cadastrado?&nbsp; <strong><router-link to="/cadastro">Cadastre-se agora</router-link></strong> </span>
+        </div>    
+    </div>
+    <div class="recovery-container" v-if="controller.isRecovery">
+        <h4 class="primary" v-if="controller.recoveryMessage.s">
+            Enviamos as intruções para alterar sua senha. <br>
+            Por favor verifique sua caixa de emails e não esqueça de conferir a área de spans.
+        </h4>
+        <form id="recoveryForm" v-if="!controller.recoveryMessage.s">
+            <h4>Informe seu e-mail e enviaremos instruções para você alterar sua senha.</h4>
+            <div class="input-wrapper">
+                <label for="email">E-mail: </label>
+                <input
+                    v-on:focusout="controller.recoveryFormInputs.email.validate(controller.recoveryFormInputs.email.data)" 
+                    @input="controller.recoveryFormInputs.email.data = $event.target.value" 
+                    id="email"
+                    type="email">
+                <span class="error" v-if="controller.recoveryFormInputs.email.hasErrors == true">{{ controller.recoveryFormInputs.email.errorMessage }}</span>    
+            </div>
+            <button v-on:click="controller.recover(controller.recoveryMessage, $event, loading)" style="min-width: 130px;" class="button primary-button upcase-button">
+                <span v-if="!loading.loading">Enviar &nbsp; <i class="fas fa-chevron-right" style="position: absolute; right: 20px;top: 12px;"></i></span>
+                <app-loading></app-loading>
+            </button>
+        </form>
+        <br>
+        <div>
+            <strong>
+                <a href="" v-on:click="controller.setRecovery($event)">Voltar</a>
+            </strong>
+        </div>
     </div>
 </div>

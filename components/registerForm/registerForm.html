@@ -132,8 +132,8 @@
                 <option value="" selected disabled hidden>Selecione</option>
                 <option 
                     v-for="option in optionsLists.maritalStatus" 
-                    v-bind:value="option">
-                    {{ option }}
+                    v-bind:value="option.value">
+                    {{ option.viewValue }}
                 </option>
             </select>
             <span v-if="formInputs.maritalStatus.hasErrors == true" class="error">{{ formInputs.maritalStatus.errorMessage }}</span>
@@ -162,8 +162,8 @@
                 <option value="" selected disabled hidden>Selecione</option>
                 <option 
                     v-for="option in optionsLists.literacyLevels" 
-                    v-bind:value="option">
-                    {{ option }}
+                    v-bind:value="option.value">
+                    {{ option.viewValue }}
                 </option>
             </select>
             <span v-if="formInputs.literacy.hasErrors == true" class="error">{{ formInputs.literacy.errorMessage }}</span>
@@ -256,6 +256,14 @@
                 v-model="formInputs.account.data"
                 id="account">
             <span v-if="formInputs.account.hasErrors == true" class="error">{{ formInputs.account.errorMessage }}</span>
+        </div>
+        <div class="input-wrapper" v-if="formInputs.pix.required">
+            <label for="pix">Pix:</label>
+            <input
+                v-on:focusout="formInputs.pix.validate()" 
+                v-model="formInputs.pix.data"
+                id="pix">
+            <span v-if="formInputs.pix.hasErrors == true" class="error">{{ formInputs.pix.errorMessage }}</span>
         </div>
         <div class="input-wrapper" v-if="formInputs.accountOwner.required">
             <label for="accountOwner">Titular:</label>

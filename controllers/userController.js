@@ -105,6 +105,23 @@ window.app.controllers.UserController = (function(){
         });
     }
 
+    var denyRegister = function(userId) {
+        var msg = window.prompt("Digite as pendencias deste cadastro:");
+        if (msg !== null || msg !== '') {
+            var payload = {
+                message: msg
+            };
+            ws.denyUserRegister(userId, payload).then(
+                function(response) {
+                    window.location.reload();      
+                }
+            ).catch(function(err) {
+                console.error(err);
+                alert("Erro inesperado. Tente novamente mais tarde!");
+            });
+        }
+    }
+
     var changeUserView = function($event, dataPage) {
         this.isDataPage = dataPage;
         $event.target.parentElement.querySelectorAll('li').forEach(function(ele){ele.classList.remove('selected')});
@@ -120,6 +137,7 @@ window.app.controllers.UserController = (function(){
         enableUser,
         disableUser,
         setUserNew,
+        denyRegister,
         changeUserView,
         getUserData
     };

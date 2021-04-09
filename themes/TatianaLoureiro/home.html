@@ -1,200 +1,198 @@
 <div id="HomePage">
-    <header class="container">
-        <div class="header-content row justify-content-between align-items-center">
-            <div class="logo">
-                <img :src="[configs.logo.src]" :width="[configs.logo.width]" :height="[configs.logo.height]" alt="Logo">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+        <header class="container">
+            <div class="header-content row justify-content-between align-items-center">
+                <div class="logo">
+                    <img :src="[configs.logo.src]" :width="[configs.logo.width]" :height="[configs.logo.height]" alt="Logo">
+                </div>
+                <div v-if="!auth.isAuthenticaded()" class="account align-right">
+                    <router-link to="/cadastro" class="">Faça seu cadastro</router-link>
+                    &nbsp;
+                    &bull;
+                    &nbsp;
+                    <router-link to="/dashboard"  class="">Acessar minha área</router-link>
+                </div>
+                <div v-if="auth.isAuthenticaded()" class="account align-right">
+                    <span v-on:click="myAccout($router)" style="margin: 0px 20px;" class="click"><i class="far fa-user-circle"></i> {{ auth.getTokenData().n }}</span>
+                    <span v-on:click="logOut($router)" class="click"><i class="fas fa-sign-out-alt"></i> LogOut</span>
+                </div>
             </div>
-            <div v-if="!auth.isAuthenticaded()" class="account align-right">
-                <router-link to="/cadastro" class="">Faça seu cadastro</router-link>
-                &nbsp;
-                &bull;
-                &nbsp;
-                <router-link to="/dashboard"  class="">Acessar minha área</router-link>
-            </div>
-            <div v-if="auth.isAuthenticaded()" class="account align-right">
-                <span v-on:click="myAccout($router)" style="margin: 0px 20px;" class="click"><i class="far fa-user-circle"></i> {{ auth.getTokenData().n }}</span>
-                <span v-on:click="logOut($router)" class="click"><i class="fas fa-sign-out-alt"></i> LogOut</span>
-            </div>
-        </div>
-    </header>
-    <main>
-        <section class="home-banner">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-12 col-lg-6 text">
-                        <h1>Circulo Vírtuoso</h1>
+        </header>
+        <main>
+            <section class="home-banner">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-lg-6 text">
+                            <h1>Círculo Virtuoso</h1>
+                            <p>
+                                Tatiana Loureiro, primeira marca especializada em flats também arrasa 
+                                quando assunto é salto médio. Confira nossos produtos da nova coleção
+                                e celebre a sua individualidade com muito estilo, elegância e conforto!
+                                Tatiana Loureiro, primeira marca especializada em flats.
+                            </p>
+                        </div>
+                        <div class="col-12 col-lg-6 banner-img"><img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/banner.webp']" alt="Tatiana Loureiro"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="container center">
+                <h2 class="primary">Comece a ganhar divulgando na internet</h2>
+                <p>Toda venda realizada através dessa divulgação é convertida em comissão para o divulgador</p>
+            
+                <div class="row steps">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/1.png']" alt="Passo 1">
                         <p>
-                            Tatiana Loureiro, primeira marca especializada em flats também arrasa 
-                            quando assunto é salto médio. Confira nossos produtos da nova coleção
-                            e celebre a sua individualidade com muito estilo, elegância e conforto!
-                            Tatiana Loureiro, primeira marca especializada em flats.
+                            Cadastre-se em<br>poucos minutos
                         </p>
                     </div>
-                    <div class="col-12 col-lg-6 banner-img"><img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/banner.webp']" alt="Tatiana Loureiro"></div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/2.png']" alt="Passo 2">
+                        <p>
+                            Após análise você poderá<br>iniciar sua divulgação
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/3.png']" alt="Passo 3">
+                        <p>
+                            Você vende e nós cuidamos<br>da cobrança e entrega
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/4.png']" alt="Passo 4">
+                        <p>
+                            Você recebe a comissão<br>diretamente em sua conta
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <section class="container center">
-            <h2 class="primary">Comece a ganhar divulgando na internet</h2>
-            <p>Toda venda realizada através dessa divulgação é convertida em comissão para o divulgador</p>
-        
-            <div class="row steps">
-                <div class="col">
-                    <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/1.png']" alt="Passo 1">
-                    <p>
-                        Cadastre-se em poucos minutos
-                    </p>
+                <div class="row" style="padding: 0px 0px 50px;">
+                    <div class="col-12 center">
+                        <router-link to='/cadastro' class="home-register-link">
+                            Faça seu cadastro &nbsp;
+                            <i class="fas fa-chevron-right"></i>
+                        </router-link>
+                    </div>
                 </div>
-                <div class="col">
-                    <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/2.png']" alt="Passo 2">
-                    <p>
-                        Após análise você poderá
-                        iniciar sua divulgação
-                    </p>
+            </section>
+            <section class="container center">
+                <h2 style="font-weight: 700;">É simples e rápido</h2>
+                <p>É simples e rápido para começar a ganhar
+    Vender é simples, temos diversas opções e variedades de produtos.</p>
+                <div class="row justify-content-between" style="padding: 50px 0px;">
+                    <div class="col-12 card  home-card">
+                        <h3> 
+                            <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/clip.png']" alt="Clip">
+                            Gerador de link
+                        </h3>
+                        <p  style="margin: 30px 0px 25px;">
+                            Você gera o link que será divulgado.
+                        </p>
+                        <p>
+                            O consumidor clica na divulgação feita pelo divulgador, é direcionado para os nossos
+                            sites e finaliza a compra.
+                        </p>
+                    </div>
+                    <div class="col-12 card  home-card">
+                        <h3>
+                            <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/circle.png']" alt="Circle">
+                            Círculo Virtuoso
+                        </h3>
+                        <p  style="margin: 30px 0px 25px;">
+                            As vendas serão exibidas na plataforma
+                        </p>
+                        <p>                        
+                            Você terá acesso ao monitoramento de suas vendas e acesso aos dados.
+                        </p>
+                    </div>
+                    <div class="col-12 card home-card">
+                        <h3>
+                            <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/wallet.png']" alt="Circle">
+                            Comissão
+                        </h3>        
+                        <p style="margin: 30px 0px 25px;">
+                            O divulgador ganhará uma comissão.
+                        </p>
+                        <p>
+                           Você vai ganhar uma valor em cada produto vendido. Sua comissão será paga diretamente em sua conta corrente.
+                        </p>        
+                    </div>
                 </div>
-                <div class="col">
-                    <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/3.png']" alt="Passo 3">
-                    <p>
-                        Você vende e nós cuidamos
-                        da cobrança e entrega
-                    </p>
+            </section>
+            <section class="card" style="background: #f4f4f4; margin-bottom: 0px;">
+                <div class="container center">
+                    <h2 class="primary">Perguntas Frequentes</h2>
+                    <div class="row questions">
+                        <ul>
+                            <li v-on:click="openAnw('#anw-1')">O que preciso para poder me cadastrar no programa Divulgadores {{ configs.name }}?</li>
+                            <p class="answear" id="anw-1">
+                                Você irá precisar possuir uma conta corrente individual em seu nome, ser maior de 18 anos, ter um número de CPF válido. Não aceitamos conta corrente conjunta, conta poupança ou conta salário. 
+                            </p>
+                            <li v-on:click="openAnw('#anw-2')">Tenho uma empresa, posso cadastrá-la para fazer parte do programa divulgadores {{ configs.name }}?</li>
+                            <p class="answear" id="anw-2">
+                                Não, neste momento não estamos aceitando cadastros de Pessoa Jurídica (PJ), mas você pode se cadastrar como pessoa física (PF) através do seu CPF e demais documentos.
+                            </p>
+                            <li v-on:click="openAnw('#anw-3')">Como eu faço para me tornar um divulgador {{ configs.name }}?</li>
+                            <p class="answear" id="anw-3">
+                                Clique no botão FAÇA SEU CADASTRO na área superior e do lado direito desta página, e preencha o formulário com os seus dados e documentação solicitada. Após aprovação, iremos enviar um e-mail de confirmação e você poderá acessar nosso painel para realizar a sua divulgação!
+                            </p>
+                            <li v-on:click="openAnw('#anw-4')">Como posso consultar se o número do meu PIS e/ou CPF é válido?</li>
+                            <p class="answear" id="anw-4">
+                                Você deve acessar este link <a href="http://consultacadastral.inss.gov.br/Esocial/pages/index.xhtml">http://consultacadastral.inss.gov.br/Esocial/pages/index.xhtml</a> do programa e-social do governo para verificar se não existe nenhuma restrição com o seu CPF.
+                            </p>
+                            <li v-on:click="openAnw('#anw-5')">Quais os dados solicitados no cadastro do programa Divulgadores {{ configs.name }}?</li>
+                            <p class="answear" id="anw-5">
+                                Para efetivar o cadastro, será necessário informar seus dados pessoais (incluindo o número dos documentos RG e CPF), endereço e dados bancários.
+                            </p>
+                            <li v-on:click="openAnw('#anw-6')">Quais os tipos de divulgações possíveis?</li>
+                            <p class="answear" id="anw-6">
+                                Neste momento temos disponíveis a divulgação através de links que você poderá gerar de qualquer página do nosso site {{ configs.url }}, podendo escolher produtos específicos ou até mesmo uma campanha que esteja vigente no site.
+                            </p>
+                            
+                            <li v-on:click="openAnw('#anw-7')">Onde posso realizar a divulgação deste link?</li>
+                            <p class="answear" id="anw-7">
+                                Você poderá divulgar o seu link através de seus contatos e grupos do WhatsApp, através das suas redes sociais, como Facebook, Instagram.  
+                            </p>
+                            
+                            <li v-on:click="openAnw('#anw-8')">Como faço para gerar os meus links de divulgação?</li>
+                            <p class="answear" id="anw-8">
+                                Acessando nosso portal, através do botão ACESSAR MINHA ÁREA, você irá encontrar no lado esquerdo você irá encontrar a opção Gerador de Links, onde você poderá colar qualquer URL do nosso site {{ configs.url }} e gerar o seu link exclusivo para divulgação. 
+                            </p>
+                            
+                            <li v-on:click="openAnw('#anw-9')">Por que preciso utilizar um link exclusivo para realizar a minha divulgação?</li>
+                            <p class="answear" id="anw-9">
+                                Somente através do link gerado em nosso portal é que conseguimos identificar que as vendas foram feitas através das suas divulgações, para poder pagar a sua comissão. 
+                            </p>
+                            
+                            <li v-on:click="openAnw('#anw-10')">Qual o valor pago de comissão sobre as minhas vendas?</li>
+                            <p class="answear" id="anw-10">
+                                Neste momento o valor da comissão é de 6% sobre o valor de todos os produtos do site www.tatianaloureiro.com.br, lembrando que não será calculado o valor da comissão sobre o frete. 
+                            </p>
+                            
+                            <li v-on:click="openAnw('#anw-11')">Quando irei receber o valor referente as minhas comissões?</li>
+                            <p class="answear" id="anw-11">
+                                O pagamento das comissões de vendas será realizado todo dia 15 do mês subsequente ao período de apuração. Apuramos as vendas mensalmente, no período do dia 16 ao dia 15 mês posterior, lembrando que é necessário um valor mínimo de R$ 50,00 (cinquenta reais) em comissões para ocorrer o pagamento. 
+                            </p>
+                            
+                            <li v-on:click="openAnw('#anw-12')">Como posso consultar o valor que tenho para receber?</li>
+                            <p class="answear" id="anw-12">
+                                Através do nosso portal você terá acesso as vendas geradas através do seu link, com os valores dos pedidos e o valor da comissão gerada. 
+                            </p>
+                            <li v-on:click="openAnw('#anw-13')">Se o cliente cancelar a venda, ainda vou receber comissão?</li>
+                            <p class="answear" id="anw-13">
+                                Não, neste caso, se o cliente cancela a venda dentro do seu direito de arrependimento de 7 dias após o recebimento do produto, você não irá receber o valor de comissão sobre esta venda. 
+                            </p>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col">
-                    <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/4.png']" alt="Passo 4">
-                    <p>
-                        Você recebe a comissão
-                        diretamente em sua conta
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 center">
-                    <router-link to='/cadatro' class="home-register-link">
-                        Faça seu cadastro
-                        <i class="fas fa-chevron-right"></i>
-                    </router-link>
-                </div>
-            </div>
-        </section>
-        <section class="container center">
-            <h2>É simples e rápido</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <div class="row">
-                <div class="col card">
-                    <h3> 
-                        <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/clip.png']" alt="Clip">
-                        Gerador de link
-                    </h3>
-                    <p>
-                        Você gera o link que será divulgado.
-                    </p>
-                    <p>
-                        O consumidor clica na divulgação feita pelo divulgador, é direcionado para os nossos
-                        sites e finaliza a compra.
-                    </p>
-                </div>
-                <div class="col card">
-                    <h3>
-                        <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/circle.png']" alt="Circle">
-                        Círculo Virtuoso
-                    </h3>
-                    <p>
-                        Você gera o link que será divulgado.
-                    </p>
-                    <p>                        
-                        O consumidor clica na divulgação feita pelo divulgador, é direcionado para os nossos
-                        sites e finaliza a compra.
-                    </p>
-                </div>
-                <div class="col card">
-                    <h3>
-                        <img :src="[configs.staticUrl+'themes/TatianaLoureiro/assets/images/wallet.png']" alt="Circle">
-                        Comissão
-                    </h3>        
-                    <p>
-                        Você gera o link que será divulgado.
-                    </p>
-                    <p>
-                        O consumidor clica na divulgação feita pelo divulgador, é direcionado para os nossos
-                        sites e finaliza a compra.
-                    </p>        
-                </div>
-            </div>
-        </section>
-        <section class="card">
-            <div class="container center">
-                <h2 class="primary">Perguntas Frequentes</h2>
-                <div class="row questions">
-                    <ul>
-                        <li v-on:click="openAnw('#anw-1')">O que preciso para poder me cadastrar no programa Divulgadores {{ configs.name }}?</li>
-                        <p class="answear" id="anw-1">
-                            Você irá precisar possuir uma conta corrente individual em seu nome, ser maior de 18 anos, ter um número de CPF válido. Não aceitamos conta corrente conjunta, conta poupança ou conta salário. 
-                        </p>
-                        <li v-on:click="openAnw('#anw-2')">Tenho uma empresa, posso cadastrá-la para fazer parte do programa divulgadores {{ configs.name }}?</li>
-                        <p class="answear" id="anw-2">
-                            Não, neste momento não estamos aceitando cadastros de Pessoa Jurídica (PJ), mas você pode se cadastrar como pessoa física (PF) através do seu CPF e demais documentos.
-                        </p>
-                        <li v-on:click="openAnw('#anw-3')">Como eu faço para me tornar um divulgador {{ configs.name }}?</li>
-                        <p class="answear" id="anw-3">
-                            Clique no botão FAÇA SEU CADASTRO na área superior e do lado direito desta página, e preencha o formulário com os seus dados e documentação solicitada. Após aprovação, iremos enviar um e-mail de confirmação e você poderá acessar nosso painel para realizar a sua divulgação!
-                        </p>
-                        <li v-on:click="openAnw('#anw-4')">Como posso consultar se o número do meu PIS e/ou CPF é válido?</li>
-                        <p class="answear" id="anw-4">
-                            Você deve acessar este link <a href="http://consultacadastral.inss.gov.br/Esocial/pages/index.xhtml">http://consultacadastral.inss.gov.br/Esocial/pages/index.xhtml</a> do programa e-social do governo para verificar se não existe nenhuma restrição com o seu CPF.
-                        </p>
-                        <li v-on:click="openAnw('#anw-5')">Quais os dados solicitados no cadastro do programa Divulgadores {{ configs.name }}?</li>
-                        <p class="answear" id="anw-5">
-                            Para efetivar o cadastro, será necessário informar seus dados pessoais (incluindo o número dos documentos RG e CPF), endereço e dados bancários.
-                        </p>
-                        <li v-on:click="openAnw('#anw-6')">Quais os tipos de divulgações possíveis?</li>
-                        <p class="answear" id="anw-6">
-                            Neste momento temos disponíveis a divulgação através de links que você poderá gerar de qualquer página do nosso site {{ configs.url }}, podendo escolher produtos específicos ou até mesmo uma campanha que esteja vigente no site.
-                        </p>
-                        
-                        <li v-on:click="openAnw('#anw-7')">Onde posso realizar a divulgação deste link?</li>
-                        <p class="answear" id="anw-7">
-                            Você poderá divulgar o seu link através de seus contatos e grupos do WhatsApp, através das suas redes sociais, como Facebook, Instagram.  
-                        </p>
-                        
-                        <li v-on:click="openAnw('#anw-8')">Como faço para gerar os meus links de divulgação?</li>
-                        <p class="answear" id="anw-8">
-                            Acessando nosso portal, através do botão ACESSAR MINHA ÁREA, você irá encontrar no lado esquerdo você irá encontrar a opção Gerador de Links, onde você poderá colar qualquer URL do nosso site {{ configs.url }} e gerar o seu link exclusivo para divulgação. 
-                        </p>
-                        
-                        <li v-on:click="openAnw('#anw-9')">Por que preciso utilizar um link exclusivo para realizar a minha divulgação?</li>
-                        <p class="answear" id="anw-9">
-                            Somente através do link gerado em nosso portal é que conseguimos identificar que as vendas foram feitas através das suas divulgações, para poder pagar a sua comissão. 
-                        </p>
-                        
-                        <li v-on:click="openAnw('#anw-10')">Qual o valor pago de comissão sobre as minhas vendas?</li>
-                        <p class="answear" id="anw-10">
-                            Neste momento o valor da comissão é de 6% sobre o valor de todos os produtos do site www.tatianaloureiro.com.br, lembrando que não será calculado o valor da comissão sobre o frete. 
-                        </p>
-                        
-                        <li v-on:click="openAnw('#anw-11')">Quando irei receber o valor referente as minhas comissões?</li>
-                        <p class="answear" id="anw-11">
-                            O pagamento das comissões de vendas será realizado todo dia 15 do mês subsequente ao período de apuração. Apuramos as vendas mensalmente, no período do dia 16 ao dia 15 mês posterior, lembrando que é necessário um valor mínimo de R$ 50,00 (cinquenta reais) em comissões para ocorrer o pagamento. 
-                        </p>
-                        
-                        <li v-on:click="openAnw('#anw-12')">Como posso consultar o valor que tenho para receber?</li>
-                        <p class="answear" id="anw-12">
-                            Através do nosso portal você terá acesso as vendas geradas através do seu link, com os valores dos pedidos e o valor da comissão gerada. 
-                        </p>
-                        <li v-on:click="openAnw('#anw-13')">Se o cliente cancelar a venda, ainda vou receber comissão?</li>
-                        <p class="answear" id="anw-13">
-                            Não, neste caso, se o cliente cancela a venda dentro do seu direito de arrependimento de 7 dias após o recebimento do produto, você não irá receber o valor de comissão sobre esta venda. 
-                        </p>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer class="container center">
-        <h2>Se precisar, entre em contato</h2>
-        <p class="primary">duvidas@tatianaloureiro.com.br</p>
-        <router-link to="/cadastro" class="home-register-link">
-            Faça seu cadastro
-            <i class="fas fa-chevron-right"></i>
-        </router-link>
-   </footer>
-</div>
+            </section>
+        </main>
+        <footer class="container center">
+            <h2 style="font-weight: 700;font-size: 25px;">Se precisar, entre em contato</h2>
+            <p class="primary" style="margin-bottom:40px;">duvidas@tatianaloureiro.com.br</p>
+            <router-link to="/cadastro" class="home-register-link">
+                Faça seu cadastro &nbsp;
+                <i class="fas fa-chevron-right"></i>
+            </router-link>
+       </footer>
+    </div>
