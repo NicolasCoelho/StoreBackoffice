@@ -3,6 +3,8 @@
 
     var url = window.location.href;
 
+    window.divulgadoresObserver = false;
+
     var storageName = "divulgadoresOrder";
 
     var product = window.produto || window.product;
@@ -15,6 +17,7 @@
 
     function startObserver() {
         if (location.pathname === '/checkout/easy') {
+            window.divulgadoresObserver = true;
             window.addEventListener("hashchange", oberserver, false);
         }
     }
