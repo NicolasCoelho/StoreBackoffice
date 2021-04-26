@@ -1,12 +1,12 @@
 'use strict';
 (function(){
-    var url = window.app.configs.staticUrl;
+    var url = window.divulgadores.configs.staticUrl;
 
-    var fontUrl = window.app.configs.fonts;
+    var fontUrl = window.divulgadores.configs.fonts;
 
-    document.title = window.app.configs.appTitle;
-    document.querySelector("link[rel='shortcut icon']").href = window.app.configs.favicon;
-    addElement(window.app.configs.styleVars);
+    document.title = window.divulgadores.configs.appTitle;
+    document.querySelector("link[rel='shortcut icon']").href = window.divulgadores.configs.favicon;
+    addElement(window.divulgadores.configs.styleVars);
 
     var imports = [
         'dependencies/vue.js',

@@ -1,6 +1,6 @@
 (function(){
     // Configs
-    var configs = window.app.configs
+    var configs = window.divulgadores.configs
 
     //Import controllers
     var loginController = new Object();

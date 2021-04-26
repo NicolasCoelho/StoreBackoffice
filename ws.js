@@ -1,8 +1,8 @@
 var ws = (function (){
-    var apiUrl = window.app.configs.wsUrl;
-    var staticUrl = window.app.configs.staticUrl;
+    var apiUrl = window.divulgadores.configs.wsUrl;
+    var staticUrl = window.divulgadores.configs.staticUrl;
     var viacepUrl = "https://viacep.com.br/ws/";
-    var id = window.app.configs.id;
+    var id = window.divulgadores.configs.id;
     var headers = {
         Authorization: "Basic " + localStorage.getItem("Token")
     };
