@@ -1,5 +1,5 @@
 (function(){
-    var apiUrl = 'https://wshlg.divulgadores.app.br/sales/register';
+    var apiEndpoint = 'https://ws.tst.divulgadores.app.br/sales/register';
 
     var url = window.location.href;
 
@@ -85,7 +85,7 @@
     function sendOrder() {
         var order = getMememoryOrder();
 
-        fetch(apiUrl, {
+        fetch(apiEndpoint, {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
