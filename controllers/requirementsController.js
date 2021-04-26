@@ -1,4 +1,4 @@
-window.divulgadores.app.controllers.RequirementsController = (function(){
+window.divulgadores.controllers.RequirementsController = (function(){
 
     var reqsOptions = [
         {label: "Sim", value: true},

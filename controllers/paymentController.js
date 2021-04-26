@@ -1,4 +1,4 @@
-window.divulgadores.app.controllers.PaymentController = (function(){
+window.divulgadores.controllers.PaymentController = (function(){
     var payment = {
         createdAt: "",
         date: "",

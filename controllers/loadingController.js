@@ -1,4 +1,4 @@
-window.divulgadores.app.controllers.LoadingController = (function(){
+window.divulgadores.controllers.LoadingController = (function(){
     
     var loading = false;
 

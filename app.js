@@ -20,22 +20,22 @@
     var paymentController = new Object();
     var passwordRecoveryController = new Object();
 
-    Object.assign(loginController, window.divulgadores.app.controllers.LoginController);
-    Object.assign(registerController, window.divulgadores.app.controllers.RegisterController);
-    Object.assign(loadingController ,window.divulgadores.app.controllers.LoadingController);
-    Object.assign(menuController, window.divulgadores.app.controllers.MenuController);
-    Object.assign(modalController, window.divulgadores.app.controllers.ModalController);
-    Object.assign(usersListController, window.divulgadores.app.controllers.UsersListController);
-    Object.assign(userController, window.divulgadores.app.controllers.UserController);
-    Object.assign(contractController, window.divulgadores.app.controllers.ContractController);
-    Object.assign(configsController, window.divulgadores.app.controllers.ConfigsController);
-    Object.assign(storeController, window.divulgadores.app.controllers.StoreController);
-    Object.assign(requirementsController, window.divulgadores.app.controllers.RequirementsController);
-    Object.assign(linksGeneratorController, window.divulgadores.app.controllers.LinksGeneratorController);
-    Object.assign(salesListController, window.divulgadores.app.controllers.SalesListController);
-    Object.assign(paymentsListController, window.divulgadores.app.controllers.PaymentsListController);
-    Object.assign(paymentController, window.divulgadores.app.controllers.PaymentController);
-    Object.assign(passwordRecoveryController, window.divulgadores.app.controllers.PasswordRecoveryController);
+    Object.assign(loginController, window.divulgadores.controllers.LoginController);
+    Object.assign(registerController, window.divulgadores.controllers.RegisterController);
+    Object.assign(loadingController ,window.divulgadores.controllers.LoadingController);
+    Object.assign(menuController, window.divulgadores.controllers.MenuController);
+    Object.assign(modalController, window.divulgadores.controllers.ModalController);
+    Object.assign(usersListController, window.divulgadores.controllers.UsersListController);
+    Object.assign(userController, window.divulgadores.controllers.UserController);
+    Object.assign(contractController, window.divulgadores.controllers.ContractController);
+    Object.assign(configsController, window.divulgadores.controllers.ConfigsController);
+    Object.assign(storeController, window.divulgadores.controllers.StoreController);
+    Object.assign(requirementsController, window.divulgadores.controllers.RequirementsController);
+    Object.assign(linksGeneratorController, window.divulgadores.controllers.LinksGeneratorController);
+    Object.assign(salesListController, window.divulgadores.controllers.SalesListController);
+    Object.assign(paymentsListController, window.divulgadores.controllers.PaymentsListController);
+    Object.assign(paymentController, window.divulgadores.controllers.PaymentController);
+    Object.assign(passwordRecoveryController, window.divulgadores.controllers.PasswordRecoveryController);
 
     // Import components 
     var componentsRequests = [];

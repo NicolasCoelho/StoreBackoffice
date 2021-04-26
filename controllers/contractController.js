@@ -1,4 +1,4 @@
-window.divulgadores.app.controllers.ContractController = (function(){
+window.divulgadores.controllers.ContractController = (function(){
     
     var contract = {
         id: "",

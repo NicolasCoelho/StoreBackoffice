@@ -1,4 +1,4 @@
-window.divulgadores.app.controllers.ModalController = (function(){
+window.divulgadores.controllers.ModalController = (function(){
 
     var isActive = false;
     var width = '550px';

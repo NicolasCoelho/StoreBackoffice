@@ -1,4 +1,4 @@
-window.divulgadores.app.controllers.PaymentsListController = (function(){
+window.divulgadores.controllers.PaymentsListController = (function(){
     var paymentsStatus = [
         {viewValue: "Pendentes", value: "1"},
         {viewValue: "Pagas", value: "2"},
