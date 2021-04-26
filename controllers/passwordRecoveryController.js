@@ -1,4 +1,4 @@
-window.app.controllers.PasswordRecoveryController = (function(){
+window.divulgadores.app.controllers.PasswordRecoveryController = (function(){
     var tokenData = new Object();
 
     var passwordsInputs = {

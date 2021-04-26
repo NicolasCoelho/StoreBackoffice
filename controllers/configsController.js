@@ -1,4 +1,4 @@
-window.app.controllers.ConfigsController = (function(){
+window.divulgadores.app.controllers.ConfigsController = (function(){
 
     var page = 1;
 

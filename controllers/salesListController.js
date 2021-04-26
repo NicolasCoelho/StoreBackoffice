@@ -1,4 +1,4 @@
-window.app.controllers.SalesListController = (function(){
+window.divulgadores.app.controllers.SalesListController = (function(){
 
     var salesStatus = [
         {viewValue: "Realizadas", value: "1"},

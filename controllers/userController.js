@@ -1,4 +1,4 @@
-window.app.controllers.UserController = (function(){
+window.divulgadores.app.controllers.UserController = (function(){
     
     var user = {
         account: "",

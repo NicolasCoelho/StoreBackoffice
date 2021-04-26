@@ -1,4 +1,4 @@
-window.app.controllers.LoginController = (function(){
+window.divulgadores.app.controllers.LoginController = (function(){
     var formInputs = {
         username: {
             data:'',

@@ -1,4 +1,4 @@
-window.app.controllers.MenuController = (function(){
+window.divulgadores.app.controllers.MenuController = (function(){
     
     var changeScreen = function($event) {
         var target = $event.target;

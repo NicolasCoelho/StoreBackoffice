@@ -1,4 +1,4 @@
-window.app.controllers.UsersListController = (function(){
+window.divulgadores.app.controllers.UsersListController = (function(){
 
     var users = [];
     var search = {

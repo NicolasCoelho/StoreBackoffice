@@ -1,4 +1,4 @@
-window.app.controllers.StoreController = (function(){
+window.divulgadores.app.controllers.StoreController = (function(){
 
     var optionsList = {
         register: [
