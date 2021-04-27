@@ -50,7 +50,7 @@ window.divulgadores.controllers.PaymentsListController = (function(){
         } else {
             if (table.params.status !== undefined) delete table.params.status; 
         }
-        getSales();
+        getPayments();
     }
 
     var previousPage = function() {

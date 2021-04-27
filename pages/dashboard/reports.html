@@ -15,7 +15,7 @@
                     </option>
                 </select>    
             </div>
-            <div class="select-header-container">
+            <div class="select-header-container"  style="display: none;">
                 <i class="far fa-calendar-alt"></i>
                 <select class="custom header" v-on:change="controller.setStatusFilter($event)">
                     <option 
@@ -43,10 +43,6 @@
             <div class="center" v-if="controller.table.totalItems === 0">
                 <h2>Você não realizou nenhuma venda nesse período</h2>
                 <p>Aproveite e compartilhe seu link para gerar uma renda extra ;)</p>
-            </div>
-            <div class="center" v-if="controller.table.totalItems === 0 && controller.sales.length === 0">
-                <h2>Não vendas neste perído</h2>
-                <p>Utilize o filtro acima para vizualiar outras vendas ;)</p>
             </div>
             <table v-if="controller.table.totalItems > 0 && controller.sales.length > 0">
                 <thead>
