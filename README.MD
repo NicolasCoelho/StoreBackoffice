@@ -16,7 +16,3 @@ Passos para instalação
 <script src="https://wshlg.divulgadores.app.br/store/{STORE_PUBLIC_ID}/configs/dynamic/js"></script>
 <script src="https://static.divulgadores.app.br/autoload.js"></script>
 ```
-
-
-TatianaLoureiro = 86430f5d0f7d
-Senha user admin = Tat1ana@Divulg@d0res
