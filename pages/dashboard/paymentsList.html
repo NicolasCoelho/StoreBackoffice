@@ -32,10 +32,10 @@
             <app-card icon="fas fa-money-bill" title="Transações" v-bind:value="controller.table.totalItems"></app-card>
         </div>
         <div class="col col-12 col-lg-4 small-card">
-            <app-card icon="far fa-chart-bar" title="Valores a receber" value="0"></app-card>
+            <app-card icon="far fa-chart-bar" title="Valores a receber" v-bind:value="controller.paymentsValues.pending"></app-card>
         </div>
         <div class="col col-12 col-lg-4 small-card">
-            <app-card icon="fas fa-coins" title="Valores pagos" value="0"></app-card>
+            <app-card icon="fas fa-coins" title="Valores pagos" v-bind:value="controller.paymentsValues.payed"></app-card>
         </div>
     </div>
     <div class="row">

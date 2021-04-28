@@ -1,6 +1,20 @@
 <div id="RequirementsComponent">
     <form id="requirementsForm" class="row justify-content-between">
+
         <div class="col-12 col-md-5">
+            <div class="input-wrapper">
+                <label for="account">Pix:</label>
+                <select 
+                    v-model="controller.requirements.account"
+                    id="pix">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option 
+                        v-for="option in controller.reqsOptions" 
+                        v-bind:value="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
             <div class="input-wrapper">
                 <label for="account">Conta:</label>
                 <select 

@@ -6,7 +6,13 @@ window.divulgadores.controllers.PaymentController = (function(){
         sales: [],
         user: {
             name: '',
-            cpfCnpj: ''  
+            cpfCnpj: '',
+            account: null,
+            accountOwner: null,
+            accountOwnerCpf: null,
+            agency: null,
+            bank: null,
+            pix: null
         },
         salesValue: "0.00",
         status: 1,

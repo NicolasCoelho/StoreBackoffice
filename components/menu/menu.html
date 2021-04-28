@@ -15,6 +15,11 @@
                     Usuários
                 </router-link>
             </li>
+            <li v-on:click="menu.changeScreen($event)" v-if="user.isAdmin()">
+                <router-link to="/dashboard/relatorios" :class="[menu.checkCurrentRoute('/dashboard/relatorios') ? 'active' : '' ]">
+                    Vendas
+                </router-link>
+            </li>
             <li v-on:click="menu.changeScreen($event)">
                 <router-link to="/dashboard/pagamentos" :class="[menu.checkCurrentRoute('/dashboard/pagamentos') ? 'active' : '' ]">
                     Pagamentos

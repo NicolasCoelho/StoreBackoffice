@@ -45,8 +45,13 @@ window.divulgadores.controllers.SalesListController = (function(){
                 Object.assign(sales, response.data.items);
             }
         );
-
-        ws.getSalesStats().then(
+        var params = {}
+        if (table.params.status !== undefined) {
+            params.status = table.params.status;
+        } else {
+            params = {};
+        }
+        ws.getSalesStats(params).then(
             function(response) {
                 salesValues.sales = utils.formatCurrency(response.data.sales)
                 salesValues.comission = utils.formatCurrency(response.data.comission)

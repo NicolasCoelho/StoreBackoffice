@@ -12,6 +12,7 @@ window.divulgadores.controllers.RequirementsController = (function(){
         address: false,
         addressNumber: false,
         agency: false,
+        pix: false,
         bank: false,
         birthLocation: false,
         birthdate: false,

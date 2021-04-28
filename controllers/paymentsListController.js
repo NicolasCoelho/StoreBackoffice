@@ -23,6 +23,11 @@ window.divulgadores.controllers.PaymentsListController = (function(){
         }
     }
 
+    var paymentsValues = {
+        pending: "",
+        payed: ""
+    }
+
     var getPayments = function() {
         ws.getPayments(table.params).then(
             function(response){
@@ -34,14 +39,12 @@ window.divulgadores.controllers.PaymentsListController = (function(){
             }
         );
 
-        // ws.getSalesStats().then(
-        //     function(response) {
-        //         salesValues.sales = utils.formatCurrency(response.data.sales)
-        //         salesValues.comission = utils.formatCurrency(response.data.comission)
-        //         salesValues.confirmed = utils.formatCurrency(response.data.confirmed)
-        //         salesValues.canceled = utils.formatCurrency(response.data.canceled)
-        //     }
-        // )
+        ws.getPaymentsStats().then(
+            function(response) {
+                paymentsValues.pending = utils.formatCurrency(response.data.pending)
+                paymentsValues.payed = utils.formatCurrency(response.data.payed)
+            }
+        )
     }
 
     var setFilter = function ($event) {
@@ -76,6 +79,7 @@ window.divulgadores.controllers.PaymentsListController = (function(){
         table,
         paymentsStatus,
         paymentsPeriods,
+        paymentsValues,
         getPayments,
         setFilter,
         nextPage,

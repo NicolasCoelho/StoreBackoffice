@@ -113,8 +113,9 @@ var ws = (function (){
         return axios.get(apiUrl+'sales'+queryString, {headers});
     }
     
-    var getSalesStats = function() {
-        return axios.get(apiUrl+'sales/stats/all', {headers})
+    var getSalesStats = function(params) {
+        var queryString = setUrlParams(params);
+        return axios.get(apiUrl+'sales/stats/all'+queryString, {headers})
     }
 
     var setUrlParams = function(params) {
@@ -137,6 +138,10 @@ var ws = (function (){
 
     var changePaymentStatus = function(paymentId, payload) {
         return axios.put(apiUrl+'payment/'+paymentId+'/changeStatus', payload, {headers});
+    }
+    var getPaymentsStats = function(params={}) {
+        var queryString = setUrlParams(params);
+        return axios.get(apiUrl+'payments/stats/all'+queryString, {headers})
     }
 
     var sendRecoveryEmail = function(payload) {
@@ -177,6 +182,7 @@ var ws = (function (){
         getPayments,
         getPaymentDetails,
         changePaymentStatus,
+        getPaymentsStats,
         sendRecoveryEmail,
         changePassword
     };

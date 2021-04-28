@@ -41,8 +41,7 @@
     <div class="row">
         <div class="table-container">
             <div class="center" v-if="controller.table.totalItems === 0">
-                <h2>Você não realizou nenhuma venda nesse período</h2>
-                <p>Aproveite e compartilhe seu link para gerar uma renda extra ;)</p>
+                <h2>Nenhuma venda realizada nesse período</h2>
             </div>
             <table v-if="controller.table.totalItems > 0 && controller.sales.length > 0">
                 <thead>
