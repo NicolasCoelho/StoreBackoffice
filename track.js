@@ -84,11 +84,12 @@
     }
 
     function getMememoryOrder() {
-        return sessionStorage.getItem(storageName);
+        return JSON.parse(sessionStorage.getItem(storageName));
     }
 
     function saveOrder(order) {
-        sessionStorage.setItem(storageName, order);
+        var tempOrder = JSON.stringify(order);
+        sessionStorage.setItem(storageName, tempOrder);
     }
 
     function sendOrder() {
@@ -101,7 +102,7 @@
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(order)
-        }).then(function(res){ deleteOrderFromMemory(); log("Order sended sucessfuly"); }).catch(
+        }).then(function(res){ deleteOrderFromMemory(); log({m:"Order sended sucessfuly", order: order}); }).catch(
             function(err) {
                 log({err: "Order send error", details: err});
             }
