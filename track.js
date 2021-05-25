@@ -114,10 +114,9 @@
     }
 
     function log(m) {
-        var logs = sessionStorage.getItem("DivulgadoresLogs") || [];
-        
+        var logs = JSON.parse(sessionStorage.getItem("DivulgadoresLogs")) || [];
         logs.push({date:new Date().toISOString(), message: m});
-
+        logs = JSON.stringify(logs);
         sessionStorage.setItem("DivulgadoresLogs", logs);
     }
 })();
