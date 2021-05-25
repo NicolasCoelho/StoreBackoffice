@@ -93,21 +93,22 @@
     }
 
     function sendOrder() {
-        var order = getMememoryOrder();
-        log("Sending order")
-        fetch(apiEndpoint, {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(order)
-        }).then(function(res){ deleteOrderFromMemory(); log({m:"Order sended sucessfuly", order: order}); }).catch(
-            function(err) {
-                log({err: "Order send error", details: err});
-            }
-        );
-        
+        setTimeout(function(){
+            var order = getMememoryOrder();
+            log("Sending order")
+            fetch(apiEndpoint, {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(order)
+            }).then(function(res){ deleteOrderFromMemory(); log({m:"Order sended sucessfuly", order: order}); }).catch(
+                function(err) {
+                    log({err: "Order send error", details: err});
+                }
+            );
+        },2000);
     }
 
     function deleteOrderFromMemory() {
