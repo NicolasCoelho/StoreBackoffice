@@ -17,6 +17,7 @@
 
     function startObserver() {
         if (location.pathname === '/checkout/easy') {
+            log("Oberserver started");
             window.divulgadoresObserver = true;
             window.addEventListener("hashchange", oberserver, false);
         }
@@ -24,6 +25,7 @@
 
     function oberserver(event) {
         if (location.hash === '#confirmation' && getMememoryOrder()) {
+            log("Oberserver fired");
             completeOrder();
             sendOrder();
         } 
@@ -36,6 +38,7 @@
             id = url.slice(index, url.length);
             id = id.slice(id.indexOf('=')+1, id.length)
         }
+        log("Partner Id active: "+id);
         return id;
     }
 
@@ -54,6 +57,7 @@
             productPrice: product.RetailPrice,
             total: 0.00
         }
+        log({m: "Order created", order: order});
         saveOrder(order);
     }
 
@@ -66,14 +70,16 @@
         });        
         order.total = EasyCheckout.ModelData.Basket.SubTotal;
         try {
-            order.orderId = Order.OrderID;
-            order.orderNumber = Order.OrderNumber;
+            order.orderId = EasyCheckout.ModelData.Order.OrderID;
+            order.orderNumber = EasyCheckout.ModelData.Order.OrderNumber;
+            order.custumerId = browsingContext.Common.Customer.CustomerID;
         } catch(err) {
             console.error(err);
         }
         if (order.custumerId === null) {
             order.custumerId = browsingContext.Common.Customer.CustomerID;
         }
+        log({m:"Order complete", order: order});
         saveOrder(order);
     }
 
@@ -87,7 +93,7 @@
 
     function sendOrder() {
         var order = getMememoryOrder();
-
+        log("Sending order")
         fetch(apiEndpoint, {
             method: 'POST',
             headers: {
@@ -95,6 +101,23 @@
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(order)
-        }).then(function(res){ sessionStorage.removeItem(storageName) })
+        }).then(function(res){ deleteOrderFromMemory(); log("Order sended sucessfuly"); }).catch(
+            function(err) {
+                log({err: "Order send error", details: err});
+            }
+        );
+        
+    }
+
+    function deleteOrderFromMemory() {
+        sessionStorage.removeItem(storageName);
+    }
+
+    function log(m) {
+        var logs = sessionStorage.getItem("DivulgadoresLogs") || [];
+        
+        logs.push({date:new Date().toISOString(), message: m});
+
+        sessionStorage.setItem("DivulgadoresLogs", logs);
     }
 })();
