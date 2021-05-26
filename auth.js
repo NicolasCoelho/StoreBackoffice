@@ -1,6 +1,6 @@
 var auth = (function () {
 
-    var token = localStorage.getItem('Token');
+    var token = sessionStorage.getItem('Token');
 
     var getToken = function () {
         return token;
@@ -9,7 +9,7 @@ var auth = (function () {
     var setToken = function (tkn) {
         token = tkn;
         ws.updateHeaders(tkn);
-        localStorage.setItem('Token', token);
+        sessionStorage.setItem('Token', token);
     }
 
     var isAuthenticaded = function () {
@@ -49,7 +49,7 @@ var auth = (function () {
 
     var deleteToken = function () {
         token = null;
-        localStorage.removeItem('Token');
+        sessionStorage.removeItem('Token');
     }
 
     var logOut = function (router) {

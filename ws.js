@@ -4,7 +4,7 @@ var ws = (function (){
     var viacepUrl = "https://viacep.com.br/ws/";
     var id = window.divulgadores.configs.id;
     var headers = {
-        Authorization: "Basic " + localStorage.getItem("Token")
+        Authorization: "Basic " + sessionStorage.getItem("Token")
     };
 
     var updateHeaders = function(newToken) {

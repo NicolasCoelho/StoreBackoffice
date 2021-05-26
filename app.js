@@ -275,7 +275,7 @@
                     currentRoute: window.location.href.split('#')[1],
                     logOut: auth.logOut,
                     myAccout: function (router) {
-                        router.replace('/dashboard'); 
+                        router.replace('/dashboard');
                     },
                     isAuthenticaded: auth.isAuthenticaded,
                     user: auth.getTokenData,
@@ -409,7 +409,18 @@
         });
         
         var routes = [
-            { path: '/', component: homePage },
+            { path: '/', component: homePage,
+                beforeEnter: function(to,from,next){
+                    if (auth.isAuthenticaded()) {
+                        next({
+                            path: '/dashboard',
+                            query: { redirect: to.fullPath }
+                        })
+                    } else {
+                        next();
+                    }
+                }   
+            },
             { path: '/recuperar-senha/:token', component: passwordRecoveryPage },
             { path: '/cadastro', component: registerPage,
                 beforeEnter: function(to,from,next){
@@ -474,7 +485,10 @@
         if (!auth.hasToken() || (auth.hasToken() && !auth.isEmptyTokenValid() )) {
             ws.getToken().then(
                 function(response){
-                    auth.setToken(response.data.token)
+                    auth.setToken(response.data.token);
+                    var app = new Vue({
+                        router
+                    }).$mount('#app');
                 }
             ).catch(
                 function(err){
@@ -488,9 +502,10 @@
                     console.error(err);
                 }
             );
+        } else {
+            var app = new Vue({
+                router
+            }).$mount('#app');
         }
-        var app = new Vue({
-            router
-        }).$mount('#app');
     } 
 })();
