@@ -102,7 +102,7 @@
             order.total = EasyCheckout.ModelData.Basket.SubTotal;
             order.orderId = (EasyCheckout.ModelData.Order.OrderID || ko.postbox.topicCache['checkout/payment/submit'].value.Response.Custom['PlaceOrder.OrderID'] || failPreventOrder.orderId).toString();
             order.orderNumber = (EasyCheckout.ModelData.Order.OrderNumber || ko.postbox.topicCache['checkout/payment/submit'].value.Response.Custom['PlaceOrder.OrderNumber'] || failPreventOrder.orderNumber).toString();
-            order.custumerId = browsingContext.Common.Customer.CustomerID;
+            order.custumerId = browsingContext.Common.Customer.CustomerID || EasyCheckout.ModelData.Customer.CustomerID || ko.postbox.topicCache['checkout/payment/submit'].value.Checkout.CustomerID;
         } catch(err) {
             console.error(err);
         }
