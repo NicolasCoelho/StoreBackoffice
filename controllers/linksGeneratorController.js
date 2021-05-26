@@ -1,4 +1,4 @@
-window.app.controllers.LinksGeneratorController = (function(){
+window.divulgadores.controllers.LinksGeneratorController = (function(){
     
     var infos = {
         publicId: "",

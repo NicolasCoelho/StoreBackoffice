@@ -1,4 +1,4 @@
-window.app.controllers.RequirementsController = (function(){
+window.divulgadores.controllers.RequirementsController = (function(){
 
     var reqsOptions = [
         {label: "Sim", value: true},
@@ -12,6 +12,7 @@ window.app.controllers.RequirementsController = (function(){
         address: false,
         addressNumber: false,
         agency: false,
+        pix: false,
         bank: false,
         birthLocation: false,
         birthdate: false,

@@ -1,13 +1,14 @@
-window.app.controllers.SalesListController = (function(){
+window.divulgadores.controllers.SalesListController = (function(){
 
     var salesStatus = [
         {viewValue: "Realizadas", value: "1"},
         {viewValue: "Confirmadas", value: "2"},
         {viewValue: "Completas", value: "3"},
-        {viewValue: "Pagas", value: "4"},
-        {viewValue: "Em revisão", value: "6"},
-        {viewValue: "Canceladas", value: "5"},
-        {viewValue: "Estornadas", value: "7"}
+        {viewValue: "Pendente Pagamento", value: "4"},
+        {viewValue: "Pagas", value: "5"},
+        {viewValue: "Canceladas", value: "6"},
+        {viewValue: "Em revisão", value: "7"},
+        {viewValue: "Estornadas", value: "8"}
     ];
 
     var salesPeriods = [
@@ -44,8 +45,13 @@ window.app.controllers.SalesListController = (function(){
                 Object.assign(sales, response.data.items);
             }
         );
-
-        ws.getSalesStats().then(
+        var params = {}
+        if (table.params.status !== undefined) {
+            params.status = table.params.status;
+        } else {
+            params = {};
+        }
+        ws.getSalesStats(params).then(
             function(response) {
                 salesValues.sales = utils.formatCurrency(response.data.sales)
                 salesValues.comission = utils.formatCurrency(response.data.comission)

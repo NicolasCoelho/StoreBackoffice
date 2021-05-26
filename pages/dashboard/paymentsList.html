@@ -15,7 +15,7 @@
                     </option>
                 </select>    
             </div>
-            <div class="select-header-container">
+            <div class="select-header-container" style="display: none;">
                 <i class="far fa-calendar-alt"></i>
                 <select class="custom header" v-on:change="controller.setFilter($event)">
                     <option 
@@ -32,21 +32,16 @@
             <app-card icon="fas fa-money-bill" title="Transações" v-bind:value="controller.table.totalItems"></app-card>
         </div>
         <div class="col col-12 col-lg-4 small-card">
-            <app-card icon="far fa-chart-bar" title="Valores a receber" value="0"></app-card>
+            <app-card icon="far fa-chart-bar" title="Valores a receber" v-bind:value="controller.paymentsValues.pending"></app-card>
         </div>
         <div class="col col-12 col-lg-4 small-card">
-            <app-card icon="fas fa-coins" title="Valores pagos" value="0"></app-card>
+            <app-card icon="fas fa-coins" title="Valores pagos" v-bind:value="controller.paymentsValues.payed"></app-card>
         </div>
     </div>
     <div class="row">
         <div class="table-container">
             <div class="center" v-if="controller.table.totalItems === 0">
-                <h2>Não há nenhum pagamento registrado =(</h2>
-                <p>Aproveite e compartilhe seu link para gerar uma renda extra ;)</p>
-            </div>
-            <div class="center" v-if="controller.table.totalItems === 0 && controller.payments.length === 0">
-                <h2>Sem pagamentos neste perído</h2>
-                <p>Utilize o filtro acima para vizualiar outras registros ;)</p>
+                <h2>Nenhum pagamento encontrado</h2>
             </div>
             <table v-if="controller.table.totalItems > 0 && controller.payments.length > 0">
                 <thead>

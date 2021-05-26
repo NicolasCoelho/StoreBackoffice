@@ -1,4 +1,4 @@
-window.app.controllers.PaymentController = (function(){
+window.divulgadores.controllers.PaymentController = (function(){
     var payment = {
         createdAt: "",
         date: "",
@@ -6,7 +6,13 @@ window.app.controllers.PaymentController = (function(){
         sales: [],
         user: {
             name: '',
-            cpfCnpj: ''  
+            cpfCnpj: '',
+            account: null,
+            accountOwner: null,
+            accountOwnerCpf: null,
+            agency: null,
+            bank: null,
+            pix: null
         },
         salesValue: "0.00",
         status: 1,

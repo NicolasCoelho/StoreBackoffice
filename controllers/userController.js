@@ -1,4 +1,4 @@
-window.app.controllers.UserController = (function(){
+window.divulgadores.controllers.UserController = (function(){
     
     var user = {
         account: "",
@@ -107,7 +107,7 @@ window.app.controllers.UserController = (function(){
 
     var denyRegister = function(userId) {
         var msg = window.prompt("Digite as pendencias deste cadastro:");
-        if (msg !== null || msg !== '') {
+        if (msg !== null && msg !== '' && msg != undefined) {
             var payload = {
                 message: msg
             };

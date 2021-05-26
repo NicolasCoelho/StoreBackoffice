@@ -1,4 +1,4 @@
-window.app.controllers.RegisterController = (function(){
+window.divulgadores.controllers.RegisterController = (function(){
     
     var registerRequirements = new Object();
 

@@ -1,3 +1,54 @@
+:root {
+    font-family: Montserrat, sans-serif;
+    --primary: #d9888a;
+    --secondary: #fff;
+    --header-bg: #ffffff;
+    --content-bg: #fff;
+    --card-bg: #eae8e2;
+    --login-page-bg: #fff;
+    --login-box-bg: var(--card-bg);
+    --text-primary: #635a58;
+    --links-color: #635a58;
+    --links-weight: 600;
+    --text-secondary: #fff;
+    --border-radius: 0px;
+    --icons-color: var(--primary);
+    --menu-bg: #eae8e2;
+    --menu-button-bg-hover: #ebebeb;
+    --menu-text: #6d6d6d;
+    --menu-text-hover: #6d6d6d;
+    --menu-border-hover: var(--primary);
+    --table-header-bg: var(--primary);
+    --table-header-color: var(--secondary);
+    --table-variation: #ededed;
+    --table-font-size: 14px;
+    --table-padding: 5px;
+    --table-text-align: center;
+    --input-bg: #f5f5f5;
+    --input-border: 1px solid #6d6d6d;
+    --input-padding: 13px;
+    --input-font-size: 14px;
+    --input-border-radius: 0px;
+    --input-color: #6d6d6d;
+    --input-error-color: var(--primary);
+    --button-color-primary: #635a58;
+    --button-bg-primary: #dedede;
+    --button-bg-disabled-primary: #dedede;
+    --button-color-secondary: #fff;
+    --button-bg-secondary: var(--primary);
+    --button-bg-disabled-secondary: #dedede;
+    --button-font-weight: 400;
+    --button-border-radius: 0px;
+    --button-color-active-primary: var(--button-bg-primary);
+    --button-color-active-secondary: var(--button-bg-secondary);
+    --button-padding: 10px 15px;
+    --button-font-size: 16px;
+    --loading-icon: var(--primary);
+    --loading-spinner: var(--primary);
+    --loading-spinner-border: rgba(255, 255, 255, 0.3);
+    --modal-bg: var(--content-bg);
+    }
+
 /* Custom Home */
 #HomePage {
     border-top: 4px solid #635a58;

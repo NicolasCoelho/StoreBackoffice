@@ -48,6 +48,7 @@ var utils = (function(){
     }
 
     var formatDate = function(date) {
+        if (date === null) return "Não disponivel";
         return new Date(date).toLocaleString().slice(0,10);
     }
 

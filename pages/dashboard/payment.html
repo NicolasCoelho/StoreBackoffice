@@ -51,6 +51,45 @@
                     <br><br>
                 </div>
             </div>
+            <h4 class="secondary center">Dados para pagamento</h4>
+            <div class="row">
+                <div class="col-12 col-sm-6" v-if="controller.payment.user.bank != null">
+                    <span class="primary">Banco:</span>
+                    <br>
+                    <span>{{ controller.payment.user.bank }}</span>
+                    <br><br>
+                </div>
+                <div class="col-12 col-sm-6" v-if="controller.payment.user.agency != null">
+                    <span class="primary">Agência</span>
+                    <br>
+                    <span>{{ controller.payment.user.agency }}</span>
+                    <br><br>
+                </div>
+                <div class="col-12 col-sm-6" v-if="controller.payment.user.account != null">
+                    <span class="primary">Conta</span>
+                    <br>
+                    <span>{{ controller.payment.user.account }}</span>
+                    <br><br>
+                </div>
+                <div class="col-12 col-sm-6" v-if="controller.payment.user.pix != null">
+                    <span class="primary">Pix</span>
+                    <br>
+                    <span>{{ controller.payment.user.pix }}</span>
+                    <br><br>
+                </div>
+                <div class="col-12 col-sm-6" v-if="controller.payment.user.accountOwner != null">
+                    <span class="primary">Titular da conta</span>
+                    <br>
+                    <span>{{ controller.payment.user.accountOwner }}</span>
+                    <br><br>
+                </div>
+                <div class="col-12 col-sm-6" v-if="controller.payment.user.accountOwnerCpf != null">
+                    <span class="primary">Cpf do Titular da conta</span>
+                    <br>
+                    <span>{{ controller.payment.user.accountOwnerCpf }}</span>
+                    <br><br>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

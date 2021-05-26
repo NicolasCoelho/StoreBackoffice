@@ -14,7 +14,7 @@
     <div class="row">
         <ul class="option-bar" v-if="auth.getTokenData().t === 3">
             <li class="selected" v-on:click="controller.changeUserView($event, true)">Dados</li>
-            <li v-on:click="controller.changeUserView($event, false)">Vendas</li>
+            <li v-on:click="controller.changeUserView($event, false)" style="display: none;">Vendas</li>
         </ul>
         <div class="col-12 user-data" v-if="controller.isDataPage">
             <div class="row">

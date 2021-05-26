@@ -1,4 +1,4 @@
-window.app.controllers.PaymentsListController = (function(){
+window.divulgadores.controllers.PaymentsListController = (function(){
     var paymentsStatus = [
         {viewValue: "Pendentes", value: "1"},
         {viewValue: "Pagas", value: "2"},
@@ -23,6 +23,11 @@ window.app.controllers.PaymentsListController = (function(){
         }
     }
 
+    var paymentsValues = {
+        pending: "",
+        payed: ""
+    }
+
     var getPayments = function() {
         ws.getPayments(table.params).then(
             function(response){
@@ -34,14 +39,12 @@ window.app.controllers.PaymentsListController = (function(){
             }
         );
 
-        // ws.getSalesStats().then(
-        //     function(response) {
-        //         salesValues.sales = utils.formatCurrency(response.data.sales)
-        //         salesValues.comission = utils.formatCurrency(response.data.comission)
-        //         salesValues.confirmed = utils.formatCurrency(response.data.confirmed)
-        //         salesValues.canceled = utils.formatCurrency(response.data.canceled)
-        //     }
-        // )
+        ws.getPaymentsStats().then(
+            function(response) {
+                paymentsValues.pending = utils.formatCurrency(response.data.pending)
+                paymentsValues.payed = utils.formatCurrency(response.data.payed)
+            }
+        )
     }
 
     var setFilter = function ($event) {
@@ -50,7 +53,7 @@ window.app.controllers.PaymentsListController = (function(){
         } else {
             if (table.params.status !== undefined) delete table.params.status; 
         }
-        getSales();
+        getPayments();
     }
 
     var previousPage = function() {
@@ -76,6 +79,7 @@ window.app.controllers.PaymentsListController = (function(){
         table,
         paymentsStatus,
         paymentsPeriods,
+        paymentsValues,
         getPayments,
         setFilter,
         nextPage,
