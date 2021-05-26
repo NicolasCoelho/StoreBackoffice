@@ -1,6 +1,7 @@
 (function(){
+
     log("Tracking divulgadores active");
-    
+  
     var apiEndpoint = 'https://ws.tst.divulgadores.app.br/sales/register';
 
     var url = window.location.href;
