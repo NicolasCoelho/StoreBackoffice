@@ -15,19 +15,47 @@
 
     startObserver();
 
+    var failPreventOrder = {
+        orderId: '',
+        orderNumber: '',
+    };
+
+    log("Tracking divulgadores active");
+
     function startObserver() {
         if (location.pathname === '/checkout/easy') {
+            koOberserverFailPrevent();
             log("Oberserver started");
             window.divulgadoresObserver = true;
             window.addEventListener("hashchange", oberserver, false);
         }
     }
 
+    function koOberserverFailPrevent() {
+        ko.postbox.subscribe('checkout/payment/submit', function(event) {
+            try {
+                if (event.Order.OrderID && event.Order.OrderNumber) {
+                    failPreventOrder.orderId = event.Order.OrderID;
+                    failPreventOrder.orderNumber = event.Order.OrderNumber;
+                } else if(event.Response.Custom['PlaceOrder.OrderID'] && event.Response.Custom['PlaceOrder.OrderID']) {
+                    failPreventOrder.orderId = event.Response.Custom['PlaceOrder.OrderID'];
+                    failPreventOrder.orderNumber = event.Response.Custom['PlaceOrder.OrderNumber'];
+                }
+                log({m:"Submit Response", response: event});
+            } catch(err){
+                console.error(err);
+            }
+            
+        });
+    }
+
     function oberserver(event) {
         if (location.hash === '#confirmation' && getMememoryOrder()) {
             log("Oberserver fired");
-            completeOrder();
-            sendOrder();
+            setTimeout(function(){ 
+                completeOrder();
+                sendOrder();
+            },2000);
         } 
     }
 
@@ -37,8 +65,8 @@
         if (url.indexOf('partner=') > -1) {
             id = url.slice(index, url.length);
             id = id.slice(id.indexOf('=')+1, id.length)
+            log("Partner Id active: "+id);
         }
-        log("Partner Id active: "+id);
         return id;
     }
 
@@ -63,21 +91,18 @@
 
     function completeOrder() {
         var order = getMememoryOrder();
-        EasyCheckout.ModelData.Basket.Items.forEach(function (item) {
-            if (item.ProductID === order.productId && item.SKU === order.skuId) {
-                order.qtd = item.Quantity;
-            }
-        });        
-        order.total = EasyCheckout.ModelData.Basket.SubTotal;
         try {
-            order.orderId = EasyCheckout.ModelData.Order.OrderID;
-            order.orderNumber = EasyCheckout.ModelData.Order.OrderNumber;
+            EasyCheckout.ModelData.Basket.Items.forEach(function (item) {
+                if (item.ProductID.toString() === order.productId.toString()) {
+                    order.qtd += item.Quantity;
+                }
+            });        
+            order.total = EasyCheckout.ModelData.Basket.SubTotal;
+            order.orderId = (EasyCheckout.ModelData.Order.OrderID || ko.postbox.topicCache['checkout/payment/submit'].value.Response.Custom['PlaceOrder.OrderID'] || failPreventOrder.orderId).toString();
+            order.orderNumber = (EasyCheckout.ModelData.Order.OrderNumber || ko.postbox.topicCache['checkout/payment/submit'].value.Response.Custom['PlaceOrder.OrderNumber'] || failPreventOrder.orderNumber).toString();
             order.custumerId = browsingContext.Common.Customer.CustomerID;
         } catch(err) {
             console.error(err);
-        }
-        if (order.custumerId === null) {
-            order.custumerId = browsingContext.Common.Customer.CustomerID;
         }
         log({m:"Order complete", order: order});
         saveOrder(order);
@@ -93,22 +118,20 @@
     }
 
     function sendOrder() {
-        setTimeout(function(){
-            var order = getMememoryOrder();
-            log("Sending order")
-            fetch(apiEndpoint, {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(order)
-            }).then(function(res){ deleteOrderFromMemory(); log({m:"Order sended sucessfuly", order: order}); }).catch(
-                function(err) {
-                    log({err: "Order send error", details: err});
-                }
-            );
-        },2000);
+        var order = getMememoryOrder();
+        log("Sending order")
+        fetch(apiEndpoint, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        }).then(function(res){ deleteOrderFromMemory(); log({m:"Order sended sucessfuly", order: order}); }).catch(
+            function(err) {
+                log({err: "Order send error", details: err});
+            }
+        );
     }
 
     function deleteOrderFromMemory() {
