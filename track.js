@@ -1,4 +1,6 @@
 (function(){
+    log("Tracking divulgadores active");
+    
     var apiEndpoint = 'https://ws.tst.divulgadores.app.br/sales/register';
 
     var url = window.location.href;
@@ -20,8 +22,6 @@
         orderNumber: '',
     };
 
-    log("Tracking divulgadores active");
-
     function startObserver() {
         if (location.pathname === '/checkout/easy') {
             koOberserverFailPrevent();
@@ -32,20 +32,22 @@
     }
 
     function koOberserverFailPrevent() {
-        ko.postbox.subscribe('checkout/payment/submit', function(event) {
-            try {
-                if (event.Order.OrderID && event.Order.OrderNumber) {
-                    failPreventOrder.orderId = event.Order.OrderID;
-                    failPreventOrder.orderNumber = event.Order.OrderNumber;
-                } else if(event.Response.Custom['PlaceOrder.OrderID'] && event.Response.Custom['PlaceOrder.OrderID']) {
-                    failPreventOrder.orderId = event.Response.Custom['PlaceOrder.OrderID'];
-                    failPreventOrder.orderNumber = event.Response.Custom['PlaceOrder.OrderNumber'];
+        document.addEventListener("DOMContentLoaded", function(){
+            ko.postbox.subscribe('checkout/payment/submit', function(event) {
+                try {
+                    if (event.Order.OrderID && event.Order.OrderNumber) {
+                        failPreventOrder.orderId = event.Order.OrderID;
+                        failPreventOrder.orderNumber = event.Order.OrderNumber;
+                    } else if(event.Response.Custom['PlaceOrder.OrderID'] && event.Response.Custom['PlaceOrder.OrderID']) {
+                        failPreventOrder.orderId = event.Response.Custom['PlaceOrder.OrderID'];
+                        failPreventOrder.orderNumber = event.Response.Custom['PlaceOrder.OrderNumber'];
+                    }
+                    log({m:"Submit Response", response: event});
+                } catch(err){
+                    console.error(err);
                 }
-                log({m:"Submit Response", response: event});
-            } catch(err){
-                console.error(err);
-            }
-            
+                
+            });
         });
     }
 
