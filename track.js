@@ -83,7 +83,7 @@
             productId: product.ProductID,
             productName: product.Name,
             qtd: 0,
-            skuId: product.SKU,
+            skuId: 0,
             productPrice: product.RetailPrice,
             total: 0.00
         }
@@ -97,6 +97,7 @@
             EasyCheckout.ModelData.Basket.Items.forEach(function (item) {
                 if (item.ProductID.toString() === order.productId.toString()) {
                     order.qtd += item.Quantity;
+                    order.skuId = item.SkuID || 0;
                 }
             });        
             order.total = EasyCheckout.ModelData.Basket.SubTotal;
