@@ -288,8 +288,11 @@
                 return {
                     currentRoute: window.location.href.split('#')[1],
                     logOut: auth.logOut,
-                    myAccout: function (router) {
+                    myAccount: function (router) {
                         router.replace('/dashboard');
+                    },
+                    goToHome: function() {
+                        router.replace('/');
                     },
                     isAuthenticaded: auth.isAuthenticaded,
                     user: auth.getTokenData,
@@ -424,18 +427,7 @@
         });
         
         var routes = [
-            { path: '/', component: homePage,
-                beforeEnter: function(to,from,next){
-                    if (auth.isAuthenticaded()) {
-                        next({
-                            path: '/dashboard',
-                            query: { redirect: to.fullPath }
-                        })
-                    } else {
-                        next();
-                    }
-                }   
-            },
+            { path: '/', component: homePage },
             { path: '/recuperar-senha/:token', component: passwordRecoveryPage },
             { path: '/cadastro', component: registerPage,
                 beforeEnter: function(to,from,next){

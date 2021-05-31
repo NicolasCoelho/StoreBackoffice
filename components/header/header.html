@@ -1,18 +1,18 @@
-<section id="HeaderComponent">
+<header id="HeaderComponent">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12" :class="[currentRoute === '/cadastro' || currentRoute.indexOf('/recuperar-senha/') > -1 ? 'align-center':'col-lg-6']">
-                <img :src="[configs.logo.src]" :width="[configs.logo.width]" :height="[configs.logo.height]" alt="Logo">
+                <img :src="[configs.logo.src]" :width="[configs.logo.width]" :height="[configs.logo.height]" alt="Logo" v-on:click="goToHome($router)">
             </div>
-            <div v-if="currentRoute === '/' && !isAuthenticaded()" class="col-12 col-lg-6 align-right">
-                <router-link to="/cadastro" class="button primary-button upcase-button">Faça seu cadastro</router-link>
+            <div v-if="currentRoute === '/' && !isAuthenticaded()" class="col-12 col-lg-6 align-right nav-buttons">
+                <router-link to="/cadastro">Faça seu cadastro</router-link>
                 &bull;
-                <router-link to="/dashboard"  class="button second-button upcase-button">Acessar minha área</router-link>
+                <router-link to="/dashboard">Acessar minha área</router-link>
             </div>
-            <div v-if="isAuthenticaded()" class="col-12 col-lg-6 align-right">
-                <span v-on:click="myAccout($router)" style="margin: 0px 20px;" class="click"><i class="far fa-user-circle"></i> {{ user().n }}</span>
+            <div v-if="isAuthenticaded()" class="col-12 col-lg-6 align-right nav-buttons">
+                <span v-on:click="myAccount($router)" style="margin: 0px 20px;" class="click"><i class="far fa-user-circle"></i> {{ user().n }}</span>
                 <span v-on:click="logOut($router)" class="click"><i class="fas fa-sign-out-alt"></i> LogOut</span>
             </div>
         </div>
     </div>
-</section>
+</header>
