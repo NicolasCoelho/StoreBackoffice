@@ -427,7 +427,18 @@
         });
         
         var routes = [
-            { path: '/', component: homePage },
+            { path: '/', component: homePage,
+                beforeEnter: function(to,from,next){
+                    if (auth.isAuthenticaded()) {
+                        next({
+                            path: '/dashboard',
+                            query: { redirect: to.fullPath }
+                        })
+                    } else {
+                        next();
+                    }
+                }   
+            },
             { path: '/recuperar-senha/:token', component: passwordRecoveryPage },
             { path: '/cadastro', component: registerPage,
                 beforeEnter: function(to,from,next){
