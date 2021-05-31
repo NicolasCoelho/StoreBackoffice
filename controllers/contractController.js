@@ -3,7 +3,11 @@ window.divulgadores.controllers.ContractController = (function(){
     var contract = {
         id: "",
         content: "",
+        helpPage: "",
+        trainingPage: "",
         contentEditable: "",
+        helpEditable: "",
+        trainingEditable: "",
         updatedAt: "" 
     }
 
@@ -20,6 +24,8 @@ window.divulgadores.controllers.ContractController = (function(){
             function(response) {
                 Object.assign(temp, response.data);
                 temp.contentEditable = temp.content;
+                temp.trainingEditable = temp.trainingPage;
+                temp.helpEditable = temp.helpPage
             }
         )
     }
@@ -37,9 +43,13 @@ window.divulgadores.controllers.ContractController = (function(){
         var tempContract = this.contract;
         var payload = {
             status: tempContract.status,
-            content: tempContract.contentEditable
+            content: tempContract.contentEditable,
+            trainingPage: tempContract.trainingEditable,
+            helpPage: tempContract.helpEditable,
         }
         tempContract.content = tempContract.contentEditable;
+        tempContract.helpPage = tempContract.helpEditable;
+        tempContract.trainingPage = tempContract.trainingEditable;
         this.toggleEdit();
         ws.changeContract(this.contract.id, payload).then(
             function (response) {       

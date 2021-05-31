@@ -1,6 +1,10 @@
 <div id="Contract">
     <div class="card" v-if="!controller.isEditing">
-        <pre v-html="controller.contract.content" class="contract-table"></pre> 
+        <pre v-if="type == 1" v-html="controller.contract.content" class="contract-table"></pre> 
+        <pre v-if="type == 2" v-html="controller.contract.trainingPage" class="contract-table"></pre>
+        <pre v-if="type == 3" v-html="controller.contract.helpPage" class="contract-table"></pre> 
     </div>
-    <textarea v-if="controller.isEditing" v-model="controller.contract.contentEditable" style="min-height: 500px;"></textarea>
+    <textarea v-if="controller.isEditing && type == 1" v-model="controller.contract.contentEditable" style="min-height: 500px;"></textarea>
+    <textarea v-if="controller.isEditing && type == 2" v-model="controller.contract.trainingEditable" style="min-height: 500px;"></textarea>
+    <textarea v-if="controller.isEditing && type == 3" v-model="controller.contract.helpEditable" style="min-height: 500px;"></textarea>
 </div>

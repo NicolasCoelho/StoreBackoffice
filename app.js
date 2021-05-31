@@ -118,8 +118,22 @@
         }
     };
     var dashboardLinksGeneratorPage = {};
-    var dashboardTrainingPage = {};
-    var dasboardHelpPage = {};
+    var dashboardTrainingPage = {
+        data: function() {
+            return {
+                controller: contractController,
+                user: auth
+            }
+        }
+    };
+    var dasboardHelpPage = {
+        data: function() {
+            return {
+                controller: contractController,
+                user: auth
+            }
+        }
+    };
     var dashboardChangePasswordPage = {};
     var dashboardCustumerDataPage = {};
     var dashboardContractPage = {
@@ -372,6 +386,7 @@
             template: modalComponent
         });
         Vue.component('app-contract', {
+            props: ['type'],
             data: function() {
                 return {
                     controller: contractController
