@@ -346,6 +346,9 @@ form {
 #RegisterFormComponent {
     width: 100%;
 }
+#RegisterPage #RegisterFormComponent #h-captcha {
+    text-align: center;
+}
     @media(min-width: 1200px) {
         #RegisterPage #RegisterFormComponent h2,
         #RegisterPage #RegisterFormComponent .error {
@@ -363,6 +366,10 @@ form {
             margin-left: 5px;
             display: inline-block;
             text-align: left;
+        }
+        #RegisterPage #RegisterFormComponent #h-captcha {
+            padding-left: 410px;
+            text-align: unset;
         }
     }
 

@@ -331,6 +331,9 @@
             beforeMount: function () {
                 registerController.getUserRequirements();
             },
+            mounted: function () {
+                registerController.renderHCaptcha();
+            },
             template: registerFormComponent   
         });
         Vue.component('app-menu', {

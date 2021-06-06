@@ -283,6 +283,7 @@
                 maxlength="15">
             <span v-if="formInputs.accountOwnerCpf.hasErrors == true" class="error">{{ formInputs.accountOwnerCpf.errorMessage }}</span>
         </div>
+        <div class="h-captcha" id="h-captcha"></div>
         <div class="align-center" style="padding: 20px 0px;">
             <div class="primary form-general-error" v-if="controller.hasFormErrors">Há erros no preenchimento do formulário!</div>
             <button v-on:click="controller.register($router, $event, modal, loading)" v-if="!controller.isEditing" class="button primary-button upcase-button align-center">

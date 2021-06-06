@@ -8,6 +8,11 @@ window.divulgadores.controllers.RegisterController = (function(){
     
     var userId = 0;
 
+    var hcaptchaParams = {
+        widgetId: '',
+        response: ''
+    } 
+
     var optionsLists = {
         maritalStatus: [
             { viewValue: 'Selecione', value: null },
@@ -821,8 +826,10 @@ window.divulgadores.controllers.RegisterController = (function(){
     var register = function(router,event, modal, loading) {
         event.preventDefault();
         var validation = validateForm();
-        if (validation.isValid) { 
+        hcaptchaParams.response = hcaptcha.getResponse(hcaptchaParams.widgetId);
+        if (validation.isValid && hcaptchaParams.response !== "") { 
             loading.toogleLoad();
+            validation.payload.captchaKey = hcaptchaParams.response;
             ws.register(validation.payload).then(
                 function (response) {
                     auth.setToken(response.data.token);
@@ -893,6 +900,12 @@ window.divulgadores.controllers.RegisterController = (function(){
             }
         })
     }
+
+    var renderHCaptcha = function() {
+        hcaptchaParams.widgetId = hcaptcha.render('h-captcha', {
+            sitekey: window.divulgadores.configs.captchaKey
+        })
+    }
     
     return {
         formInputs,
@@ -903,6 +916,7 @@ window.divulgadores.controllers.RegisterController = (function(){
         saveUser,
         register,
         getUserRequirements,
-        setDataToEdit
+        setDataToEdit,
+        renderHCaptcha
     };
 })();

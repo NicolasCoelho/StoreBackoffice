@@ -4,6 +4,8 @@
 
     var fontUrl = window.divulgadores.configs.fonts;
 
+    var hcaptchaWidgetUrl = "https://hcaptcha.com/1/api.js";
+
     document.title = window.divulgadores.configs.appTitle;
     document.querySelector("link[rel='shortcut icon']").href = window.divulgadores.configs.favicon;
     addElement(window.divulgadores.configs.styleVars);
@@ -12,6 +14,7 @@
         'dependencies/vue.js',
         'dependencies/axios.js',
         fontUrl,
+        hcaptchaWidgetUrl,
         'styles/css/fontAwesome/css/all.min.css',
         'styles/css/bootstrap-grid.css',
         'styles/css/app.css',
