@@ -29,8 +29,11 @@ var ws = (function (){
         )
     };
 
-    var register = function (payload) {
-        return axios.post(apiUrl+"register", payload, {headers}).then(
+    var register = function (payload, captcha) {
+        var tempHeaders = new Object();
+        Object.assign(tempHeaders, headers);
+        tempHeaders.Captcha = captcha;
+        return axios.post(apiUrl+"register", payload, {headers: tempHeaders}).then(
             function (response) {
                 auth.setToken(response.data.token);
                 return response;

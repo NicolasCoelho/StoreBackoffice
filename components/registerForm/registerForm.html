@@ -280,7 +280,7 @@
                 v-on:keyup="formInputs.accountOwnerCpf.mask();"
                 v-model="formInputs.accountOwnerCpf.data"
                 id="accountOwnerCpf"
-                maxlength="15">
+                maxlength="1">
             <span v-if="formInputs.accountOwnerCpf.hasErrors == true" class="error">{{ formInputs.accountOwnerCpf.errorMessage }}</span>
         </div>
         <div class="h-captcha" id="h-captcha"></div>

@@ -5,7 +5,7 @@
     <div class="login-container" v-if="!controller.isRecovery">
         <form id="authForm">
             <div class="input-wrapper">
-                <label for="username">E-mail ou CPF: </label>
+                <label for="username">E-mail:</label>
                 <input 
                     v-on:focusout="formInputs.username.validate()" 
                     @input="formInputs.username.data = $event.target.value"
