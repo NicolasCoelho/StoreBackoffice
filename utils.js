@@ -60,6 +60,14 @@ var utils = (function(){
         console.error(err);
         window.alert("Erro inesperado. Tente novamente mais tarde!");
     }
+
+    var tokenVerifier = function () {
+        setInterval(() => {
+            if(auth.isTokenExpired()) {
+                window.location.reload();
+            }
+        }, 5000);
+    }
     
     return {
         formatUserStatus,
@@ -68,6 +76,7 @@ var utils = (function(){
         formatCpfCnpj,
         formatDate,
         formatCurrency,
-        handleGenericError
+        handleGenericError,
+        tokenVerifier
     }
 })();
