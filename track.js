@@ -74,33 +74,31 @@
     }
 
     function createOrder() {
-        if (!product) return;
-        
         let order = {
             userId: partnerId,
             orderId: null,
             orderNumber: null,
             custumerId: browsingContext.Common.Customer.CustomerID || null,
-            productId: product.ProductID,
-            productName: product.Name,
-            qtd: 0,
-            skuId: 0,
-            productPrice: product.RetailPrice,
+            products: [],
             total: 0.00
         }
         log({m: "Order created", order: order});
         saveOrder(order);
     }
-
     function completeOrder() {
         var order = getMememoryOrder();
         try {
-            EasyCheckout.ModelData.Basket.Items.forEach(function (item) {
-                if (item.ProductID.toString() === order.productId.toString()) {
-                    order.qtd += item.Quantity;
-                    order.skuId = item.SkuID || 0;
-                }
-            });        
+            EasyCheckout.ModelData.Basket.Items.forEach(function (item) { 
+                
+                var newProduct = new Object();
+                newProduct.productId = item.ProductID;
+                newProduct.productName = item.Name;
+                newProduct.productPrice = item.RetailPrice
+                newProduct.qtd = item.Quantity;
+                newProduct.skuId = item.SkuID || 0;
+
+                order.products.push(newProduct);
+            });
             order.total = EasyCheckout.ModelData.Basket.SubTotal;
             order.orderId = (EasyCheckout.ModelData.Order.OrderID || ko.postbox.topicCache['checkout/payment/submit'].value.Response.Custom['PlaceOrder.OrderID'] || failPreventOrder.orderId).toString();
             order.orderNumber = (EasyCheckout.ModelData.Order.OrderNumber || ko.postbox.topicCache['checkout/payment/submit'].value.Response.Custom['PlaceOrder.OrderNumber'] || failPreventOrder.orderNumber).toString();
