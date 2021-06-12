@@ -894,7 +894,7 @@ window.divulgadores.controllers.RegisterController = (function(){
                 formInputs[key].data = user[key];
                 if (formInputs[key].mask !== undefined) {
                     if (key === 'birthdate') {
-                        formInputs[key].data = new Date(formInputs[key].data).toLocaleDateString()
+                        formInputs[key].data = new Date(formInputs[key].data).toISOString()
                     } else {
                         formInputs[key].mask();
                     } 
@@ -904,9 +904,11 @@ window.divulgadores.controllers.RegisterController = (function(){
     }
 
     var renderHCaptcha = function() {
-        hcaptchaParams.widgetId = hcaptcha.render('h-captcha', {
-            sitekey: window.divulgadores.configs.captchaKey
-        })
+        if (!auth.isLoggedToken()) {
+            hcaptchaParams.widgetId = hcaptcha.render('h-captcha', {
+                sitekey: window.divulgadores.configs.captchaKey
+            })
+        }
     }
     
     return {
