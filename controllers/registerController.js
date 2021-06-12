@@ -544,8 +544,10 @@ window.divulgadores.controllers.RegisterController = (function(){
                 this.data = this.data.replace(/(\d{2})(\d{2})$/,"$1$2");
             },
             unmask: function () {
-                var formated = this.data.split('/');
-                formated = formated[1]+"-"+formated[0]+"-"+formated[2];
+                var timezone = new Date().toISOString().slice(10)
+                var temp = this.data.split('/');
+                var formated = temp[2]+"-"+temp[1]+"-"+temp[0]+timezone;
+                formated = new Date(formated)
                 return formated;
             }
         },
@@ -904,9 +906,11 @@ window.divulgadores.controllers.RegisterController = (function(){
     }
 
     var renderHCaptcha = function() {
-        hcaptchaParams.widgetId = hcaptcha.render('h-captcha', {
-            sitekey: window.divulgadores.configs.captchaKey
-        })
+        if (!auth.isLoggedToken()) {
+            hcaptchaParams.widgetId = hcaptcha.render('h-captcha', {
+                sitekey: window.divulgadores.configs.captchaKey
+            })
+        }
     }
     
     return {
