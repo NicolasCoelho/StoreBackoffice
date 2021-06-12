@@ -19,6 +19,12 @@ var auth = (function () {
         return !isTokenExpired();
     }
 
+    var isLoggedToken = function() {
+        if (!hasToken()) return false;
+        var data = getTokenData();
+        return data.t > 1;
+    }
+
     var hasToken = function () {
         return (
             token !== null &&
@@ -33,6 +39,7 @@ var auth = (function () {
     }
 
     var isTokenExpired = function () {
+        if (!hasToken()) return true; 
         var data = getTokenData();
         return (Date.now().valueOf() / 1000) > data.exp;
     }
@@ -64,6 +71,7 @@ var auth = (function () {
 
     return {
         getToken,
+        isLoggedToken,
         setToken,
         isAuthenticaded,
         hasToken,

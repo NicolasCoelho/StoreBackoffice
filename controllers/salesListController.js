@@ -30,7 +30,7 @@ window.divulgadores.controllers.SalesListController = (function(){
         totalPages:0,
         currentPage: 1,
         params: {
-            size: 25,
+            size: 10,
             page: 1
         }
     }
@@ -73,15 +73,23 @@ window.divulgadores.controllers.SalesListController = (function(){
     var previousPage = function() {
         if (table.currentPage > 1 && table.currentPage <= table.totalPages) {
             table.params.page--;
-            getUsers();
+            getSales();
         }
     }
 
     var nextPage = function() {
         if (table.currentPage >= 1 && table.currentPage < table.totalPages) {
             table.params.page++;
-            getUsers();
+            getSales();
         }
+    }
+
+    var openExtendable = function(event) {
+        var exdendable = event.target.parentElement.parentElement.parentElement.querySelectorAll('.extends');
+        if (exdendable.length === 0) {
+            exdendable = event.target.parentElement.parentElement.parentElement.parentElement.querySelectorAll('.extends');
+        }
+        return exdendable.length > 0 ? exdendable.forEach(el=>el.classList.toggle('open')) : null;
     }
 
     return {
@@ -93,6 +101,7 @@ window.divulgadores.controllers.SalesListController = (function(){
         getSales,
         setStatusFilter,
         nextPage,
-        previousPage
+        previousPage,
+        openExtendable
     }
 })();

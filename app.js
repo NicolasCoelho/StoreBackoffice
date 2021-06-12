@@ -118,8 +118,22 @@
         }
     };
     var dashboardLinksGeneratorPage = {};
-    var dashboardTrainingPage = {};
-    var dasboardHelpPage = {};
+    var dashboardTrainingPage = {
+        data: function() {
+            return {
+                controller: contractController,
+                user: auth
+            }
+        }
+    };
+    var dasboardHelpPage = {
+        data: function() {
+            return {
+                controller: contractController,
+                user: auth
+            }
+        }
+    };
     var dashboardChangePasswordPage = {};
     var dashboardCustumerDataPage = {};
     var dashboardContractPage = {
@@ -274,8 +288,11 @@
                 return {
                     currentRoute: window.location.href.split('#')[1],
                     logOut: auth.logOut,
-                    myAccout: function (router) {
+                    myAccount: function (router) {
                         router.replace('/dashboard');
+                    },
+                    goToHome: function() {
+                        router.replace('/');
                     },
                     isAuthenticaded: auth.isAuthenticaded,
                     user: auth.getTokenData,
@@ -313,6 +330,9 @@
             },
             beforeMount: function () {
                 registerController.getUserRequirements();
+            },
+            mounted: function () {
+                registerController.renderHCaptcha();
             },
             template: registerFormComponent   
         });
@@ -372,6 +392,7 @@
             template: modalComponent
         });
         Vue.component('app-contract', {
+            props: ['type'],
             data: function() {
                 return {
                     controller: contractController
@@ -489,6 +510,7 @@
                     var app = new Vue({
                         router
                     }).$mount('#app');
+                    utils.tokenVerifier();
                 }
             ).catch(
                 function(err){
@@ -498,6 +520,7 @@
                     } else {
                         document.querySelector("#app").innerHTML = '';
                         window.alert("Erro inesperado. Por favor tente mais tarde");
+                        window.location.reload();
                     }
                     console.error(err);
                 }
@@ -506,6 +529,7 @@
             var app = new Vue({
                 router
             }).$mount('#app');
+            utils.tokenVerifier();
         }
     } 
 })();

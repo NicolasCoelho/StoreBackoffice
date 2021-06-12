@@ -45,7 +45,7 @@
                     Gerador de links
                 </router-link>
             </li>
-            <li v-on:click="menu.changeScreen($event)" v-if="!user.isAdmin()">
+            <li v-on:click="menu.changeScreen($event)">
                 <router-link to="/dashboard/material-de-treinamento">
                     Material de treinamento
                 </router-link>
@@ -70,7 +70,7 @@
                     </li>
                 </ul>
             </li>
-            <li v-on:click="menu.changeScreen($event)" v-if="!user.isAdmin()">
+            <li v-on:click="menu.changeScreen($event)">
                 <router-link to="/dashboard/ajuda">Ajuda</router-link>
             </li>
         </ul>

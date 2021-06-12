@@ -43,36 +43,52 @@
             <div class="center" v-if="controller.table.totalItems === 0">
                 <h2>Nenhuma venda realizada nesse período</h2>
             </div>
-            <table v-if="controller.table.totalItems > 0 && controller.sales.length > 0">
+            <table v-if="controller.table.totalItems > 0 && controller.sales.length > 0" class="salesTable">
                 <thead>
                     <tr>
-                        <th style="width: 20%;">Nome do produto</th>
-                        <th style="width: 20%;">Quantidade</th>
-                        <th style="width: 20%;">Valor do produto</th>
-                        <th style="width: 15%;">Total da venda</th>
-                        <th style="width: 15%;">Comissão</th>
-                        <th style="width: 10%;">Id do pedido</th>
+                        <th>Id do pedido</th>
+                        <th>Produtos</th>
+                        <th>Quantidade</th>
+                        <th>Total da venda</th>
+                        <th>Comissão</th>
+                        <th>Data</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="sale in controller.sales">
-                        <td>{{ sale.productName }}</td>
-                        <td>{{ sale.qtd }}</td>
-                        <td>{{ sale.productPrice }}</td>
-                        <td>{{ sale.total }}</td>
-                        <td>{{ sale.comission }}</td>
-                        <td>{{ sale.orderNumber }}</td>
+                        <td colspan="6">
+                            <tr>
+                                <td>{{ sale.orderNumber }}</td>
+                                <td> <button class="click" v-on:click="controller.openExtendable($event)">{{ sale.products.length }} produto(s) <i class="fa fa-chevron-down"></i> </button> </td>
+                                <td>{{ sale.qtd }}</td>
+                                <td>{{ sale.total }}</td>
+                                <td>{{ sale.comission }}</td>
+                                <td>{{ utils.formatDate(sale.createdAt) }}</td>
+                            </tr>
+                            <tr class="extends" v-for="product in sale.products">
+                                <td colspan="6">
+                                    <tr style="display: table; width: 100%;">
+                                        <td>&hellip;</td>
+                                        <td>{{ product.name }}</td>
+                                        <td>{{ product.qtd }}</td>
+                                        <td>{{ (product.qtd * product.price).toFixed(2) }}</td>
+                                        <td>&hellip;</td>
+                                        <td>&hellip;</td>
+                                    </tr>
+                                </td>
+                            </tr>
+                        </td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td><strong>Total:</strong> {{ controller.table.totalItems }}</td>
                         <td colspan="5" style="text-align: right;">
-                            <i class="fas fa-chevron-left" title="Página anterior" v-on:click="controller.previousPage()"></i>
+                            <i class="fas fa-chevron-left click" title="Página anterior" v-on:click="controller.previousPage()"></i>
                             &nbsp;
                             Pagina {{ controller.table.currentPage }} de {{ controller.table.totalPages }}
                             &nbsp;
-                            <i class="fas fa-chevron-right" title="Próxima página" v-on:click="controller.nextPage()"></i>
+                            <i class="fas fa-chevron-right click" title="Próxima página" v-on:click="controller.nextPage()"></i>
                         </td>
                     </tr>
                 </tfoot>

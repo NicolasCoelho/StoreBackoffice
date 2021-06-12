@@ -1,24 +1,7 @@
 <div id="HomePage">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
-        <header class="container">
-            <div class="header-content row justify-content-between align-items-center">
-                <div class="logo">
-                    <img :src="[configs.logo.src]" :width="[configs.logo.width]" :height="[configs.logo.height]" alt="Logo">
-                </div>
-                <div v-if="!auth.isAuthenticaded()" class="account align-right">
-                    <router-link to="/cadastro" class="">Faça seu cadastro</router-link>
-                    &nbsp;
-                    &bull;
-                    &nbsp;
-                    <router-link to="/dashboard"  class="">Acessar minha área</router-link>
-                </div>
-                <div v-if="auth.isAuthenticaded()" class="account align-right">
-                    <span v-on:click="myAccout($router)" style="margin: 0px 20px;" class="click"><i class="far fa-user-circle"></i> {{ auth.getTokenData().n }}</span>
-                    <span v-on:click="logOut($router)" class="click"><i class="fas fa-sign-out-alt"></i> LogOut</span>
-                </div>
-            </div>
-        </header>
+        <app-header></app-header>    
         <main>
             <section class="home-banner">
                 <div class="container">

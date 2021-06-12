@@ -8,6 +8,11 @@ window.divulgadores.controllers.RegisterController = (function(){
     
     var userId = 0;
 
+    var hcaptchaParams = {
+        widgetId: '',
+        response: ''
+    } 
+
     var optionsLists = {
         maritalStatus: [
             { viewValue: 'Selecione', value: null },
@@ -338,11 +343,12 @@ window.divulgadores.controllers.RegisterController = (function(){
             data:'',
             required: true,
             hasErrors: false,
-            errorMessage: '* Digite seu nome completo',
+            errorMessage: 'Digite seu nome corretamente',
             validate: function () {
                 var data = this.data;
                 this.hasErrors = (
-                    data.length < 4
+                    data.length < 4 ||
+                    data.search('[1-9]') >= 0
                 );
                 return !this.hasErrors;
             }
@@ -351,11 +357,12 @@ window.divulgadores.controllers.RegisterController = (function(){
             data:'',
             required: true,
             hasErrors: false,
-            errorMessage: '* Digite sua senha',
+            errorMessage: 'Sua senha precisa conter no mínimo 6 caracteres',
             validate: function () {
                 var data = this.data;
                 this.hasErrors = (
-                    data.length === 0
+                    data.length === 0 ||
+                    data.length < 6
                 );
                 return !this.hasErrors;
             }
@@ -366,18 +373,19 @@ window.divulgadores.controllers.RegisterController = (function(){
             hasErrors: false,
             isValid: true,
             errorMessage: 'Digite seu email corretamente',
-            errorDefault: 'Campo Obrigatório',
+            errorDefault: 'Digite seu email corretamente',
             validate: function () {
                 var data = this.data;
                 var isValid = this.isValid
                 this.hasErrors = (
-                    data.length === 0 &&
-                    data.length < 5
+                    data.length === 0 ||
+                    data.length < 5 ||
+                    data.indexOf('@') === -1
                 ) || !isValid;
                 return !this.hasErrors;
             },
             verifyEmail: function() {
-                if (this.data.length >= 5) {
+                if (this.data.length >= 5 && this.data.indexOf('@') !== -1) {
                     var scope = this;   
                     ws.verifyUser({email: this.data}).then(function(response){
                         if (response.data.exists) {
@@ -462,13 +470,13 @@ window.divulgadores.controllers.RegisterController = (function(){
             required: true,
             hasErrors: false,
             isValid: true,
-            errorMessage: 'Campo Obrigatório',
-            errorDefault: 'Campo Obrigatório',
+            errorMessage: 'Digite seu CPF corretamente',
+            errorDefault: 'Digite seu CPF corretamente',
             validate: function () {
                 var data = this.data;
                 var isValid = this.isValid
                 this.hasErrors = (
-                    data.length < 14
+                    data.length < 14 || data.length > 14
                 ) || !isValid;
                 return !this.hasErrors;
             },
@@ -821,9 +829,10 @@ window.divulgadores.controllers.RegisterController = (function(){
     var register = function(router,event, modal, loading) {
         event.preventDefault();
         var validation = validateForm();
-        if (validation.isValid) { 
+        hcaptchaParams.response = hcaptcha.getResponse(hcaptchaParams.widgetId);
+        if (validation.isValid && hcaptchaParams.response !== "") { 
             loading.toogleLoad();
-            ws.register(validation.payload).then(
+            ws.register(validation.payload, hcaptchaParams.response).then(
                 function (response) {
                     auth.setToken(response.data.token);
                     loading.toogleLoad();
@@ -893,6 +902,12 @@ window.divulgadores.controllers.RegisterController = (function(){
             }
         })
     }
+
+    var renderHCaptcha = function() {
+        hcaptchaParams.widgetId = hcaptcha.render('h-captcha', {
+            sitekey: window.divulgadores.configs.captchaKey
+        })
+    }
     
     return {
         formInputs,
@@ -903,6 +918,7 @@ window.divulgadores.controllers.RegisterController = (function(){
         saveUser,
         register,
         getUserRequirements,
-        setDataToEdit
+        setDataToEdit,
+        renderHCaptcha
     };
 })();
