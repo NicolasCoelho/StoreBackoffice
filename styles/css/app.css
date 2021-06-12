@@ -61,19 +61,59 @@ table {
                 overflow-x: scroll;
             }
         }
-    thead tr {
+    thead > tr {
         background: var(--table-header-bg);
         color: var(--table-header-color);
     }
-	tbody tr:nth-child(even) {
+	tbody > tr:nth-child(even) {
 		background: var(--table-variation);
 	}
-	td, th {
+	table > tbody > tr > td, table > thead > tr > th {
 		padding: var(--table-padding);
 	}
 	thead th, tbody td {
 		text-align: var(--table-text-align);
 	}
+    table.salesTable td:nth-child(1),table.salesTable th:nth-child(1) {
+        width: 15%;
+    }
+    table.salesTable td:nth-child(2),table.salesTable th:nth-child(2) {
+        width: 20%;
+    }
+    table.salesTable td:nth-child(3),table.salesTable th:nth-child(3) {
+        width: 15%;
+    }
+    table.salesTable td:nth-child(4),table.salesTable th:nth-child(4) {
+        width: 20%;
+    }
+    table.salesTable td:nth-child(5),table.salesTable th:nth-child(5) {
+        width: 15%;
+    }
+    table.salesTable td:nth-child(6),table.salesTable th:nth-child(6) {
+        width: 15%;
+    }
+
+    table.salesTable > tbody > tr > td > tr {
+        display: table; 
+        width: 100%;
+    }
+
+    table.salesTable > tbody > tr > td > tr.extends {
+        display: none;
+    }
+    table.salesTable > tbody > tr > td > tr.extends.open {
+        display: table;
+    }
+    table.salesTable > tbody > tr > td > tr.extends > td {
+        padding: 10px 0px;
+    }
+    table.salesTable > tbody > tr > td > tr> td > button{
+        width: 100%; 
+        background: inherit;
+        box-shadow: none; 
+        border: none; 
+        color: var(--input-color);
+    }
 
 label {
     margin-bottom: 10px;

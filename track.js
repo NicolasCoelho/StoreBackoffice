@@ -92,8 +92,8 @@
                 
                 var newProduct = new Object();
                 newProduct.productId = item.ProductID;
-                newProduct.productName = item.Name;
-                newProduct.productPrice = item.RetailPrice
+                newProduct.name = item.Name;
+                newProduct.price = item.RetailPrice
                 newProduct.qtd = item.Quantity;
                 newProduct.skuId = item.SkuID || 0;
 
