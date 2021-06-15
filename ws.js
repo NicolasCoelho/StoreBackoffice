@@ -11,7 +11,7 @@ var Ws = function (httpClient){
         Authorization: "Basic " + sessionStorage.getItem("Token")
     };
 
-    this.tokenInterceptor = function (request) {
+    this.tokenInterceptor = (request) => {
         if (auth.hasToken() && auth.isTokenExpired()) {
             if (auth.isLoggedToken()) {
                 alert("Sua sessão expirou. Faça o login novamente.")
@@ -22,127 +22,127 @@ var Ws = function (httpClient){
         return request;
     }
 
-    this.interceptorError = function(error) {
+    this.interceptorError = (error) => {
         return Promise.reject(error);
     }
 
     this.http.interceptors.request.use(this.tokenInterceptor, this.interceptorError)
 
-    this.updateHeaders = function(newToken) {
-        headers.Authorization = "Basic " + newToken; 
+    this.updateHeaders = (newToken) => {
+        this.headers.Authorization = "Basic " + newToken; 
     }
 
-    this.getToken = function() {
-        return http.post(apiUrl+"token", {storeId: id}).then(
-            function(response) {
-                headers.Authorization = "Basic " + response.data.token;
+    this.getToken = () => {
+        return this.http.post(this.apiUrl+"token", {storeId: this.id}).then(
+            (response) => {
+                this.headers.Authorization = "Basic " + response.data.token;
                 return response;
             }
         )
     }
     
-    this.authenticate = function (user, password) {
-        return http.post(apiUrl+'auth', {username: user, password: password}, { headers }).then(
-            function(response) {
-                headers.Authorization = "Basic " + response.data.token;
+    this.authenticate = (user, password) => {
+        return this.http.post(this.apiUrl+'auth', {username: user, password: password}, {headers: this.headers}).then(
+            (response) => {
+                this.headers.Authorization = "Basic " + response.data.token;
                 return response;
             }
         )
     };
 
-    this.register = function (payload, captcha) {
+    this.register = (payload, captcha) => {
         var tempHeaders = new Object();
         Object.assign(tempHeaders, headers);
         tempHeaders.Captcha = captcha;
-        return http.post(apiUrl+"register", payload, {headers: tempHeaders}).then(
-            function (response) {
+        return this.http.post(this.apiUrl+"register", payload, {headers: tempHeaders}).then(
+            (response) => {
                 auth.setToken(response.data.token);
                 return response;
             }
         )
     };
 
-    this.getRegisterOptions = function () {
-        return http.get(apiUrl+"registerOptions", {headers});
+    this.getRegisterOptions = () => {
+        return this.http.get(this.apiUrl+"registerOptions", {headers: this.headers});
     }
 
-    this.findCep = function (cep) {
+    this.findCep = (cep) => {
         cep = cep.replace('-','');
-        return http.get(viacepUrl+cep+"/json");
+        return this.http.get(this.viacepUrl+cep+"/json");
     }
 
-    this.getUserRequirements = function (storeId) {
-        return http.get(apiUrl+"userRequirements/"+storeId+"/store", {headers});
+    this.getUserRequirements = (storeId) => {
+        return this.http.get(this.apiUrl+"userRequirements/"+storeId+"/store", {headers: this.headers});
     }
 
-    this.changeRequirements = function(id, payload) {
-        return http.put(apiUrl+"userRequirements/"+id, payload, {headers});
+    this.changeRequirements = (id, payload) => {
+        return this.http.put(this.apiUrl+"userRequirements/"+id, payload, {headers: this.headers});
     }
 
-    this.getUsers = function(params) {
-        var queryString = setUrlParams(params);
-        return http.get(apiUrl+'users'+queryString, {headers});
+    this.getUsers = (params) => {
+        var queryString = this.setUrlParams(params);
+        return this.http.get(this.apiUrl+'users'+queryString, {headers: this.headers});
     }
 
-    this.getUserByPublicId = function(userId) {
-        return http.get(apiUrl+"user/"+userId, {headers});
+    this.getUserByPublicId = (userId) => {
+        return this.http.get(this.apiUrl+"user/"+userId, {headers: this.headers});
     }
 
-    this.changeUser = function(userId, payload) {
-        return http.put(apiUrl+'user/'+userId, payload, {headers})
+    this.changeUser = (userId, payload) => {
+        return this.http.put(this.apiUrl+'user/'+userId, payload, {headers: this.headers})
     }
 
-    this.changeUserStatus = function(userId, payload) {
-        return http.put(apiUrl+'user/'+userId+'/changeStatus', payload, {headers});
+    this.changeUserStatus = (userId, payload) => {
+        return this.http.put(this.apiUrl+'user/'+userId+'/changeStatus', payload, {headers: this.headers});
     }
 
-    this.denyUserRegister = function(userId, payload) {
-        return http.post(apiUrl+'user/'+userId+'/register/deny', payload, {headers})
+    this.denyUserRegister = (userId, payload) => {
+        return this.http.post(this.apiUrl+'user/'+userId+'/register/deny', payload, {headers: this.headers})
     }
 
-    this.verifyUser = function (payload) {
-        return http.post(apiUrl+"user/verify", payload, {headers});
+    this.verifyUser = (payload) => {
+        return this.http.post(this.apiUrl+"user/verify", payload, {headers: this.headers});
     }
 
-    this.getUserShareInfos = function(userId) {
-        return http.get(apiUrl+"user/"+userId+"/shareInfos", {headers});
+    this.getUserShareInfos = (userId) => {
+        return this.http.get(this.apiUrl+"user/"+userId+"/shareInfos", {headers: this.headers});
     }
 
-    this.getContract = function (storeId) {
-        return http.get(apiUrl+"contract/"+storeId, {headers});
+    this.getContract = (storeId) => {
+        return this.http.get(this.apiUrl+"contract/"+storeId, {headers: this.headers});
     }
 
-    this.changeContract = function (id, payload) {
-        return http.put(apiUrl+"contract/"+id, payload, {headers}); 
+    this.changeContract = (id, payload) => {
+        return this.http.put(this.apiUrl+"contract/"+id, payload, {headers: this.headers}); 
     }
 
-    this.getStore = function () {
-        return http.get(apiUrl+"store", {headers});
+    this.getStore = () => {
+        return this.http.get(this.apiUrl+"store", {headers: this.headers});
     }
 
-    this.changeStore = function(payload) {
-        return http.put(apiUrl+"store", payload, {headers});
+    this.changeStore = (payload) => {
+        return this.http.put(this.apiUrl+"store", payload, {headers: this.headers});
     }
 
-    this.getSalesStatus = function(storeId) {
-        return http.get(apiUrl+'salesStatus/'+storeId+"/store", {headers});
+    this.getSalesStatus = (storeId) => {
+        return this.http.get(this.apiUrl+'salesStatus/'+storeId+"/store", {headers: this.headers});
     }
 
-    this.changeSalesStatus = function(id, payload) {
-        return http.put(apiUrl+'salesStatus/'+id, payload, {headers});
+    this.changeSalesStatus = (id, payload) => {
+        return this.http.put(this.apiUrl+'salesStatus/'+id, payload, {headers: this.headers});
     }
 
-    this.getSales = function(params) {
-        var queryString = setUrlParams(params);
-        return http.get(apiUrl+'sales'+queryString, {headers});
+    this.getSales = (params) => {
+        var queryString = this.setUrlParams(params);
+        return this.http.get(this.apiUrl+'sales'+queryString, {headers: this.headers});
     }
     
-    this.getSalesStats = function(params) {
-        var queryString = setUrlParams(params);
-        return http.get(apiUrl+'sales/stats/all'+queryString, {headers})
+    this.getSalesStats = (params) => {
+        var queryString = this.setUrlParams(params);
+        return this.http.get(this.apiUrl+'sales/stats/all'+queryString, {headers: this.headers})
     }
 
-    this.setUrlParams = function(params) {
+    this.setUrlParams = (params) => {
         var queryString = ""; 
         Object.keys(params).forEach(function(key){
             queryString += queryString === '' ? '?' : '&';
@@ -151,28 +151,28 @@ var Ws = function (httpClient){
         return queryString
     }
 
-    this.getPayments = function(params) {
-        var queryString = setUrlParams(params);
-        return http.get(apiUrl+'payments'+queryString, {headers});
+    this.getPayments = (params) => {
+        var queryString = this.setUrlParams(params);
+        return this.http.get(this.apiUrl+'payments'+queryString, {headers: this.headers});
     }
 
-    this.getPaymentDetails = function(paymentId) {
-        return http.get(apiUrl+'payment/'+paymentId, {headers});
+    this.getPaymentDetails = (paymentId) => {
+        return this.http.get(this.apiUrl+'payment/'+paymentId, {headers: this.headers});
     }
 
-    this.changePaymentStatus = function(paymentId, payload) {
-        return http.put(apiUrl+'payment/'+paymentId+'/changeStatus', payload, {headers});
+    this.changePaymentStatus = (paymentId, payload) => {
+        return this.http.put(this.apiUrl+'payment/'+paymentId+'/changeStatus', payload, {headers: this.headers});
     }
-    this.getPaymentsStats = function(params={}) {
-        var queryString = setUrlParams(params);
-        return http.get(apiUrl+'payments/stats/all'+queryString, {headers})
-    }
-
-    this.sendRecoveryEmail = function(payload) {
-        return http.post(apiUrl+"auth/recovery", payload, {headers});
+    this.getPaymentsStats = (params={}) => {
+        var queryString = this.setUrlParams(params);
+        return this.http.get(this.apiUrl+'payments/stats/all'+queryString, {headers: this.headers})
     }
 
-    this.changePassword = function(payload) {
-        return http.post(apiUrl+"auth/changePassword", payload, {headers});
+    this.sendRecoveryEmail = (payload) => {
+        return this.http.post(this.apiUrl+"auth/recovery", payload, {headers: this.headers});
+    }
+
+    this.changePassword = (payload) => {
+        return this.http.post(this.apiUrl+"auth/changePassword", payload, {headers: this.headers});
     }
 }
