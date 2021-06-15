@@ -46,6 +46,7 @@
     Promise.all(requests).then(function(){
         addElement('dependencies/vue-router.js').then(
             function(){
+                window.ws = new Ws(window.axios);
                 addElement('app.js');
             }
         )
