@@ -1,16 +1,17 @@
-var ws = (function (){
-    var http = axios.create();
+'use strict';
+var Ws = function (httpClient){
+    this.http = httpClient.create();
 
-    var apiUrl = window.divulgadores.configs.wsUrl;
-    var staticUrl = window.divulgadores.configs.staticUrl;
-    var viacepUrl = "https://viacep.com.br/ws/";
-    var id = window.divulgadores.configs.id;
+    this.apiUrl = window.divulgadores.configs.wsUrl;
+    this.staticUrl = window.divulgadores.configs.staticUrl;
+    this.viacepUrl = "https://viacep.com.br/ws/";
+    this.id = window.divulgadores.configs.id;
 
-    var headers = {
+    this.headers = {
         Authorization: "Basic " + sessionStorage.getItem("Token")
     };
 
-    var tokenInterceptor = function (request) {
+    this.tokenInterceptor = function (request) {
         if (auth.hasToken() && auth.isTokenExpired()) {
             if (auth.isLoggedToken()) {
                 alert("Sua sessão expirou. Faça o login novamente.")
@@ -21,17 +22,17 @@ var ws = (function (){
         return request;
     }
 
-    var interceptorError = function(error) {
+    this.interceptorError = function(error) {
         return Promise.reject(error);
     }
 
-    http.interceptors.request.use(tokenInterceptor, interceptorError)
+    this.http.interceptors.request.use(this.tokenInterceptor, this.interceptorError)
 
-    var updateHeaders = function(newToken) {
+    this.updateHeaders = function(newToken) {
         headers.Authorization = "Basic " + newToken; 
     }
 
-    var getToken = function() {
+    this.getToken = function() {
         return http.post(apiUrl+"token", {storeId: id}).then(
             function(response) {
                 headers.Authorization = "Basic " + response.data.token;
@@ -40,7 +41,7 @@ var ws = (function (){
         )
     }
     
-    var authenticate = function (user, password) {
+    this.authenticate = function (user, password) {
         return http.post(apiUrl+'auth', {username: user, password: password}, { headers }).then(
             function(response) {
                 headers.Authorization = "Basic " + response.data.token;
@@ -49,7 +50,7 @@ var ws = (function (){
         )
     };
 
-    var register = function (payload, captcha) {
+    this.register = function (payload, captcha) {
         var tempHeaders = new Object();
         Object.assign(tempHeaders, headers);
         tempHeaders.Captcha = captcha;
@@ -61,87 +62,87 @@ var ws = (function (){
         )
     };
 
-    var getRegisterOptions = function () {
+    this.getRegisterOptions = function () {
         return http.get(apiUrl+"registerOptions", {headers});
     }
 
-    var findCep = function (cep) {
+    this.findCep = function (cep) {
         cep = cep.replace('-','');
         return http.get(viacepUrl+cep+"/json");
     }
 
-    var getUserRequirements = function (storeId) {
+    this.getUserRequirements = function (storeId) {
         return http.get(apiUrl+"userRequirements/"+storeId+"/store", {headers});
     }
 
-    var changeRequirements = function(id, payload) {
+    this.changeRequirements = function(id, payload) {
         return http.put(apiUrl+"userRequirements/"+id, payload, {headers});
     }
 
-    var getUsers = function(params) {
+    this.getUsers = function(params) {
         var queryString = setUrlParams(params);
         return http.get(apiUrl+'users'+queryString, {headers});
     }
 
-    var getUserByPublicId = function(userId) {
+    this.getUserByPublicId = function(userId) {
         return http.get(apiUrl+"user/"+userId, {headers});
     }
 
-    var changeUser = function(userId, payload) {
+    this.changeUser = function(userId, payload) {
         return http.put(apiUrl+'user/'+userId, payload, {headers})
     }
 
-    var changeUserStatus = function(userId, payload) {
+    this.changeUserStatus = function(userId, payload) {
         return http.put(apiUrl+'user/'+userId+'/changeStatus', payload, {headers});
     }
 
-    var denyUserRegister = function(userId, payload) {
+    this.denyUserRegister = function(userId, payload) {
         return http.post(apiUrl+'user/'+userId+'/register/deny', payload, {headers})
     }
 
-    var verifyUser = function (payload) {
+    this.verifyUser = function (payload) {
         return http.post(apiUrl+"user/verify", payload, {headers});
     }
 
-    var getUserShareInfos = function(userId) {
+    this.getUserShareInfos = function(userId) {
         return http.get(apiUrl+"user/"+userId+"/shareInfos", {headers});
     }
 
-    var getContract = function (storeId) {
+    this.getContract = function (storeId) {
         return http.get(apiUrl+"contract/"+storeId, {headers});
     }
 
-    var changeContract = function (id, payload) {
+    this.changeContract = function (id, payload) {
         return http.put(apiUrl+"contract/"+id, payload, {headers}); 
     }
 
-    var getStore = function () {
+    this.getStore = function () {
         return http.get(apiUrl+"store", {headers});
     }
 
-    var changeStore = function(payload) {
+    this.changeStore = function(payload) {
         return http.put(apiUrl+"store", payload, {headers});
     }
 
-    var getSalesStatus = function(storeId) {
+    this.getSalesStatus = function(storeId) {
         return http.get(apiUrl+'salesStatus/'+storeId+"/store", {headers});
     }
 
-    var changeSalesStatus = function(id, payload) {
+    this.changeSalesStatus = function(id, payload) {
         return http.put(apiUrl+'salesStatus/'+id, payload, {headers});
     }
 
-    var getSales = function(params) {
+    this.getSales = function(params) {
         var queryString = setUrlParams(params);
         return http.get(apiUrl+'sales'+queryString, {headers});
     }
     
-    var getSalesStats = function(params) {
+    this.getSalesStats = function(params) {
         var queryString = setUrlParams(params);
         return http.get(apiUrl+'sales/stats/all'+queryString, {headers})
     }
 
-    var setUrlParams = function(params) {
+    this.setUrlParams = function(params) {
         var queryString = ""; 
         Object.keys(params).forEach(function(key){
             queryString += queryString === '' ? '?' : '&';
@@ -150,66 +151,28 @@ var ws = (function (){
         return queryString
     }
 
-    var getPayments = function(params) {
+    this.getPayments = function(params) {
         var queryString = setUrlParams(params);
         return http.get(apiUrl+'payments'+queryString, {headers});
     }
 
-    var getPaymentDetails = function(paymentId) {
+    this.getPaymentDetails = function(paymentId) {
         return http.get(apiUrl+'payment/'+paymentId, {headers});
     }
 
-    var changePaymentStatus = function(paymentId, payload) {
+    this.changePaymentStatus = function(paymentId, payload) {
         return http.put(apiUrl+'payment/'+paymentId+'/changeStatus', payload, {headers});
     }
-    var getPaymentsStats = function(params={}) {
+    this.getPaymentsStats = function(params={}) {
         var queryString = setUrlParams(params);
         return http.get(apiUrl+'payments/stats/all'+queryString, {headers})
     }
 
-    var sendRecoveryEmail = function(payload) {
+    this.sendRecoveryEmail = function(payload) {
         return http.post(apiUrl+"auth/recovery", payload, {headers});
     }
 
-    var changePassword = function(payload) {
+    this.changePassword = function(payload) {
         return http.post(apiUrl+"auth/changePassword", payload, {headers});
     }
-    
-    return {
-        http,
-        tokenInterceptor,
-        interceptorError,
-        apiUrl,
-        staticUrl,
-        setUrlParams,
-        updateHeaders,
-        getToken,
-        authenticate,
-        register,
-        findCep,
-        getUserRequirements,
-        getRegisterOptions,
-        getUsers,
-        getUserByPublicId,
-        changeUser,
-        changeUserStatus,
-        denyUserRegister,
-        verifyUser,
-        getUserShareInfos,
-        getContract,
-        changeContract,
-        getStore,
-        changeStore,
-        changeRequirements,
-        getSalesStatus,
-        changeSalesStatus,
-        getSales,
-        getSalesStats,
-        getPayments,
-        getPaymentDetails,
-        changePaymentStatus,
-        getPaymentsStats,
-        sendRecoveryEmail,
-        changePassword
-    };
-})();
+}

@@ -1,6 +1,11 @@
 (function(){
     // Configs
     var configs = window.divulgadores.configs
+    
+    // Ws
+    if(window.ws === null || window.ws === undefined || typeof(window.ws) !== 'object') {
+        window.ws = new Ws(axios);
+    }
 
     //Import controllers
     var loginController = new Object();
@@ -271,15 +276,6 @@
         axios(ws.staticUrl+'pages/404.html')
         .then(function(page){notFoundPage.template=page.data}),
     ];
-
-    // Start app after download all pages
-    var importsRequests = componentsRequests.concat(pagesRequests);
-    Promise.all(importsRequests).then( (complete) => {
-        init();
-    }).catch( (error) => {
-        console.log("Pages Download error", error);
-        alert("Erro de conexão... Tente mais tarde!");
-    })
         
     function init() {
         // Set components
@@ -532,4 +528,13 @@
             utils.tokenVerifier();
         }
     } 
+
+    // Start app after download all pages
+    var importsRequests = componentsRequests.concat(pagesRequests);
+    Promise.all(importsRequests).then( (complete) => {
+        init();
+    }).catch( (error) => {
+        console.log("Pages Download error", error);
+        alert("Erro de conexão... Tente mais tarde!");
+    })
 })();
