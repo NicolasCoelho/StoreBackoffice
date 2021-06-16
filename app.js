@@ -528,10 +528,16 @@
             utils.tokenVerifier();
         }
     } 
+    
+    function removePreLoader() {
+        var loader = document.querySelector('#preLoader');
+        if (loader) { loader.remove(); } 
+    };
 
     // Start app after download all pages
     var importsRequests = componentsRequests.concat(pagesRequests);
     Promise.all(importsRequests).then( (complete) => {
+        removePreLoader();
         init();
     }).catch( (error) => {
         console.log("Pages Download error", error);
