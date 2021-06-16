@@ -80,7 +80,7 @@
     function preLoader() {
         var loader = document.querySelector("#preLoader");
         if (!loader) {
-            document.querySelector('#app').innerHTML += `<div id="preLoader" style="width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center;"><img src="${url}styles/images/loader1.gif" alt="carregando" style="width: 120px;"></div>`;
+            document.querySelector('#app').innerHTML += `<div id="preLoader" style="width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center;"><img src="${url}styles/images/loader1.gif" alt="carregando" style="width: 50px;"></div>`;
         }
     }
 })();
