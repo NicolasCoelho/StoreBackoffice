@@ -109,7 +109,7 @@ window.divulgadores.controllers.LoginController = (function(){
         }
     }
 
-    var goToHome = function($router) {
+    var goToHome = function(router) {
         router.replace('/');
     }
 
