@@ -10,7 +10,10 @@
 <script src="http://divulgadores.com:3000/store/8a5fb828-7ffd-4d79-a3a5-cda0a70475ee/configs/dynamic/js"></script>
     
 -->
-    <div id="app"><router-view></router-view></div>
+    <div id="app">
+        <div id="preLoader" style="width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center;"><img src="https://static.tst.divulgadores.app.br/styles/images/loader1.gif" alt="Carregando" style="width: 80px;"></div>
+        <router-view></router-view>
+    </div>
     <script src="https://ws.tst.divulgadores.app.br/store/5fdf3897-3516-48ae-bcf8-077fe64f8d1e/configs/dynamic/js"></script>
     <script src="/autoload.js"></script>
 </body>
