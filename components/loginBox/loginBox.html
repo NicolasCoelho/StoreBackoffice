@@ -1,6 +1,6 @@
 <div id="LoginBoxComponent">
     <div class="logo-login-container">
-        <img :src=[configs.logo.src] width="150" alt="Logo">
+        <img :src=[configs.logo.src] width="150" alt="Logo" v-on:click="goToHome($router)" class="click">
     </div>
     <div class="login-container" v-if="!controller.isRecovery">
         <form id="authForm">
