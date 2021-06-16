@@ -109,6 +109,10 @@ window.divulgadores.controllers.LoginController = (function(){
         }
     }
 
+    var goToHome = function(router) {
+        router.replace('/');
+    }
+
     return {
         isRecovery,
         formInputs,
@@ -118,6 +122,7 @@ window.divulgadores.controllers.LoginController = (function(){
         recover,
         setRecovery,
         setRecoveryMessage,
-        submit
+        submit,
+        goToHome
     };
 })();

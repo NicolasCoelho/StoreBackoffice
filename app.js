@@ -287,7 +287,7 @@
                     myAccount: function (router) {
                         router.replace('/dashboard');
                     },
-                    goToHome: function() {
+                    goToHome: function(router) {
                         router.replace('/');
                     },
                     isAuthenticaded: auth.isAuthenticaded,
@@ -426,18 +426,7 @@
         });
         
         var routes = [
-            { path: '/', component: homePage,
-                beforeEnter: function(to,from,next){
-                    if (auth.isAuthenticaded()) {
-                        next({
-                            path: '/dashboard',
-                            query: { redirect: to.fullPath }
-                        })
-                    } else {
-                        next();
-                    }
-                }   
-            },
+            { path: '/', component: homePage},
             { path: '/recuperar-senha/:token', component: passwordRecoveryPage },
             { path: '/cadastro', component: registerPage,
                 beforeEnter: function(to,from,next){

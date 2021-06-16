@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12" :class="[currentRoute === '/cadastro' || currentRoute.indexOf('/recuperar-senha/') > -1 ? 'align-center':'col-lg-6']">
-                <img :src="[configs.logo.src]" :width="[configs.logo.width]" :height="[configs.logo.height]" alt="Logo" v-on:click="goToHome($router)">
+                <img :src="[configs.logo.src]" :width="[configs.logo.width]" :height="[configs.logo.height]" alt="Logo" v-on:click="goToHome($router)"  class="click">
             </div>
             <div v-if="currentRoute === '/' && !isAuthenticaded()" class="col-12 col-lg-6 align-right nav-buttons">
                 <router-link to="/cadastro">Faça seu cadastro</router-link>
