@@ -52,7 +52,7 @@ var Ws = function (httpClient){
 
     this.register = (payload, captcha) => {
         var tempHeaders = new Object();
-        Object.assign(tempHeaders, headers);
+        Object.assign(tempHeaders, this.headers);
         tempHeaders.Captcha = captcha;
         return this.http.post(this.apiUrl+"register", payload, {headers: tempHeaders}).then(
             (response) => {
