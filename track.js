@@ -67,7 +67,8 @@
         var index = url.indexOf('partner=')
         if (url.indexOf('partner=') > -1) {
             id = url.slice(index, url.length);
-            id = id.slice(id.indexOf('=')+1, id.length)
+            var delimiter = id.indexOf('&');
+            id = id.slice(id.indexOf('=')+1, delimiter);
             log("Partner Id active: "+id);
         }
         return id;
