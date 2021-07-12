@@ -49,7 +49,7 @@ window.divulgadores.controllers.LinksGeneratorController = (function(){
         
         parsedUtm = inputs.url.indexOf('?') != -1 ? '&'+parsedUtm : '?'+parsedUtm;
 
-        var finalUrl = inputs.url + parsedUtm;
+        var finalUrl = inputs.url + parsedUtm + '&utm_source=div';
         
         inputs.targetUrl = finalUrl;
     }
